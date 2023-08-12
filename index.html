@@ -35,9 +35,34 @@
             hideDirectChildDivs("mainDIV");
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
+
+
             blogid = urlParams.get('blog');
+            s = urlParams.get('s');
+            
             if(blogid){
                 document.getElementById("blogDIV").style.display = "block";
+            }else if(s){
+                var redirecturl = "";
+                switch(s){
+                    case "itch":
+                        redirecturl="https://interbullet-art.itch.io/";
+                        break;
+                    case "github":
+                        redirecturl="https://github.com/IkariDevGIT";
+                        break;
+                    case "civit":
+                        redirecturl="https://civitai.com/user/ikaridev";
+                        break;
+                    case "ayumi":
+                        redirecturl="https://rentry.co/ayumi_erp_rating";
+                        break;
+                }
+                if (redirecturl != ""){
+                    window.location.replace(redirecturl);
+                }else{
+                    document.getElementById("homeDIV").style.display = "block";
+                }
             }else{
                 document.getElementById("homeDIV").style.display = "block";
             }
