@@ -11,9 +11,16 @@
             var parentDiv = button.closest('.blogbox');
                 if (parentDiv) {
                     var parentId = parentDiv.id;
-                    var newlink = window.location.href.split('?')[0] + "?blog=" + parentId
+                    var newlink = window.location.href.split('?')[0] + "?blog=" + parentId + "&bo=true"
                     navigator.clipboard.writeText(newlink);
                     alert('"'+newlink+'" was copied!');
+                }
+        }
+        function getParentIdC(button){
+            var parentDiv = button.closest('.blogbox');
+                if (parentDiv) {
+                    var parentId = parentDiv.id;
+                    return parentId;
                 }
         }
         function hideDirectChildDivs(parentId) {
@@ -28,6 +35,41 @@
             }
         }
 
+        function revealDirectChildDivs(parentId) {
+            const parent = document.getElementById(parentId);
+
+            if (parent) {
+                const childDivs = parent.querySelectorAll(":scope > div");
+
+                childDivs.forEach((div) => {
+                    if(!getParentIdC(div)){
+                        div.style.display = "block";
+                    }
+                });
+            }
+        }
+
+        function revealBlogPosts(parentId){
+            document.querySelector('button[onclick="revealBlogPosts(\'blogDIV\')"]').remove();
+            document.querySelectorAll('#openPost_button')?.forEach(button => button.style.display = 'unset');
+            revealDirectChildDivs(parentId);
+        }
+
+        function seePostOnly(blogid){
+            hideDirectChildDivs("blogDIV");
+            document.getElementById(blogid).parentNode.style.display = "block";
+            if(!Array.from(document.querySelectorAll('[onclick*="revealBlogPosts(\'blogDIV\')"]')).length > 0){
+                document.getElementById(blogid).parentNode.insertAdjacentHTML("afterbegin",'<button onclick="revealBlogPosts(\'blogDIV\')" class="btn-blog">See all posts</button>')
+            }
+            document.querySelectorAll('#openPost_button')?.forEach(button => button.style.display = 'none');
+        }
+
+        function openPostOnly(e){
+            const id = getParentIdC(e);
+            console.log(id);
+            seePostOnly(id);
+        }
+
         var blogid = "";
 
         document.addEventListener("DOMContentLoaded", function(){
@@ -39,6 +81,7 @@
 
             blogid = urlParams.get('blog');
             s = urlParams.get('s');
+            blogonly = urlParams.get('bo');
             
             if(blogid){
                 document.getElementById("blogDIV").style.display = "block";
@@ -74,6 +117,9 @@
                     block: 'center',
                     inline: 'center'
                 });
+                if(!!blogonly == true){
+                    seePostOnly(blogid)
+                }
             }
         })
 
