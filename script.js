@@ -60,7 +60,7 @@ function revealBlogPosts(parentId) {
 function seePostOnly(blogid) {
     hideDirectChildDivs("blogDIV");
     if(document.getElementById(blogid) == null){
-        
+
     }
     document.getElementById(blogid).parentNode.style.display = "block";
     if (!Array.from(document.querySelectorAll('[onclick*="revealBlogPosts(\'blogDIV\')"]')).length > 0) {
@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
     blogid = urlParams.get('blog');
     s = urlParams.get('s');
     blogonly = urlParams.get('bo');
+    page = urlParams.get('p');
 
     if (blogid) {
         document.getElementById("blogDIV").style.display = "block";
@@ -112,12 +113,15 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             document.getElementById("homeDIV").style.display = "block";
         }
+    } else if(page != null) {
+        switchTo(parseInt(page));
     } else {
         document.getElementById("homeDIV").style.display = "block";
     }
 });
 window.addEventListener('load', function() {
-    document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", '<div id="smallline" style="margin-top: 40px;"></div><div style="display: flex; justify-content: right; height: auto;"><button onclick="getParentId(this)" class="btn-blog">Share</button><button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button></div>'));
+    const vote_ver = 1;
+    document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", '<div id="smallline" style="margin-top: 40px;"></div><div style="display: flex; justify-content: right; height: auto;"><iframe src="https://incr.easrng.net/badge?key=ikaridev-blogvote-v'+vote_ver+'-id_'+item.id+'" class="vote" style="background: url(https://incr.easrng.net/bg.gif);" title="Vote up" width="88" height="31" frameborder="0"></iframe><button onclick="getParentId(this)" class="btn-blog">Share</button><button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button></div>'));
     if (blogid) {
         document.getElementById(blogid).scrollIntoView({
             behavior: 'auto',
@@ -128,6 +132,7 @@ window.addEventListener('load', function() {
             seePostOnly(blogid)
         }
     }
+    document.getElementById("loading-screen").style.display = "none";
 })
 
 
