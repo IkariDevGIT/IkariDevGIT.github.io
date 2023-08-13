@@ -1,3 +1,13 @@
+function removeArgs(){
+    const currentURL = window.location.href;
+
+    const questionMarkIndex = currentURL.indexOf('?');
+
+    const newURL = currentURL.substring(0, questionMarkIndex);
+
+    window.history.pushState({}, '', newURL);
+}
+
 function sidebar(activated){
     if(!!activated){
         document.getElementById("rightSidebar").style.display = "unset";
@@ -55,6 +65,7 @@ function revealBlogPosts(parentId) {
     document.querySelectorAll('#openPost_button')?.forEach(button => button.style.display = 'unset');
     sidebar(true)
     revealDirectChildDivs(parentId);
+    removeArgs();
 }
 
 function seePostOnly(blogid) {
@@ -143,6 +154,7 @@ function switchTo(toI) {
     hideDirectChildDivs("mainDIV");
     sidebar(true);
     revealBlogPosts("blogDIV");
+    removeArgs();
     switch (toI) {
         case 0:
             document.getElementById("homeDIV").style.display = "block";
