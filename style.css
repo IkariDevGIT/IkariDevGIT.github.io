@@ -315,6 +315,23 @@ strong {
     border-radius: 10px;
 }
 
+.cat{
+    box-shadow:inset 0px 2px 15px 0px #e100ff63;
+    background-color: #13092D;
+    border: 1px solid #be54c4be;
+    padding: 15px;
+    display: block;
+    background: transparent;
+    backdrop-filter: saturate(5) hue-rotate(20deg) blur(1px);
+    background-image: url("https://sadhost.neocities.org/images/tiles/stars4.gif");
+    background-size: 100%;
+    height: auto;
+    width: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
 .btn-blog{
     box-shadow:inset 0px 1px 3px 0px #cc00ff;
 	background-color:#68005f63;
@@ -333,8 +350,6 @@ strong {
 .timestamp{
     font-size: 14px;
     color: #eb14ff75;
-    margin-bottom: 220px
-    back
 }
 
 .vote{

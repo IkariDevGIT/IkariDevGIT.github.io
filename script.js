@@ -165,6 +165,14 @@ function switchTo(toI) {
         case 2:
             document.getElementById("blogDIV").style.display = "block";
             break;
+        case 3:
+            //alert("Under construction!");
+            //document.getElementById("homeDIV").style.display = "block";
+            document.getElementById("resourcesDIV").style.display = "block";
+            break;
+        case 4:
+            document.getElementById("projectsDIV").style.display = "block";
+            break;
         case 100:
             document.getElementById("secretDIV").style.display = "block";
             break;
