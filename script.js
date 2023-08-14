@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 window.addEventListener('load', function() {
     const vote_ver = 1;
-    document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", '<div id="smallline" style="margin-top: 40px;"></div><div style="display: flex; justify-content: right; height: auto;"><iframe src="https://incr.easrng.net/badge?key=ikaridev-blogvote-v'+vote_ver+'-id_'+item.id+'" class="vote" style="background: url(https://incr.easrng.net/bg.gif);" title="Vote up" width="88" height="31" frameborder="0"></iframe><button onclick="getParentId(this)" class="btn-blog">Share</button><button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button></div>'));
+    document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", '<div id="smallline" style="margin-top: 60px;"></div><div style="display: flex; justify-content: right; height: auto;"><iframe src="https://incr.easrng.net/badge?key=ikaridev-blogvote-v'+vote_ver+'-id_'+item.id+'" class="vote" style="background: url(https://incr.easrng.net/bg.gif); opacity: 0.5;" title="Vote up" width="88" height="31" frameborder="0"></iframe><button onclick="getParentId(this)" class="btn-blog">Share</button><button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button></div>'));
     if (blogid) {
         document.getElementById(blogid).scrollIntoView({
             behavior: 'auto',
@@ -170,3 +170,15 @@ function switchTo(toI) {
             break;
     }
 }
+
+
+//#########################################################
+//################## Blog related js  #####################
+//#########################################################
+
+
+//blogid-x
+
+//place future code here
+
+//blogid-x END
