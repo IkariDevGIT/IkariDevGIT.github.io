@@ -74,10 +74,10 @@ function seePostOnly(blogid) {
 
     }
     document.getElementById(blogid).parentNode.style.display = "block";
+    sidebar(false);
     if (!Array.from(document.querySelectorAll('[onclick*="revealBlogPosts(\'blogDIV\')"]')).length > 0) {
         document.getElementById(blogid).parentNode.insertAdjacentHTML("afterbegin", '<button onclick="revealBlogPosts(\'blogDIV\')" class="btn-blog">See all posts</button>')
     }
-    sidebar(false);
     document.querySelectorAll('#openPost_button')?.forEach(button => button.style.display = 'none');
 }
 
@@ -88,6 +88,10 @@ function openPostOnly(e) {
 }
 
 var blogid = "";
+var s = "";
+var blogonly = false;
+var page = 0;
+
 
 document.addEventListener("DOMContentLoaded", function() {
     w3IncludeHTML();
@@ -100,9 +104,41 @@ document.addEventListener("DOMContentLoaded", function() {
     s = urlParams.get('s');
     blogonly = urlParams.get('bo');
     page = urlParams.get('p');
+});
 
+function addBlogButtons(){
+    const vote_ver = 1;
+    document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", `
+    <div id="smallline" style="margin-top: 60px;"></div>
+    <div style="display: flex; justify-content: right; height: auto;">
+        <iframe
+            src="https://incr.easrng.net/badge?key=ikaridev-blogvote-v`+vote_ver+`-id_`+item.id+`"
+            class="vote"
+            style="background: url(https://incr.easrng.net/bg.gif); opacity: 0.5;"
+            title="Vote up"
+            width="88"
+            height="31"
+            frameborder="0"
+        ></iframe>
+        <button onclick="getParentId(this)" class="btn-blog">Share</button>
+        <button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button>
+    </div>
+    `));
     if (blogid) {
-        document.getElementById("blogDIV").style.display = "block";
+        document.getElementById(blogid).scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });
+        if (!!blogonly == true) {
+            seePostOnly(blogid)
+        }
+    }
+}
+
+window.addEventListener('load', function() {
+    if (blogid) {
+        switchTo(2);
     } else if (s) {
         var redirecturl = "";
         switch (s) {
@@ -122,31 +158,17 @@ document.addEventListener("DOMContentLoaded", function() {
         if (redirecturl != "") {
             window.location.replace(redirecturl);
         } else {
-            document.getElementById("homeDIV").style.display = "block";
+            switchTo(0);
         }
     } else if(page != null) {
         switchTo(parseInt(page));
     } else {
-        document.getElementById("homeDIV").style.display = "block";
-    }
-});
-window.addEventListener('load', function() {
-    const vote_ver = 1;
-    document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", '<div id="smallline" style="margin-top: 60px;"></div><div style="display: flex; justify-content: right; height: auto;"><iframe src="https://incr.easrng.net/badge?key=ikaridev-blogvote-v'+vote_ver+'-id_'+item.id+'" class="vote" style="background: url(https://incr.easrng.net/bg.gif); opacity: 0.5;" title="Vote up" width="88" height="31" frameborder="0"></iframe><button onclick="getParentId(this)" class="btn-blog">Share</button><button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button></div>'));
-    if (blogid) {
-        document.getElementById(blogid).scrollIntoView({
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center'
-        });
-        if (!!blogonly == true) {
-            seePostOnly(blogid)
-        }
+        switchTo(0);
     }
     document.getElementById("loading-screen").style.display = "none";
 })
 
-
+var kek = 0;
 /**
  * @param {Integer} site index
  */
@@ -164,6 +186,10 @@ function switchTo(toI) {
             break;
         case 2:
             document.getElementById("blogDIV").style.display = "block";
+            if (kek === 0){
+                addBlogButtons();
+                kek++;
+            }
             break;
         case 3:
             //alert("Under construction!");
@@ -173,15 +199,36 @@ function switchTo(toI) {
         case 4:
             document.getElementById("projectsDIV").style.display = "block";
             break;
+        case 5:
+            document.getElementById("experiencesDIV").style.display = "block";
+            break;
         case 100:
             document.getElementById("secretDIV").style.display = "block";
             break;
     }
 }
 
+function switchToBlog(blogid2, blogonly2) {
+    hideDirectChildDivs("mainDIV");
+    sidebar(true);
+    revealBlogPosts("blogDIV");
+    removeArgs();
+    document.getElementById("blogDIV").style.display = "block";
+    if (blogid2) {
+        document.getElementById(blogid2).scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });
+        if (!!blogonly2 == true) {
+            seePostOnly(blogid2)
+        }
+    }
+}
+
 
 //#########################################################
-//################## Blog related js  #####################
+//################### Blog related js #####################
 //#########################################################
 
 
