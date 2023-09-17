@@ -65,6 +65,7 @@ function revealBlogPosts(parentId) {
     document.querySelectorAll('#openPost_button')?.forEach(button => button.style.display = 'unset');
     sidebar(true)
     revealDirectChildDivs(parentId);
+    addBlogButtons();
     removeArgs();
 }
 
@@ -106,33 +107,38 @@ document.addEventListener("DOMContentLoaded", function() {
     page = urlParams.get('p');
 });
 
+var kek = 0;
+
 function addBlogButtons(){
-    const vote_ver = 1;
-    document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", `
-    <div id="smallline" style="margin-top: 60px;"></div>
-    <div style="display: flex; justify-content: right; height: auto;">
-        <iframe
-            src="https://incr.easrng.net/badge?key=ikaridev-blogvote-v`+vote_ver+`-id_`+item.id+`"
-            class="vote"
-            style="background: url(https://incr.easrng.net/bg.gif); opacity: 0.5;"
-            title="Vote up"
-            width="88"
-            height="31"
-            frameborder="0"
-        ></iframe>
-        <button onclick="getParentId(this)" class="btn-blog">Share</button>
-        <button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button>
-    </div>
-    `));
-    if (blogid) {
-        document.getElementById(blogid).scrollIntoView({
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center'
-        });
-        if (!!blogonly == true) {
-            seePostOnly(blogid)
+    if (kek === 0){
+        const vote_ver = 1;
+        document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", `
+        <div id="smallline" style="margin-top: 60px;"></div>
+        <div style="display: flex; justify-content: right; height: auto;">
+            <iframe
+                src="https://incr.easrng.net/badge?key=ikaridev-blogvote-v`+vote_ver+`-id_`+item.id+`"
+                class="vote"
+                style="background: url(https://incr.easrng.net/bg.gif); opacity: 0.5;"
+                title="Vote up"
+                width="88"
+                height="31"
+                frameborder="0"
+            ></iframe>
+            <button onclick="getParentId(this)" class="btn-blog">Share</button>
+            <button onclick="openPostOnly(this)" class="btn-blog" id="openPost_button">Open post</button>
+        </div>
+        `));
+        if (blogid) {
+            document.getElementById(blogid).scrollIntoView({
+                behavior: 'auto',
+                block: 'center',
+                inline: 'center'
+            });
+            if (!!blogonly == true) {
+                seePostOnly(blogid)
+            }
         }
+        kek++;
     }
 }
 
@@ -168,7 +174,6 @@ window.addEventListener('load', function() {
     document.getElementById("loading-screen").style.display = "none";
 })
 
-var kek = 0;
 /**
  * @param {Integer} site index
  */
@@ -186,10 +191,7 @@ function switchTo(toI) {
             break;
         case 2:
             document.getElementById("blogDIV").style.display = "block";
-            if (kek === 0){
-                addBlogButtons();
-                kek++;
-            }
+            addBlogButtons();
             break;
         case 3:
             //alert("Under construction!");
