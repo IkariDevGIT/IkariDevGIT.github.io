@@ -107,10 +107,9 @@ document.addEventListener("DOMContentLoaded", function() {
     page = urlParams.get('p');
 });
 
-var kek = 0;
-
 function addBlogButtons(){
-    if (kek === 0){
+    const blogboxExists = document.querySelector('.blogbox') !== null;
+    if (!blogboxExists){
         const vote_ver = 1;
         document.querySelectorAll('.blogbox')?.forEach(item => item.insertAdjacentHTML("beforeend", `
         <div id="smallline" style="margin-top: 60px;"></div>
