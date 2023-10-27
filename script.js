@@ -100,12 +100,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    addBlogButtons();
-
     blogid = urlParams.get('blog');
     s = urlParams.get('s');
     blogonly = urlParams.get('bo');
     page = urlParams.get('p');
+
+    addBlogButtons();
 });
 
 function addBlogButtons(){
