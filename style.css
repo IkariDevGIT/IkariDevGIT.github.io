@@ -257,7 +257,7 @@ h3 {
 
 h1 {
     font-size: 25px;
-    text-shadow: #3a003f 0px 0px 5px, #910091 0px 0px 5px, #d400ff 0px 0px 10px, #FF2D95 0px 0px 15px, #FF2D95 0px 0px 20px, #FF2D95 0px 0px 25px, #FF2D95 0px 0px 30px, #FF2D95 0px 0px 40px;
+    text-shadow: #3a003f80 0px 0px 5px, #9100913b 0px 0px 5px, #d400ff79 0px 0px 10px, #ff2d9681 0px 0px 15px, #ff2d968e 0px 0px 20px, #ff2d9654 0px 0px 25px, #ff2d9663 0px 0px 30px, #ff2d9660 0px 0px 40px;
 }
 
 strong {
@@ -352,6 +352,33 @@ strong {
     color: #eb14ff75;
 }
 
+
+.rainbow_text {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 32px;
+    font-family: monospace;
+    letter-spacing: 5px;
+}
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 0.7s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
+
 .vote{
 	display:inline-block;
     margin-top: 10px;
@@ -375,6 +402,7 @@ strong {
     backdrop-filter: saturate(5) hue-rotate(20deg) blur(1px);
 }
 /* CSS for extras */
+
 
 #topBar {
     width: 100%;

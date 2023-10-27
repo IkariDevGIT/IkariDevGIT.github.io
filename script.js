@@ -137,7 +137,6 @@ function addBlogButtons(){
                 seePostOnly(blogid)
             }
         }
-        kek++;
     }
 }
 
@@ -181,6 +180,7 @@ function switchTo(toI) {
     sidebar(true);
     revealBlogPosts("blogDIV");
     removeArgs();
+    window.history.replaceState(null, '', './index.html?p='+toI);
     switch (toI) {
         case 0:
             document.getElementById("homeDIV").style.display = "block";
