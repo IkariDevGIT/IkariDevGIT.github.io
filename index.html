@@ -6,12 +6,72 @@
         <link rel="stylesheet" href="style.css"/>
         <script type="text/javascript" src="script.js"></script>
         <script src="https://www.w3schools.com/lib/w3data.js"></script>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="speechbubbles.css" />
+        <script src="speechbubbles.js">
+        /***********************************************
+        * Speech Bubbles Tooltip- (c) Dynamic Drive (www.dynamicdrive.com)
+        * Please keep this notice intact
+        * Visit http://www.dynamicdrive.com/ for this script and 100s more.
+        ***********************************************/
+        </script>
+        <script type="text/javascript">
+
+            window.addEventListener('load', function() { //on document.ready
+                 //Apply tooltip to links with class="addspeech", plus look inside 'speechdata.txt' for the tooltip markups
+                $('.addspeech').speechbubble("")
+            })
+            
+            </script>
     </head>
+
     <body>
         <div class="loading" id="loading-screen"><img src="./data/loading.gif" alt="loading..." style="width: 20%; height: auto;"></div>
         <div>
             <div id="container">
-                <div id="header"></div>
+                <div id="headerObj">
+                    <div id="header"></div>
+                    <div id="headerOverlay">
+                        <img id="img_ikari-cringe"
+                        style="display: none; height:90%; transform: scaleX(-1) translateX(25px); position: absolute; bottom: 0;" src="./data/ikari_cringe.png"
+                        alt="This image was created with Picrew’s “物騒な女メーカー“!!  https://picrew.me/share?cd=0u0hEoFId8 #Picrew #物騒な女メーカー"
+                        class="addspeech" title="<span style='color: yellow;'>IkariDev:</span><br>
+                        I sure look different now.. anyways, have this:<br><br>
+
+                        VGhhdCB3YXMgbm90
+                        IHRoYXQgZGlmZmlj
+                        dWx0LCB3YXMgaXQ/
+                        IEFueXdheSwgaGF2
+                        ZSB0aGlzOiBodHRw
+                        czovL3Bhc3RlYmlu
+                        LmNvbS95ZFBKYTNW
+                        cwoKSSdtIHRoZSBm
+                        aXJzdCwgSSdtIHRo
+                        ZSBsYXN0LCBidXQg
+                        bmV2ZXIgaW4gYmV0
+                        d2Vlbi4KSW4gY29k
+                        ZSwgSSdtIHRoZSBt
+                        ZXNzYWdlLCB0aGUg
+                        c2ltcGxlc3QgeW91
+                        J3ZlIHNlZW4uCkkg
+                        Z3JlZXQgdGhlIHNw
+                        aGVyZSwgaW4gdGhp
+                        cyBkaWdpdGFsIGFy
+                        dCwKQSBwcm9ncmFt
+                        bWVyJ3MgZnJpZW5k
+                        LCB3aXRoICdIZWxs
+                        bycgSSdsbCBkZXBh
+                        cnQuCgpOb3cuLi53
+                        aGF0IGFtIEk/
+                        ">
+
+                        <img id="img_ikari-normal"
+                        style="display: none; height:90%; transform: scaleX(-1) translateX(25px); position: absolute; bottom: 0;" src="./data/ikari_normal.png"
+                        alt="This image was created with Picrew’s “物騒な女メーカー“!!  https://picrew.me/share?cd=NYEuGaXn1h #Picrew #物騒な女メーカー">
+                    </div>
+                </div>
                 <div id="headerArea">
                     <nav id="navbar" style="margin-bottom: 10px;">
                         <ul>
@@ -37,7 +97,7 @@
                             <p style="font-size: 25px; text-decoration: underline;" class="rainbow_text_animated">Welcome to my site!</p> <br>
 
                             <p>Hey, i am ikaridev.</p>
-                            <p>I love anime especially serial experiments lain type animes, they just have a kind of.. special feeling.</p>
+                            <p>I love anime especially serial experiments lain type animes, they just have a kind of.. <span class="addspeech addspeechstyle" title="Idk how to really describe this, but its kind of an 'nostalgic' feeling, but at the same time it feels different..">special feeling</span>.</p>
                             <p>Upvote if you like <span class="rainbow_text_animated">lain!</span></p>
                             <iframe src="https://incr.easrng.net/badge?key=ideflikelainisntthatobvious" style="background: url(https://incr.easrng.net/bg.gif);" title="increment badge" width="88" height="31" frameborder="0"></iframe>
                             
@@ -134,6 +194,9 @@
 
                         <div style="width: 100%; height: auto; display: flex; justify-content: center; margin-top: 20px;">
                             <img src="./data/tumblr_owz2o1gL1L1wqs2v9o2_100.gif" style="width: 140px; height: auto; margin-bottom: 5px;" />
+                        </div>
+                        <div style="width: 100%; height: auto; display: flex; justify-content: center; margin-top: 20px;">
+                            <img src="./data/firefox.gif" style="width: 140px; height: auto; margin-bottom: 5px;" />
                         </div>
                     </aside>
                 </div>

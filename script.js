@@ -16,15 +16,20 @@ function sidebar(activated){
     }
 }
 
+
 function getParentId(button) {
     var parentDiv = button.closest('.blogbox');
     if (parentDiv) {
-        var parentId = parentDiv.id;
-        var newlink = window.location.href.split('?')[0] + "?blog=" + parentId + "&bo=true"
+        var parentId = parentDiv.getAttribute('id'); // Assuming there's a data attribute containing the blog ID
+        var currentURL = window.location.href.split('?')[0]; // Get the base URL
+        var newlink = `${currentURL}?blog=${parentId}&bo=true`; // Construct the new URL
         navigator.clipboard.writeText(newlink);
         alert('"' + newlink + '" was copied!');
     }
 }
+
+
+
 
 function getParentIdC(button) {
     var parentDiv = button.closest('.blogbox');
@@ -88,6 +93,16 @@ function openPostOnly(e) {
     seePostOnly(id);
 }
 
+
+function showRandomImage() {
+    const randomValue = Math.random(); // Generate a random number between 0 and 1
+    if (randomValue < 0.05) {
+      document.getElementById("img_ikari-cringe").style.display = "block"; // 10% chance to show image 1
+    } else {
+      document.getElementById("img_ikari-normal").style.display = "block"; // 90% chance to show image 2
+    }
+  }
+
 var blogid = "";
 var s = "";
 var blogonly = false;
@@ -105,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
     blogonly = urlParams.get('bo');
     page = urlParams.get('p');
 
-    addBlogButtons();
+    showRandomImage();
 });
 
 function addBlogButtons(){

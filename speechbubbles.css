@@ -1,0 +1,73 @@
+div.speechbubbles{
+color: rgb(255, 0, 106);
+background-color:#22003fc5; /*background color of tooltip*/
+backdrop-filter: blur(5px);;
+border:1px solid rgba(34, 0, 66, 0.63);
+position:absolute;
+top:0;
+z-index:100;
+visibility:hidden;
+line-height:1.3em;
+padding:8px;
+width: 280px; /*default width of tooltip*/
+/*border-radius:8px; /*CSS3 border radius*/
+/*-moz-border-radius:8px;*/
+/*-webkit-border-radius:8px;*/
+box-shadow:0 0 10px #780083; /*CSS3 shadow*/
+-moz-box-shadow:0 0 10px #780083;
+-webkit-box-shadow:0 0 10px #780083;
+}
+
+
+
+div.speechbubbles div.speechbubbles-arrow{  /*shared CSS for arrow DIV (upwards pointing)*/
+border-color: transparent transparent rgba(187, 0, 162, 0.63) transparent; /*border color should be same as div.speechbubbles background color*/
+border-style: solid;
+border-width: 10px;
+height:0;
+width:0;
+position:absolute;
+top:-19px;
+left:20px;
+z-index:101;
+_display:none; /*IE hack to hide arrow in IE6*/
+}
+
+div.speechbubbles div.speechbubbles-arrow-border{ /*shared CSS for arrow border DIV*/
+border-color: transparent transparent rgba(34, 0, 66, 0.63) transparent; /*border color should be same as div.speechbubbles border color*/
+border-style: solid;
+border-width: 10px;
+height:0;
+width:0;
+position:absolute;
+top:-20px;
+left:20px;
+z-index:101;
+_display:none; /*IE hack to hide arrow in IE6*/
+}
+
+
+div.downversion div.speechbubbles-arrow{ /*down arrow DIV specific CSS*/
+border-color: rgba(187, 0, 162, 0.63) transparent transparent transparent; /*border color should be same as div.speechbubbles background color*/
+top:auto;
+bottom:-19px;
+}
+
+
+div.downversion div.speechbubbles-arrow-border{ /*down arrow border DIV specific CSS*/
+border-color: rgba(34, 0, 66, 0.63) transparent transparent transparent; /*border color should be same as div.speechbubbles border color*/
+top:auto;
+bottom:-20px;
+}
+
+.addspeech{
+    &:after{
+        content: "(?)";
+        font-size: 70%;
+        vertical-align: top;
+    }
+}
+
+.addspeechstyle{
+    color: rgb(255, 0, 106);
+}

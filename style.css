@@ -151,24 +151,42 @@ text-decoration:none; */
     /* if you want to put images IN the header, 
 you can add them directly to the <div id="header"></div> element! */
     background-image: var(--header-image);
-    background-size: 100%;
+    background-size: 90%;
+    background-position: center right;
+    background-repeat: no-repeat;
+    position: relative;
     animation: horizontal-shaking 0.02s linear infinite;
     filter: drop-shadow(0 0 10px rgb(212, 0, 255)) drop-shadow(0 0 6rem rgb(162, 0, 255)) drop-shadow(0 0 1rem rgba(132, 0, 255, 0.623)) opacity(0.8);
+}
+
+#headerObj{
+    margin-top: 10px;
+    position: relative;
+    height: 180px;
+    width: 100%;
+}
+
+#headerOverlay{
+    position: overlay;
+    height: 180px;
+    width: 100%;
 }
 
 /* navigation section!! */
 #navbar {
     position: relative;
-    height: 40px;
+    height: auto;
     background-color: #13092D;
     /* navbar color */
     width: 100%;
+    padding-bottom: 3px;
+    padding-top: 0.1px;
 }
 
 #navbar ul {
     display: flex;
     padding: 0;
-    margin: 0;
+    margin-right: 5px;
     list-style-type: none;
     justify-content: space-evenly;
 }
