@@ -18,13 +18,25 @@
         ***********************************************/
         </script>
         <script type="text/javascript">
-
             window.addEventListener('load', function() { //on document.ready
                  //Apply tooltip to links with class="addspeech", plus look inside 'speechdata.txt' for the tooltip markups
                 $('.addspeech').speechbubble("")
             })
-            
-            </script>
+        </script>
+
+
+        <link rel="stylesheet" href="windowfiles/dhtmlwindow.css" type="text/css" />
+
+        <script type="text/javascript" src="windowfiles/dhtmlwindow.js">
+
+        /***********************************************
+        * DHTML Window Widget- © Dynamic Drive (www.dynamicdrive.com)
+        * This notice must stay intact for legal use.
+        * Visit http://www.dynamicdrive.com/ for full source code
+        ***********************************************/
+
+        </script>
+
     </head>
 
     <body>
@@ -102,6 +114,10 @@
                             <iframe src="https://incr.easrng.net/badge?key=ideflikelainisntthatobvious" style="background: url(https://incr.easrng.net/bg.gif);" title="increment badge" width="88" height="31" frameborder="0"></iframe>
                             
                             <br><br>
+
+                                                        
+                            <a href="#" onClick="ajaxwin=dhtmlwindow.open('ajaxbox', 'ajax', 'windowfiles/external.htm', 'Cool window!', 'width=auto,height=200px,left=300px,top=100px,resize=1,scrolling=0'); return false">Click me!</a>
+
                             
                             <p>This site is kinda crap atm, and i don't really know what to write here currently.</p>
                             <p>If you want to know what i am currently up to you can check out my <a onclick='switchTo(2)'>blog</a>.</p>
