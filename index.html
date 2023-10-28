@@ -37,6 +37,12 @@
 
         </script>
 
+        <!-- SCM Music Player https://www.scmplayer.net -->
+        <script type="text/javascript" src="https://www.scmplayer.net/script.js" 
+        data-config="{'skin':'skins/cyber/skin.css','volume':7,'autoplay':true,'shuffle':true,'repeat':1,'placement':'bottom','showplaylist':false,'playlist':[{'title':'Atmospheric breakcore/dnb mix','url':'https://www.youtube.com/watch?v=Axeqsb5Q4pY'}]}" ></script>
+        <!-- SCM Music Player script end -->
+
+
     </head>
 
     <body>
@@ -117,8 +123,27 @@
 
                                                         
                             <a href="#" onClick="ajaxwin=dhtmlwindow.open('ajaxbox', 'ajax', 'windowfiles/external.htm', 'Cool window!', 'width=auto,height=200px,left=300px,top=100px,resize=1,scrolling=0'); return false">Click me!</a>
-
                             
+                            <div class="cat">
+                                <h3>Submit merging idea</h3>
+                                <form
+                                action="https://formspree.io/f/xvojlyyd"
+                                method="POST"
+                                >
+                                <label>
+                                    Your DC name:
+                                    <input type="text" name="email">
+                                </label>
+                                <br>
+                                <label>
+                                    Your idea:
+                                    <textarea name="message"></textarea>
+                                </label>
+                                <!-- your other form fields go here -->
+                                <button type="submit">Send</button>
+                                </form>
+                            </div>
+
                             <p>This site is kinda crap atm, and i don't really know what to write here currently.</p>
                             <p>If you want to know what i am currently up to you can check out my <a onclick='switchTo(2)'>blog</a>.</p>
 
