@@ -196,6 +196,33 @@ function openWindow(window, addinfo){
 }
 
 window.addEventListener('load', function() {
+    const randomValue = Math.random(); // Generate a random number between 0 and 1
+    if (randomValue < 0.001) {
+        ajaxwin=dhtmlwindow.open('what_is_this', 'inline',
+            `
+            <h3>Huh, what is this?</h3>
+            <p>Why am i here?</p>
+            <p>It feels weird being here again..</p>
+            `, 'Huh.. what is this?', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1');
+        ajaxwin.onclose=function(){
+            alert("Why?");
+            alert("...");
+            if (prompt("Did you enjoy my short company?\nyes/no").toLowerCase() == "yes") {
+                alert("Ohh..")
+                if (prompt("Could i stay maybe?\nyes/no").toLowerCase() == "yes") {
+                    alert("thanks..")
+                    ajaxwin.load("inline", "<p>I don't know what to say..</p><p>Just.. thanks!</p>", "thanks..")
+                    return false;
+                }else{
+                    alert("Okay then..")
+                    return true;
+                }
+            } else {
+                alert("Ahh.. i see..")
+                return true;
+            }
+        } 
+    }
     if (blogid) {
         switchTo(2);
     } else if (s) {
