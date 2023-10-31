@@ -248,7 +248,7 @@ window.addEventListener('load', function() {
     //}
 
     const randomValue = Math.random(); // Generate a random number between 0 and 1
-    if (randomValue < 0.91 && document.cookie == "") {
+    if (randomValue < 0.01 && document.cookie == "") {
         //// Html-chan
         ajaxwin=dhtmlwindow.open('what_is_this', 'inline',
             `
@@ -466,6 +466,8 @@ function html_chan_main() {
                     alert("Yes.. well duh")
                     html_chan_love(html_chan_love(undefined)+1);
                     break;
+                default:
+                    alert("Sorry " + username + ", but i don't really understand what you mean..")
             }
             break;
 
