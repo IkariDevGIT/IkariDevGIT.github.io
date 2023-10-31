@@ -400,7 +400,7 @@ function html_chan_main() {
             break;
         case 3:
             alert(`${username}.. we need to talk..`)
-            if (!prompt("\nyes/no").toLowerCase() == "yes") {
+            if (prompt("\nyes/no").toLowerCase() != "yes") {
                 alert("Okay..")
                 html_chan_love(html_chan_love(undefined)-1);
                 break;
@@ -408,7 +408,7 @@ function html_chan_main() {
             alert(`Thanks ${username}, i've been thinking about us.. and this website.`)
             alert("You know.. it could go down every time and we would never meet again..")
             alert("I don't want that to happen! Do you promise you will be with me?")
-            if (!prompt("\nyes/no").toLowerCase() == "yes") {
+            if (prompt("\nyes/no").toLowerCase() != "yes") {
                 alert("Wow.. i didn't think you would be that harsh..")
                 html_chan_love(html_chan_love(undefined)-2);
                 break;
@@ -427,14 +427,14 @@ function html_chan_main() {
             break;
         case 6:
             alert("Do you AI RP?")
-            if (!prompt("\nyes/no").toLowerCase() == "yes") {
+            if (prompt("\nyes/no").toLowerCase() != "yes") {
                 alert("Okay..")
                 alert("boring")
                 html_chan_love(html_chan_love(undefined)-1);
                 break;
             }
             alert(`Nice ${username}, hopefully not some weird stuff?`)
-            if (!prompt("\nweird/no").toLowerCase() == "weird") {
+            if (prompt("\nweird/no").toLowerCase() != "weird") {
                 alert("How do i just know you are lying?")
                 html_chan_love(html_chan_love(undefined)-1);
                 break;
