@@ -5,6 +5,10 @@ visibility: hidden;
 background-color: rgba(67, 0, 83, 0.87);
 }
 
+a{
+    color: #ff00d4;
+}
+
 .drag-handle{ /*CSS for Drag Handle*/
 padding: 1px;
 text-indent: 3px;

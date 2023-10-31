@@ -188,11 +188,13 @@ you can add them directly to the <div id="header"></div> element! */
     padding: 0;
     margin-right: 5px;
     list-style-type: none;
-    justify-content: space-evenly;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 #navbar li {
     padding-top: 10px;
+    padding-left: 10px;
 }
 
 /* navigation links*/
@@ -202,6 +204,12 @@ you can add them directly to the <div id="header"></div> element! */
     font-weight: 800;
     text-decoration: none;
     /* this removes the underline */
+    &:after{
+        content: " ]";
+    }
+    &:before{
+        content: "[ ";
+    }
 }
 
 /* navigation link when a link is hovered over */
@@ -428,6 +436,27 @@ strong {
     padding: 10px;
     font-size: smaller;
     background-color: #13092D;
+}
+
+
+.imgbox{
+    width: 400px;
+    margin: 10px;
+    margin-bottom: 40px;
+    background-color: #08031A;
+    padding: 20px;
+    padding-bottom: 35px;
+    border: 1px solid #62009b7c;
+    -webkit-box-shadow: inset 13px 10px 49px 1px rgba(96,0,158,0.34), 8px 3px 25px 1px rgba(143,0,158,0.23); 
+box-shadow: inset 13px 10px 49px 1px rgba(96,0,158,0.34), 8px 3px 25px 1px rgba(143,0,158,0.23);
+    border-radius: 20px;
+    text-align: center;
+}
+
+.imgboximg{
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 

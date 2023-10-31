@@ -175,6 +175,26 @@ function addBlogButtons(){
     }
 }
 
+function openWindow(window, addinfo){
+    switch (window){
+        case "pic_info":
+            if (addinfo === undefined){ alert("No addinfo set!"); return; }
+            if (addinfo[0] === ""){ addinfo[0] = "Not needed"; }
+            if (addinfo[1] === ""){ addinfo[1] = "Not needed"; }
+
+            ajaxwin=dhtmlwindow.open('pic_info', 'inline',
+            `
+            <h3>Prompt:</h3>
+            <p>${addinfo[0]}</p>
+            <h3>Negative prompt:</h3>
+            <p>${addinfo[1]}</p>
+            <h3>Generation info:</h3>
+            <p>${addinfo[2]}</p>
+            `, 'Gen info', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1');
+            break;
+    }
+}
+
 window.addEventListener('load', function() {
     if (blogid) {
         switchTo(2);
@@ -237,6 +257,10 @@ function switchTo(toI) {
             break;
         case 5:
             document.getElementById("experiencesDIV").style.display = "block";
+            break;
+        case 6:
+            document.getElementById("galleryDIV").style.display = "block";
+            sidebar(false);
             break;
         case 100:
             document.getElementById("secretDIV").style.display = "block";
