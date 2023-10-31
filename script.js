@@ -197,7 +197,7 @@ function openWindow(window, addinfo){
 
 window.addEventListener('load', function() {
     const randomValue = Math.random(); // Generate a random number between 0 and 1
-    if (randomValue < 0.001) {
+    if (randomValue < 0.008) {
         ajaxwin=dhtmlwindow.open('what_is_this', 'inline',
             `
             <h3>Huh, what is this?</h3>
