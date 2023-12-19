@@ -240,6 +240,21 @@ function html_chan(window1){
     }else{ alert("Okay then.."); window1.close(); }
 }
 
+async function openPostOnLoad() {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    console.log(blogid)
+    if (blogid) {
+        document.getElementById(blogid).scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });
+    if (!!blogonly == true) {
+        seePostOnly(blogid);
+    }
+    }
+}
+
 var htmlchan_event_active = false;
 
 window.addEventListener('load', function() {
@@ -280,6 +295,7 @@ window.addEventListener('load', function() {
     }
     if (blogid) {
         switchTo(2);
+        openPostOnLoad();
     } else if (s) {
         var redirecturl = "";
         switch (s) {
@@ -307,18 +323,6 @@ window.addEventListener('load', function() {
         switchTo(0);
     }
     document.getElementById("loading-screen").style.display = "none";
-    console.log(blogid)
-    if (blogid) {
-        document.getElementById(blogid).scrollIntoView({
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center'
-        });
-    if (!!blogonly == true) {
-        seePostOnly(blogid);
-    }
-    }
-    
 })
 
 /**
