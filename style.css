@@ -168,7 +168,7 @@ you can add them directly to the <div id="header"></div> element! */
 
 #headerOverlay{
     position: overlay;
-    height: 180px;
+    /*height: 180px; */
     width: 100%;
 }
 
@@ -359,6 +359,7 @@ strong {
 }
 
 .btn-blog{
+    z-index: 99;
     box-shadow:inset 0px 1px 3px 0px #cc00ff;
 	background-color:#68005f63;
 	border-radius:5px;
