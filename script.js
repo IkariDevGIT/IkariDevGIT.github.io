@@ -251,6 +251,7 @@ async function openPostOnLoad() {
         });
     if (!!blogonly == true) {
         seePostOnly(blogid);
+        addBlogButtons()
     }
     }
 }
