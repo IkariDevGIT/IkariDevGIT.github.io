@@ -138,6 +138,7 @@ var blogid = "";
 var s = "";
 var blogonly = false;
 var page = 0;
+var app = null;
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -150,6 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
     s = urlParams.get('s');
     blogonly = urlParams.get('bo');
     page = urlParams.get('p');
+    app = urlParams.get('app');
 
     showRandomImage();
 });
@@ -256,6 +258,11 @@ async function openPostOnLoad() {
     }
 }
 
+async function openAppOnLoad() {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    switchToApp(parseInt(app));
+}
+
 var htmlchan_event_active = false;
 
 window.addEventListener('load', function() {
@@ -265,7 +272,7 @@ window.addEventListener('load', function() {
     //}
 
     const randomValue = Math.random(); // Generate a random number between 0 and 1
-    if (randomValue < 0.01 && document.cookie == "") {
+    if (randomValue < 0.1 && document.cookie == "") {
         //// Html-chan
         ajaxwin=dhtmlwindow.open('what_is_this', 'inline',
             `
@@ -318,13 +325,16 @@ window.addEventListener('load', function() {
         } else {
             switchTo(0);
         }
-    } else if(page != null) {
-        switchTo(parseInt(page));
     } else {
-        switchTo(0);
+        switchTo(parseInt(page));
+    }
+    if (app != null){
+        switchTo(7);
+        openAppOnLoad();
     }
     document.getElementById("loading-screen").style.display = "none";
 })
+
 
 /**
  * @param {Integer} site index
@@ -361,11 +371,98 @@ function switchTo(toI) {
             document.getElementById("galleryDIV").style.display = "block";
             sidebar(false);
             break;
+        case 7:
+            alert("Under construction!");
+            switchTo(0);
+            break;
+
+
+            document.getElementById("appLauncherDIV").style.display = "block";
+            sidebar(false);
+            try{
+                unselectAllApps();
+                document.getElementById("apps").style.display = "none";
+            }catch{
+                break;
+            }
+            break;
         case 100:
             document.getElementById("secretDIV").style.display = "block";
             break;
+        default:
+            switchTo(0);
     }
 }
+
+function unselectAllApps() {
+    var appSelectorDiv = document.getElementById('appselector');
+    var elements = appSelectorDiv.getElementsByTagName('a');
+
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('selected');
+        elements[i].classList.add('not-selected');
+    }
+}
+
+function getAppID() {
+    var selectedElement = document.querySelector('.selected');
+    if (selectedElement) {
+        // Extract the ID from the onclick attribute
+        var onclickAttribute = selectedElement.getAttribute('onclick');
+        var id = onclickAttribute.match(/\(([^)]+)\)/)[1];
+        return id;
+    } else {
+        return null;
+    }
+}
+
+function shareApp() {
+    if (getAppID() == null){
+        alert("No app selected!")
+        return;
+    }
+    var currentURL = window.location.href.split('?')[0]; // Get the base URL
+    var newlink = `${currentURL}?p=7&app=${getAppID()}`; // Construct the new URL
+    navigator.clipboard.writeText(newlink);
+    alert('"' + newlink + '" was copied!');
+}
+
+function switchToApp(toI) {
+    toggleSelection(toI);
+    hideDirectChildDivs("apps");
+    removeArgs();
+    document.getElementById("apps").style.display = "block";
+    var currentURL = window.location.href.split('?')[0]; // Get the base URL
+    window.history.replaceState(null, '', `${currentURL}?p=7&app=${getAppID()}`);
+    switch (toI) {
+        case 0:
+            document.getElementById("APP_randomSource").style.display = "block";
+            break;
+        case 1:
+            document.getElementById("APP_test").style.display = "block";
+            break;
+    }
+}
+
+function toggleSelection(index) {
+    // Loop through all 'a' elements within the div
+    var appSelectorDiv = document.getElementById('appselector');
+    var elements = appSelectorDiv.getElementsByTagName('a');
+
+    for (var i = 0; i < elements.length; i++) {
+        // Remove the 'selected' class from all elements
+        elements[i].classList.remove('selected');
+        // Add the 'not-selected' class to all elements
+        elements[i].classList.add('not-selected');
+    }
+
+    // Add the 'selected' class to the element at the specified index
+    elements[index].classList.remove('not-selected');
+    elements[index].classList.add('selected');
+}
+
+
+
 
 function switchToBlog(blogid2, blogonly2) {
     hideDirectChildDivs("mainDIV");

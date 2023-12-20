@@ -1,0 +1,78 @@
+<h3 style="text-align: center;">App selector:</h3>
+<div id="appselector">
+    <a class="app-icon" onclick="switchToApp(0)">Random Source</a>
+    <!-- <a class="app-icon" onclick="switchToApp(1)">App 2</a> -->
+</div>
+
+<div id="line"></div>
+<br>
+
+<div id="apps" style="display: none;">
+    <div id="APP_randomSource" w3-include-html="apps/randomSource.html"></div>
+    <div id="APP_test" w3-include-html="apps/test.html"></div>
+</div>
+
+<br>
+<button onclick="shareApp()" class="btn-nice">Share app link</button>
+
+<style>
+    #apps{
+        padding: 10px;
+        background-color: rgba(162, 0, 255, 0.13);
+        border-radius: 10px;
+        border-style: inset;
+        border-color: rgba(0, 0, 0, 0.493);
+        border-width: 2px;
+    }
+
+    #appselector {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .app-icon {
+        display: inline-block;
+        width: auto;
+        height: auto;
+        background-color: #420037a8;
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        margin: 10px;
+        padding: 0 10px 0 10px;
+        text-align: center;
+        line-height: 80px;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .app-icon:hover {
+        background-color: #420037bb;
+    }
+
+    .selected {
+        background-color: #0d0011a8 !important;
+    }
+
+    .not-selected {
+        background-color: #420037a8 !important;
+    }
+
+    .btn-nice{
+    z-index: 99;
+    box-shadow:inset 0px 1px 3px 0px #cc00ff;
+	background-color:#68005f63;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:15px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+	padding:6px 12px;
+    border: #9100918a;
+}
+
+</style>
