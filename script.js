@@ -372,9 +372,9 @@ function switchTo(toI) {
             sidebar(false);
             break;
         case 7:
-            alert("Under construction!");
+            /*alert("Under construction!");
             switchTo(0);
-            break;
+            break;*/
 
 
             document.getElementById("appLauncherDIV").style.display = "block";
@@ -436,10 +436,7 @@ function switchToApp(toI) {
     window.history.replaceState(null, '', `${currentURL}?p=7&app=${getAppID()}`);
     switch (toI) {
         case 0:
-            document.getElementById("APP_randomSource").style.display = "block";
-            break;
-        case 1:
-            document.getElementById("APP_test").style.display = "block";
+            document.getElementById("APP_meow").style.display = "block";
             break;
     }
 }
