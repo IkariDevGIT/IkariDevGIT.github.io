@@ -272,7 +272,7 @@ window.addEventListener('load', function() {
     //}
 
     const randomValue = Math.random(); // Generate a random number between 0 and 1
-    if (randomValue < 0.1 && document.cookie == "") {
+    if (randomValue < 0.03 && document.cookie == "") {
         //// Html-chan
         ajaxwin=dhtmlwindow.open('what_is_this', 'inline',
             `
