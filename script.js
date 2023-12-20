@@ -76,6 +76,8 @@ function revealBlogPosts(parentId) {
 
 function seePostOnly(blogid) {
     hideDirectChildDivs("blogDIV");
+    var currentURL = window.location.href.split('?')[0]; // Get the base URL
+    window.history.replaceState(null, '', `${currentURL}?p=7&blog=${blogid}&bo=true`);
     if(document.getElementById(blogid) == null){
 
     }
@@ -135,7 +137,6 @@ function showRandomImage() {
   }
 
 var blogid = "";
-var s = "";
 var blogonly = false;
 var page = 0;
 var app = null;
@@ -148,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(queryString);
 
     blogid = urlParams.get('blog');
-    s = urlParams.get('s');
     blogonly = urlParams.get('bo');
     page = urlParams.get('p');
     app = urlParams.get('app');
@@ -304,27 +304,6 @@ window.addEventListener('load', function() {
     if (blogid) {
         switchTo(2);
         openPostOnLoad();
-    } else if (s) {
-        var redirecturl = "";
-        switch (s) {
-            case "itch":
-                redirecturl = "https://interbullet-art.itch.io/";
-                break;
-            case "github":
-                redirecturl = "https://github.com/IkariDevGIT";
-                break;
-            case "civit":
-                redirecturl = "https://civitai.com/user/ikaridev";
-                break;
-            case "ayumi":
-                redirecturl = "https://rentry.co/ayumi_erp_rating";
-                break;
-        }
-        if (redirecturl != "") {
-            window.location.replace(redirecturl);
-        } else {
-            switchTo(0);
-        }
     } else {
         switchTo(parseInt(page));
     }
