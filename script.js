@@ -354,8 +354,6 @@ function switchTo(toI) {
             /*alert("Under construction!");
             switchTo(0);
             break;*/
-
-
             document.getElementById("appLauncherDIV").style.display = "block";
             sidebar(false);
             try{
