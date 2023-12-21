@@ -90,7 +90,12 @@ function seePostOnly(blogid) {
 }
 
 function openPostOnly(e) {
-    const id = getParentIdC(e);
+    switchTo(2);
+    if (e.toString().startsWith("blogid")){
+        var id = e;
+    }else{
+        var id = getParentIdC(e);
+    }
     console.log(id);
     seePostOnly(id);
 }
@@ -311,6 +316,8 @@ window.addEventListener('load', function() {
         switchTo(7);
         openAppOnLoad();
     }
+    const asyncExample = async () => {await new Promise(resolve => setTimeout(resolve, 100)); initNewestPost();};
+    asyncExample();
     document.getElementById("loading-screen").style.display = "none";
 })
 
@@ -563,6 +570,60 @@ function html_chan_main() {
 
 }
 
+
+function getFirstBlogEntry() {
+    var blogDiv = document.getElementById('blogDIV');
+
+    function findBlogEntries(element) {
+      return element.id && element.id.startsWith('blogid-') ? [element] : Array.from(element.children).flatMap(findBlogEntries);
+    }
+
+    var blogEntries = findBlogEntries(blogDiv);
+
+    if (blogEntries.length > 0) {
+      return [blogEntries[0].id, `${document.getElementById(blogEntries[0].id).children[0].innerHTML}`, document.getElementById(blogEntries[0].id).children[1].innerHTML];
+    } else {
+      return 'No blog entries found.';
+    }
+  }
+
+function getLatestBlogPostUpdate(){
+    var id = getFirstBlogEntry()[0];
+    // Get all h4 elements
+    const h4Elements = document.getElementById(id).getElementsByTagName('h3');
+
+    // Filter h4 elements with the text "Update:"
+    const updateHeaders = Array.from(h4Elements).filter(element =>
+        element.textContent.includes('Update:')
+    );
+      
+    // Check if any update headers were found
+    if (updateHeaders.length > 0) {
+        // Find the latest update header
+        const latestUpdateHeader = updateHeaders[updateHeaders.length - 1];
+      
+        // Get the element below the latest update header
+        const elementBelowLatestUpdate = latestUpdateHeader.nextElementSibling;
+      
+        return elementBelowLatestUpdate.innerHTML;
+    } else {
+        return null;
+    }
+}
+
+function initNewestPost(){
+    const divNewestPost = document.getElementById("newestPost");
+    var latestUpdate = getLatestBlogPostUpdate();
+    var blogEntry = getFirstBlogEntry();
+    if (latestUpdate == null){ latestUpdate = "No updates to this post yet!" }
+
+    divNewestPost.innerHTML +=
+    `<h3>Latest blog post</h3>
+    <p>Title: <span style="color: #38ffff;">"</span><span style="color: #ff38bd;">${blogEntry[1]}</span><span style="color: #38ffff;">"</span></p>
+    <p>Created: ${blogEntry[2]}</p>
+    <p>Latest post Update: ${latestUpdate}</p>
+    <button onclick="openPostOnly('${blogEntry[0]}')" class="btn-nice">View post</button>`;
+}
 
 //#########################################################
 //################### Blog related js #####################
