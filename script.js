@@ -316,7 +316,7 @@ window.addEventListener('load', function() {
         switchTo(7);
         openAppOnLoad();
     }
-    const asyncExample = async () => {await new Promise(resolve => setTimeout(resolve, 100)); initNewestPost();};
+    const asyncExample = async () => {await new Promise(resolve => setTimeout(resolve, 200)); initNewestPost();};
     asyncExample();
     document.getElementById("loading-screen").style.display = "none";
 })
