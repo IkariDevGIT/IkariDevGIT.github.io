@@ -330,6 +330,9 @@ function switchTo(toI) {
     sidebar(true);
     revealBlogPosts("blogDIV");
     removeArgs();
+    try{
+        switchToApp(-1);
+    } catch { };
     window.history.replaceState(null, '', './index.html?p='+toI);
     switch (toI) {
         case 0:
@@ -363,12 +366,6 @@ function switchTo(toI) {
             break;*/
             document.getElementById("appLauncherDIV").style.display = "block";
             sidebar(false);
-            try{
-                unselectAllApps();
-                document.getElementById("apps").style.display = "none";
-            }catch{
-                break;
-            }
             break;
         case 100:
             document.getElementById("secretDIV").style.display = "block";
@@ -412,13 +409,24 @@ function shareApp() {
 }
 
 function switchToApp(toI) {
-    toggleSelection(toI);
     hideDirectChildDivs("apps");
     removeArgs();
-    document.getElementById("apps").style.display = "block";
-    var currentURL = window.location.href.split('?')[0]; // Get the base URL
-    window.history.replaceState(null, '', `${currentURL}?p=7&app=${getAppID()}`);
+    var currentURL = window.location.href.split('?')[0];
+    if(toI != -1){
+        toggleSelection(toI);
+        document.getElementById("appsMainMenu").style.display = "none";
+        document.getElementById("menuAppButtons").style.display = "block";
+        document.getElementById("apps").style.display = "block";
+        window.history.replaceState(null, '', `${currentURL}?p=7&app=${getAppID()}`);
+    }
     switch (toI) {
+        case -1:
+            unselectAllApps();
+            window.history.replaceState(null, '', `${currentURL}?p=7`);
+            document.getElementById("menuAppButtons").style.display = "none";
+            document.getElementById("appsMainMenu").style.display = "block";
+            document.getElementById("apps").style.display = "none";
+            break;
         case 0:
             document.getElementById("APP_meow").style.display = "block";
             break;
@@ -441,8 +449,6 @@ function toggleSelection(index) {
     elements[index].classList.remove('not-selected');
     elements[index].classList.add('selected');
 }
-
-
 
 
 function switchToBlog(blogid2, blogonly2) {

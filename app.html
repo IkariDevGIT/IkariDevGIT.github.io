@@ -10,9 +10,15 @@
 <div id="apps" style="display: none;">
     <div id="APP_meow" w3-include-html="apps/meow.html"></div>
 </div>
+<div id="appsMainMenu">
+    <p>Select an app!</p>
+</div>
 
 <br>
-<button onclick="shareApp()" class="btn-nice">Share app link</button>
+<div id="menuAppButtons" style="display: none;">
+    <button onclick="shareApp()" class="btn-nice" id="shareAppButton">Share app link</button>
+    <button onclick="switchToApp(-1)" class="btn-nice" id="mainMenuAppButton">Main menu</button>
+</div>
 
 <style>
     #apps{
