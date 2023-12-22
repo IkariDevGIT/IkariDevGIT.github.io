@@ -156,8 +156,11 @@ you can add them directly to the <div id="header"></div> element! */
     background-repeat: no-repeat;
     position: relative;
     animation: horizontal-shaking 0.02s linear infinite;
-    filter: drop-shadow(0 0 10px rgb(212, 0, 255)) drop-shadow(0 0 6rem rgb(162, 0, 255)) drop-shadow(0 0 1rem rgba(132, 0, 255, 0.623)) opacity(0.8);
+
+    /*filter: drop-shadow(0 0 10px rgb(212, 0, 255)) drop-shadow(0 0 6rem rgb(162, 0, 255)) drop-shadow(0 0 1rem rgba(132, 0, 255, 0.623)) opacity(0.8);*/
+    filter: drop-shadow(0 0 1px rgb(212, 0, 255)) drop-shadow(0 0 0.5rem rgb(162, 0, 255)) drop-shadow(0 0 0.1rem rgba(132, 0, 255, 0.623));
 }
+
 
 #headerObj{
     margin-top: 10px;
@@ -181,6 +184,11 @@ you can add them directly to the <div id="header"></div> element! */
     width: 100%;
     padding-bottom: 3px;
     padding-top: 0.1px;
+    border-bottom: 5px groove rgba(174,0,219,0.28);
+    /*border-radius: 0px 0px 14px 14px;*/
+    border-radius: 0px 0px 8px 8px;
+    -webkit-box-shadow: inset 0px -24px 50px -30px rgba(255,0,245,0.19); 
+    box-shadow: inset 0px -24px 50px -30px rgba(255,0,245,0.19);
 }
 
 #navbar ul {
