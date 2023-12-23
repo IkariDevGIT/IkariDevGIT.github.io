@@ -29,8 +29,6 @@ function getParentId(button) {
 }
 
 
-
-
 function getParentIdC(button) {
     var parentDiv = button.closest('.blogbox');
     if (parentDiv) {
@@ -72,6 +70,8 @@ function revealBlogPosts(parentId) {
     revealDirectChildDivs(parentId);
     addBlogButtons();
     removeArgs();
+    var currentURL = window.location.href.split('?')[0]; // Get the base URL
+    window.history.replaceState(null, '', `${currentURL}?p=2`);
 }
 
 function seePostOnly(blogid) {
@@ -316,62 +316,115 @@ window.addEventListener('load', function() {
         switchTo(7);
         openAppOnLoad();
     }
-    const asyncExample = async () => {await new Promise(resolve => setTimeout(resolve, 200)); initNewestPost();};
-    asyncExample();
+    const exeAsync = async () => {await new Promise(resolve => setTimeout(resolve, 200)); initNewestPost(); addBlogButtons();;};
+    exeAsync();
     document.getElementById("loading-screen").style.display = "none";
 })
+
+
+function getCurrentTab() {
+    var mainDiv = document.getElementById("mainDIV");
+    var childDivs = mainDiv.children;
+    var visibleDiv = null;
+    var divId = null;
+
+    for (var i = 0; i < childDivs.length; i++) {
+      var currentDiv = childDivs[i];
+      var computedStyle = window.getComputedStyle(currentDiv);
+
+      // Check if the display property is not set to "none"
+      if (computedStyle.display !== "none") {
+        visibleDiv = currentDiv.id;
+        divId = i;
+      }
+    }
+
+    return [visibleDiv, divId]; 
+}
 
 
 /**
  * @param {Integer} site index
  */
-function switchTo(toI) {
-    hideDirectChildDivs("mainDIV");
-    sidebar(true);
-    revealBlogPosts("blogDIV");
-    removeArgs();
-    try{
-        switchToApp(-1);
-    } catch { };
-    window.history.replaceState(null, '', './index.html?p='+toI);
+function switchTo(toI, getTab) {
+    if (getTab == null || getTab == false){
+        hideDirectChildDivs("mainDIV");
+        sidebar(true);
+        revealBlogPosts("blogDIV");
+        removeArgs();
+        try{
+            switchToApp(-1);
+        } catch { };
+        window.history.replaceState(null, '', './index.html?p='+toI);
+    }
     switch (toI) {
         case 0:
-            document.getElementById("homeDIV").style.display = "block";
+            var divTo = "homeDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+            }
             break;
         case 1:
-            document.getElementById("aboutDIV").style.display = "block";
+            var divTo = "aboutDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+            }
             break;
         case 2:
-            document.getElementById("blogDIV").style.display = "block";
-            addBlogButtons();
+            var divTo = "blogDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+                addBlogButtons();
+            }
             break;
         case 3:
             //alert("Under construction!");
             //document.getElementById("homeDIV").style.display = "block";
-            document.getElementById("resourcesDIV").style.display = "block";
+            var divTo = "resourcesDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+            }
             break;
         case 4:
-            document.getElementById("projectsDIV").style.display = "block";
+            var divTo = "projectsDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+            }
             break;
         case 5:
-            document.getElementById("experiencesDIV").style.display = "block";
+            var divTo = "experiencesDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+            }
             break;
         case 6:
-            document.getElementById("galleryDIV").style.display = "block";
-            sidebar(false);
+            var divTo = "galleryDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+                sidebar(false);
+            }
             break;
         case 7:
             /*alert("Under construction!");
             switchTo(0);
             break;*/
-            document.getElementById("appLauncherDIV").style.display = "block";
-            sidebar(false);
+            var divTo = "appLauncherDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+                sidebar(false);
+            }
             break;
         case 100:
-            document.getElementById("secretDIV").style.display = "block";
+            var divTo = "secretDIV"
+            if (getTab != null && getTab == true){ return divTo } else {
+                document.getElementById(divTo).style.display = "block";
+            }
             break;
         default:
-            switchTo(0);
+            var divTo = "Invalid"
+            if (getTab != null && getTab == true){ return divTo } else {
+                switchTo(0);
+            }
     }
 }
 
@@ -577,7 +630,7 @@ function html_chan_main() {
 }
 
 
-function getFirstBlogEntry() {
+function getLatestBlogEntry() {
     var blogDiv = document.getElementById('blogDIV');
 
     function findBlogEntries(element) {
@@ -594,25 +647,17 @@ function getFirstBlogEntry() {
   }
 
 function getLatestBlogPostUpdate(){
-    var id = getFirstBlogEntry()[0];
-    // Get all h4 elements
-    const h4Elements = document.getElementById(id).getElementsByTagName('h3');
+    var id = getLatestBlogEntry()[0];
 
-    // Filter h4 elements with the text "Update:"
-    const updateHeaders = Array.from(h4Elements).filter(element =>
-        element.textContent.includes('Update:')
-    );
-      
-    // Check if any update headers were found
-    if (updateHeaders.length > 0) {
-        // Find the latest update header
-        const latestUpdateHeader = updateHeaders[updateHeaders.length - 1];
-      
-        // Get the element below the latest update header
-        const elementBelowLatestUpdate = latestUpdateHeader.nextElementSibling;
-      
-        return elementBelowLatestUpdate.innerHTML;
+    // Get all elements with the class "timestamp"
+    var timestampElements = document.getElementById(id).querySelector('#updates').getElementsByClassName("timestamp");
+
+    // Check if there are any elements with the class
+    if (timestampElements.length > 0) {
+    // Return the last element
+        return timestampElements[timestampElements.length - 1].innerHTML;
     } else {
+    // If no elements are found, return null or handle accordingly
         return null;
     }
 }
@@ -620,7 +665,7 @@ function getLatestBlogPostUpdate(){
 function initNewestPost(){
     const divNewestPost = document.getElementById("newestPost");
     var latestUpdate = getLatestBlogPostUpdate();
-    var blogEntry = getFirstBlogEntry();
+    var blogEntry = getLatestBlogEntry();
     if (latestUpdate == null){ latestUpdate = "No updates to this post yet!" }
 
     divNewestPost.innerHTML +=
