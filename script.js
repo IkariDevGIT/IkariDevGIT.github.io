@@ -128,6 +128,23 @@ function getCookie(cname) {
   }
 
 function showRandomImage() {
+    const isDateInRange = () => {
+        const currentDate = new Date();
+  const startDate = new Date(currentDate.getFullYear(), 11, 20); // December is 11 (0-based index)
+  const endDate = new Date(currentDate.getFullYear(), 0, 5); // January is 0 (0-based index) of the next year
+
+  if (currentDate >= startDate || currentDate <= endDate) {
+    return true;
+  } else {
+    return false;
+  }
+      };
+      
+
+    if(isDateInRange()){
+        document.getElementById("img_ikari-christmas").style.display = "block";
+        return;
+    }
     if(!document.cookie == ""){
         username = getCookie("username")
         document.getElementById("img_html-chan").style.display = "block";
