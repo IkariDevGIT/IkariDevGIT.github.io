@@ -4,11 +4,12 @@
     <div class="blogbox" id="blogid-6">
         <h3>Noromaid model series</h3>
         <i class="timestamp">19.12.2023 - 22:51 [GMT+2]</i><div style="padding-top: 20px"></div>
+        <a href="https://discord.gg/w6C8mys35E">NeverSleep Discord</a>
         <p>Name comes from:<br>Noro = <span style="color: red;">No</span>_<span style="color: red;">ro</span>bots(dataset),<br>Maid = <span style="color: red;">M</span>inerva <span style="color: red;">AI</span> <span style="color: red;">D</span>ataset</p>
         <p>MinervaAI Dataset referring to: Aesir</p>
         <br>
         <div id="line"></div>
-        <h4>Noromaid 0.1.1</h4>
+        <h4 id="Noromaid-0.1.1">Noromaid 0.1.1</h4>
         <ul style="padding-left: 10px;">
             <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-13b-v0.1.1">Noromaid-13b-v0.1.1</a></p>
             <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-7b-v0.1.1">Noromaid-7b-v0.1.1</a></p>
@@ -17,7 +18,7 @@
         <p>Yet another merge with undi, came out 16.11.2023, main part of it a dataset by <a href="https://huggingface.co/MinervaAI">MinervaAI</a> named aesir, other part is a <a href="https://huggingface.co/datasets/Doctor-Shotgun/no-robots-sharegpt">modified version of No_Robots</a>.</p>
         <br>
         <div id="line"></div>
-        <h4>Noromaid 0.2  [ EXPERIMENTAL ]</h4>
+        <h4 id="Noromaid-0.2">Noromaid 0.2  [ EXPERIMENTAL ]</h4>
         <ul style="padding-left: 10px;">
             <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-13b-v0.2">Noromaid-13b-v0.2</a></p>
             <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-7b-v0.2">Noromaid-7b-v0.2</a></p>
@@ -26,11 +27,19 @@
         <p>This time we used <a href="https://github.com/Gryphe/MergeMonster">MergeMonster</a>, with many bad_phrases. We also used another <a href="https://huggingface.co/MinervaAI">MinervaAI</a> dataset.</p>
         <p>The 13b was published on 16.12.2023, the 7b was released on 21.12.2023, further B's will be released when we get more feedback</p>
         <br>
+        <div id="line"></div>
+        <h4 id="Noromaid-0.3">Noromaid 0.3</h4>
+        <ul style="padding-left: 10px;">
+            <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-13b-v0.3">Noromaid-13b-v0.3</a></p>
+        </ul>
+        <p>Noromaid 0.3 has: new datasets, normal alpaca Instruct(with instruction, input, and response header) instead of our modified alpaca.</p>
+        <p>It is a complete retrain based on the same model as 0.1.1 and 0.1.</p>
+        <br>
 
         <div id="line"></div>
         <p>Spin-Off's (based on 0.2)</p>
         <ul style="padding-left: 25px;">
-            <p>- <a href="https://huggingface.co/NeverSleep/FlatOrcamaid-13b-v0.2">FlatOrcamaid-13b-v0.2</a></p>
+            <p id="FlatOrcamaid-13b-v0.2">- <a href="https://huggingface.co/NeverSleep/FlatOrcamaid-13b-v0.2">FlatOrcamaid-13b-v0.2</a></p>
             <p style="padding-left: 25px;">FlatOrcamaid-13b-v0.2 is a merge between FlatOrca and Noromaid-13b-v0.2, see more info on the <a href="https://huggingface.co/NeverSleep/FlatOrcamaid-13b-v0.2">repo</a></p>
             <p style="padding-left: 25px;"><span style="color: rgb(255, 245, 110);">Important info to a 7b model:</span> Currently not possible due to Orca-2 being a LLAMA 2 7b model and Noromaid-7b being a mistral model!</p>
             <p style="padding-left: 25px;"><span style="color: rgb(255, 245, 110);">Important info to this model:</span> This model is in NO way affiliated with <a href="https://huggingface.co/ddh0/OrcaMaid-13b">ddh0/OrcaMaid-13b</a> or and *maid models by <a href="https://huggingface.co/ddh0/OrcaMaid-13b">ddh0</a>, it was inspired by him tho.</p>
@@ -38,16 +47,16 @@
         <br>
         <p>Spin-Off's (standalone)</p>
         <ul style="padding-left: 25px;">
-            <p>- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v1">Noromaid-v0.1-mixtral-8x7b-v1</a></p>
+            <p id="Noromaid-v0.1-mixtral-8x7b-v1">- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v1">Noromaid-v0.1-mixtral-8x7b-v1</a></p>
             <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v1 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 3x Alpaca modified datasets (for the RP one) and 2 shareGPT datasets. LimaRP token length, input, and output size got wiped out, and were separated into chunks of +8k context conversation (this is the maximum LimaRP can offer).</p>
         
-            <p>- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v2">Noromaid-v0.1-mixtral-8x7b-v2</a></p>
+            <p id="Noromaid-v0.1-mixtral-8x7b-v2">- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v2">Noromaid-v0.1-mixtral-8x7b-v2</a></p>
             <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v2 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 3x Alpaca modified datasets (for the RP one) and 2 shareGPT datasets. On this v2, LimaRP got fixed further, Axolotl received a monkey patch to actually reformat shareGPT to our modified Alpaca prompting.</p>
         
-            <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-v3">Noromaid-v0.1-mixtral-8x7b-v3</a></p>
+            <p id="Noromaid-v0.1-mixtral-8x7b-v3">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-v3">Noromaid-v0.1-mixtral-8x7b-v3</a></p>
             <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v3 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 5x Alpaca modified datasets. On this v3, all the datasets got trained on the "completion" method of Axolotl, with all the datasets being completely rewritten to be in Alpaca modified format. More than 2600 Wikipedia references got cleaned up of Norobots dataset.</p>
             
-            <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-Instruct-v3">Noromaid-v0.1-mixtral-8x7b-Instruct-v3</a></p>
+            <p id="Noromaid-v0.1-mixtral-8x7b-Instruct-v3">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-Instruct-v3">Noromaid-v0.1-mixtral-8x7b-Instruct-v3</a></p>
             <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-Instruct-v3 is made with a LoRA done on base Mixtral 8x7b. It's the same data than Noromaid-v0.1-mixtral-8x7b-v3, but applied on the Instruct model. Fine-tuning on base and applying on Instruct seem to give better result for our usage: RP/ERP. Stay tuned for more information!</p>
 
             <br>
@@ -55,7 +64,7 @@
         </ul>
         <br>
         <div id="line"></div>
-        <p>There was also Noromaid 0.1, but that was shit so i won't go deeper into it, if you still want more info on it consider checking out it's HuggingFace description <a href="https://huggingface.co/NeverSleep/Noromaid-13b-v0.1">here</a>.</p>
+        <p id="Noromaid-0.1">There was also Noromaid 0.1, but that was shit so i won't go deeper into it, if you still want more info on it consider checking out it's HuggingFace description <a href="https://huggingface.co/NeverSleep/Noromaid-13b-v0.1">here</a>.</p>
         
         <br><h2>Updates:</h2>
         <div id="updates">
@@ -73,6 +82,9 @@
             <p>Added Noromaid-v0.1-mixtral-8x7b-v3 [ Released on: 24.12.2023 ]</p>
             <br><i class="timestamp">26.12.2023 - 00:18 [GMT+2]</i>
             <p>Added Noromaid-v0.1-mixtral-8x7b-Instruct-v3 [ Released on: 25.12.2023 ]</p>
+            <br><i class="timestamp">09.01.2024 - 20:13 [GMT+2]</i>
+            <p>Added NeverSleep Discord link</p>
+            <p>Added Noromaid 0.3 [ Released on: 05.01.2024 ]</p>
         </div>
     </div>
     <div id="line"></div>

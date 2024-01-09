@@ -162,12 +162,13 @@ var blogid = "";
 var blogonly = false;
 var page = 0;
 var app = null;
-
+var hashA = null;
 
 document.addEventListener("DOMContentLoaded", function() {
     w3IncludeHTML();
     hideDirectChildDivs("mainDIV");
-    const queryString = window.location.search;
+    hashA = window.location.hash;
+    const queryString = window.location.search.slice(1);
     const urlParams = new URLSearchParams(queryString);
 
     blogid = urlParams.get('blog');
@@ -272,11 +273,18 @@ async function openPostOnLoad() {
             behavior: 'auto',
             block: 'center',
             inline: 'center'
-        });
+    });
     if (!!blogonly == true) {
         seePostOnly(blogid);
         addBlogButtons();
     }
+    }
+    if (hashA) {
+        document.getElementById(hashA).scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+    });
     }
 }
 
@@ -336,6 +344,7 @@ window.addEventListener('load', function() {
     const exeAsync = async () => {await new Promise(resolve => setTimeout(resolve, 200)); initNewestPost(); addBlogButtons();;};
     exeAsync();
     document.getElementById("loading-screen").style.display = "none";
+
 })
 
 
