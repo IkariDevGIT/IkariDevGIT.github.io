@@ -42,42 +42,47 @@
             <p>- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-7B-0.4">Noromaid-7b-v0.4</a></p>
             <p>- <a href="https://huggingface.co/NeverSleep/Noromaid-7B-0.4-DPO">Noromaid-7b-v0.4-DPO</a></p>
         </ul>
-        <p>Noromaid 0.4 7b is a fully finetuned 7b Mistral trained on multiple RP dataset, modified by our own hand, and redone entirely from Alpaca to Chatml. The switch from Alpaca to Chatml and the addition of a new dataset from Aesir made it even better than 0.3.</p>
-        <p>Same as Noromaid 0.4 7b. Additionally, it was trained on top with 3 DPO datasets including the Intel DPO for reasoning, and some uncensoring.</p>
+        <p>Noromaid 7b v0.4 is a fully finetuned 7b Mistral trained on multiple RP dataset, modified by our own hand, and redone entirely from Alpaca to Chatml. The switch from Alpaca to Chatml and the addition of a new dataset from Aesir made it even better than 0.3.</p>
+        <p>Noromaid 7b v0.4 DPO is the same as Noromaid 0.4 7b. Additionally, it was trained on top with 3 DPO datasets including the Intel DPO for reasoning, and some uncensoring.</p>
         <br>
 
         <div id="line"></div>
-        <p>Spin-Off's (based on 0.2)</p>
+        <h2>Spin-Off's</h2>
         <ul style="padding-left: 25px;">
-            <p id="FlatOrcamaid-13b-v0.2">- <a href="https://huggingface.co/NeverSleep/FlatOrcamaid-13b-v0.2">FlatOrcamaid-13b-v0.2</a></p>
-            <p style="padding-left: 25px;">FlatOrcamaid-13b-v0.2 is a merge between FlatOrca and Noromaid-13b-v0.2, see more info on the <a href="https://huggingface.co/NeverSleep/FlatOrcamaid-13b-v0.2">repo</a></p>
-            <p style="padding-left: 25px;"><span style="color: rgb(255, 245, 110);">Important info to a 7b model:</span> Currently not possible due to Orca-2 being a LLAMA 2 7b model and Noromaid-7b being a mistral model!</p>
-            <p style="padding-left: 25px;"><span style="color: rgb(255, 245, 110);">Important info to this model:</span> This model is in NO way affiliated with <a href="https://huggingface.co/ddh0/OrcaMaid-13b">ddh0/OrcaMaid-13b</a> or and *maid models by <a href="https://huggingface.co/ddh0/OrcaMaid-13b">ddh0</a>, it was inspired by him tho.</p>
-        </ul>
-        <br>
-        <p>Spin-Off's (standalone)</p>
-        <ul style="padding-left: 25px;">
-            <p id="Noromaid-v0.1-mixtral-8x7b-v1">- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v1">Noromaid-v0.1-mixtral-8x7b-v1</a></p>
-            <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v1 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 3x Alpaca modified datasets (for the RP one) and 2 shareGPT datasets. LimaRP token length, input, and output size got wiped out, and were separated into chunks of +8k context conversation (this is the maximum LimaRP can offer).</p>
-        
-            <p id="Noromaid-v0.1-mixtral-8x7b-v2">- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v2">Noromaid-v0.1-mixtral-8x7b-v2</a></p>
-            <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v2 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 3x Alpaca modified datasets (for the RP one) and 2 shareGPT datasets. On this v2, LimaRP got fixed further, Axolotl received a monkey patch to actually reformat shareGPT to our modified Alpaca prompting.</p>
-        
-            <p id="Noromaid-v0.1-mixtral-8x7b-v3">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-v3">Noromaid-v0.1-mixtral-8x7b-v3</a></p>
-            <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v3 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 5x Alpaca modified datasets. On this v3, all the datasets got trained on the "completion" method of Axolotl, with all the datasets being completely rewritten to be in Alpaca modified format. More than 2600 Wikipedia references got cleaned up of Norobots dataset.</p>
-            
-            <p id="Noromaid-v0.1-mixtral-8x7b-Instruct-v3">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-Instruct-v3">Noromaid-v0.1-mixtral-8x7b-Instruct-v3</a></p>
-            <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-Instruct-v3 is made with a LoRA done on base Mixtral 8x7b. It's the same data than Noromaid-v0.1-mixtral-8x7b-v3, but applied on the Instruct model. Fine-tuning on base and applying on Instruct seem to give better result for our usage: RP/ERP. Stay tuned for more information!</p>
+            <p>(standalone)</p>
+            <ul>
+                <p>Mixtral</p>
+                <ul style="padding-left: 25px;">
+                    <p id="Noromaid-v0.1-mixtral-8x7b-v1">- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v1">Noromaid-v0.1-mixtral-8x7b-v1</a></p>
+                    <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v1 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 3x Alpaca modified datasets (for the RP one) and 2 shareGPT datasets. LimaRP token length, input, and output size got wiped out, and were separated into chunks of +8k context conversation (this is the maximum LimaRP can offer).</p>
+                
+                    <p id="Noromaid-v0.1-mixtral-8x7b-v2">- <a href="https://huggingface.co/NeverSleepHistorical/Noromaid-v0.1-mixtral-8x7b-v2">Noromaid-v0.1-mixtral-8x7b-v2</a></p>
+                    <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v2 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 3x Alpaca modified datasets (for the RP one) and 2 shareGPT datasets. On this v2, LimaRP got fixed further, Axolotl received a monkey patch to actually reformat shareGPT to our modified Alpaca prompting.</p>
+                
+                    <p id="Noromaid-v0.1-mixtral-8x7b-v3">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-v3">Noromaid-v0.1-mixtral-8x7b-v3</a></p>
+                    <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-v3 is a fine-tune of Mixtral 8x7b, trained on various RP datasets including LimaRP and Aesir, ToxicDPO without warning for decensoring and norobots, rewritten to use a modified Alpaca prompting to be on a par with ChatML or other conversational formats. This version contains 5x Alpaca modified datasets. On this v3, all the datasets got trained on the "completion" method of Axolotl, with all the datasets being completely rewritten to be in Alpaca modified format. More than 2600 Wikipedia references got cleaned up of Norobots dataset.</p>
+                    
+                    <p id="Noromaid-v0.1-mixtral-8x7b-Instruct-v3">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.1-mixtral-8x7b-Instruct-v3">Noromaid-v0.1-mixtral-8x7b-Instruct-v3</a></p>
+                    <p style="padding-left: 25px;">Noromaid-v0.1-mixtral-8x7b-Instruct-v3 is made with a LoRA done on base Mixtral 8x7b. It's the same data than Noromaid-v0.1-mixtral-8x7b-v3, but applied on the Instruct model. Fine-tuning on base and applying on Instruct seem to give better result for our usage: RP/ERP. Stay tuned for more information!</p>
 
+                    <br>
+                <p>Noromaid-v0.1-mixtral-8x7b series info: v1 and v2 were each trained for 2 epochs, totaling to each 8 hours on Axolotl. v3, on the other hand, underwent 3 epochs and was trained for 12 hours, bringing the cumulative training time to 28 hours on a single A100 80GB GPU.</p>
+                </ul>
+            </ul>
             <br>
-            <p>Noromaid-v0.1-mixtral-8x7b series info: v1 and v2 were each trained for 2 epochs, totaling to each 8 hours on Axolotl. v3, on the other hand, underwent 3 epochs and was trained for 12 hours, bringing the cumulative training time to 28 hours on a single A100 80GB GPU.</p>
+            <p>(based on 0.4)</p>
+            <ul>
+                <p id="Noromaid-v0.4-Mixtral-Instruct-8x7b-Zloss">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.4-Mixtral-Instruct-8x7b-Zloss">Noromaid-v0.4-Mixtral-Instruct-8x7b-Zloss</a></p>
+                <p style="padding-left: 25px;">It's Noromaid-v0.1-mixtral-8x7b-Instruct-v3 but retrained with ChatML, Zloss(Thanks charles), and some added datasets.</p>    
+                <p id="FlatOrcamaid-13b-v0.2">- <a href="https://huggingface.co/NeverSleep/FlatOrcamaid-13b-v0.2">FlatOrcamaid-13b-v0.2</a></p>
+                <p style="padding-left: 25px;">FlatOrcamaid-13b-v0.2 is a merge between FlatOrca and Noromaid-13b-v0.2, see more info on the <a href="https://huggingface.co/NeverSleep/FlatOrcamaid-13b-v0.2">repo</a></p>
+                <ul style="padding-left: 25px;">
+                    <p style="padding-left: 25px;"><span style="color: rgb(255, 245, 110);">Important info to a 7b model:</span> Currently not possible due to Orca-2 being a LLAMA 2 7b model and Noromaid-7b being a mistral model!</p>
+                    <p style="padding-left: 25px;"><span style="color: rgb(255, 245, 110);">Important info to this model:</span> This model is in NO way affiliated with <a href="https://huggingface.co/ddh0/OrcaMaid-13b">ddh0/OrcaMaid-13b</a> or and *maid models by <a href="https://huggingface.co/ddh0/OrcaMaid-13b">ddh0</a>, it was inspired by him tho.</p>
+                </ul>
         </ul>
-        <br>
-        <p>Spin-Off's (based on 0.4)</p>
-        <ul style="padding-left: 25px;">
-            <p id="Noromaid-v0.4-Mixtral-Instruct-8x7b-Zloss">- <a href="https://huggingface.co/NeverSleep/Noromaid-v0.4-Mixtral-Instruct-8x7b-Zloss">Noromaid-v0.4-Mixtral-Instruct-8x7b-Zloss</a></p>
-            <p style="padding-left: 25px;">It's Noromaid-v0.1-mixtral-8x7b-Instruct-v3 but retrained with ChatML, Zloss(Thanks charles), and some added datasets.</p>    
         </ul>
+        
         <br>
 
         <p>Credits:</p>
@@ -109,6 +114,9 @@
             <p>Added Noromaid 0.4 DPO [ Released on: 11.01.2024 ]</p>
             <p>Added credits</p>
             <p>Added Noromaid-v0.4-Mixtral-Instruct-8x7b-Zloss [ Released on: 09.01.2024 ]</p>
+            <br><i class="timestamp">12.01.2024 - 23:45 [GMT+2]</i>
+            <p>Did some re-formatting.</p>
+            <p>Fixed some skill issue mistakes on my side.</p>
         </div>
     </div>
     <div id="line"></div>
