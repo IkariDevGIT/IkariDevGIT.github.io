@@ -68,13 +68,28 @@
                     <br>
                 <p>Noromaid-v0.1-mixtral-8x7b series info: v1 and v2 were each trained for 2 epochs, totaling to each 8 hours on Axolotl. v3, on the other hand, underwent 3 epochs and was trained for 12 hours, bringing the cumulative training time to 28 hours on a single A100 80GB GPU.</p>
                 </ul>
-                <p>Miqu</p>
+                <p>Miqu - <a href="https://huggingface.co/collections/NeverSleep/miqumaid-65c3d5e0fd15420346adc906">[HF Collection]</a></p>
                 <ul style="padding-left: 25px;">
                     <p id="MiquMaid-v1-70B">- <a href="https://huggingface.co/NeverSleep/MiquMaid-v1-70B">MiquMaid-v1-70B</a></p>
                     <p style="padding-left: 25px;">Quick train to see if <a href="https://huggingface.co/152334H/miqu-1-70b-sf">miqu</a> finetuned results in good models.</p>
 
                     <p id="MiquMaid-v2-70B-alpha-GGUF">- <a href="https://huggingface.co/NeverSleepHistorical/MiquMaid-v2-70B-alpha-GGUF">MiquMaid-v2-70B-alpha-GGUF (GGUF only)</a></p>
                     <p style="padding-left: 25px;">MiquMaid v2-alpha is trained on 1 epoch for 18h running on 2xA100 80GB. Trained on <a href="https://huggingface.co/152334H/miqu-1-70b-sf">miqu</a>. <span style="color: red;">Deprecated!</span></p>
+
+
+                    <p id="MiquMaid-v2-70B">- <a href="https://huggingface.co/NeverSleep/MiquMaid-v2-70B">MiquMaid-v2-70B</a> / <a href="https://huggingface.co/NeverSleep/MiquMaid-v2-70B-DPO">[DPO]</a></p>
+                    <p style="padding-left: 25px;">MiquMaid-v1-70B was our first 70B model, based on the leaked Mistral Medium model. V1 used Aesir datasets where V2 make the return of Norobots and some uncensoring data in it to make it even more unethical in RP.
+                    </br>
+                    V1 was already compliant to a lot of things, even on some prompt Mistral Medium would refuse 100%, because it is HIGHLY aligned. This V2 let you prompt even more unethical and unhinged RP. Not using any RP format show a rate of refusal really lower than Mistral Medium too!
+                    </br>
+                    On top of that, a DPO train, using the same data that was used in the OG Finetune for better performance made it even better, write better, and be even more uncensored. The model lose some points in benchmark, but the tradeback for really good RP and less repetition was worth it.</p>
+                    
+                    <p id="MiquMaid-v2-2x70B">- <a href="https://huggingface.co/NeverSleep/MiquMaid-v2-2x70B">MiquMaid-v2-70B</a> / <a href="https://huggingface.co/NeverSleep/MiquMaid-v2-2x70B-DPO">[DPO]</a></p>
+                    <p style="padding-left: 25px;">MiquMaid-v2-2x70B is really heavy, it's a 125B model made of MiquMaid-v2-70B and Mistral Medium base. Each MoE model have 2 expert active in them, so the idea between this was to have, on every token, 2x70B expert working together for more randomness and better precision. Since MiquMaid-v2 is here only for RP, it lose some IQ point, that's where Mistral Medium hit and make the prose a lot more better, and let the model be more logical. It's better than a frakenmerge of 2 Mistral medium because it's not 1:1 2x the same model.
+                    <br/>
+                    The gem tho, is the DPO version. When the qLora for uncensoring was made on MiquMaid-v2 for uncensoring it, we got the idea to apply it to Mistral Medium base too. At first, the result wasn't really good and that was expected, since the qLora wasn't trained on Mistral Medium, but on MiquMaid-v2. BUT! When merged together (in a MoE for this example) the full potential of a double DPO shine.
+                    <br/>
+                    We got astonish result on the worst quant ever : Q2_K. Even at Q2_K, MiquMaid-v2-2x70B-DPO showed godly performance in RP, following card, logic and smut. Only downside was the repetition of the formatting, but it was really usable. Unquanted is a gem, but we doubt anyone have the compute power to do that...</p>
                 </ul>
             </ul>
             <br>
@@ -128,6 +143,12 @@
             <br><i class="timestamp">05.02.2024 - 20:14 [GMT+2]</i>
             <p>Added MiquMaid-v1-70B [ Released on: 31.01.2024 ]</p>
             <p>Added MiquMaid-v2-70B-alpha-GGUF [ Released on: 04.02.2024 ]</p>
+            <br><i class="timestamp">07.02.2024 - 20:20 [GMT+2]</i>
+            <p>Added MiquMaid HF Collection</p>
+            <p>Added MiquMaid-v2-70B  [ Released on: 07.02.2024 ]</p>
+            <p>Added MiquMaid-v2-70B-DPO  [ Released on: 07.02.2024 ]</p>
+            <p>Added MiquMaid-v2-2x70B  [ Released on: 07.02.2024 ]</p>
+            <p>Added MiquMaid-v2-2x70B-DPO  [ Released on: 07.02.2024 ]</p>
         </div>
     </div>
     <div id="line"></div>
