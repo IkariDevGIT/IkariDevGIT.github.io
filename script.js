@@ -269,11 +269,13 @@ async function openPostOnLoad() {
     await new Promise(resolve => setTimeout(resolve, 100));
     console.log(blogid)
     if (blogid) {
-        document.getElementById(blogid).scrollIntoView({
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center'
-    });
+        if (!hashA){
+            document.getElementById(blogid).scrollIntoView({
+                behavior: 'auto',
+                block: 'center',
+                inline: 'center'
+            });
+        }
     if (!!blogonly == true) {
         seePostOnly(blogid);
         addBlogButtons();
