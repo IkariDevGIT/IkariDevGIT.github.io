@@ -17,29 +17,46 @@ const DISCUSSIONS_URL = 'https://github.com/IkariDevGIT/IkariDevGIT.github.io/di
       </picture>
     </p>
 
-    <script
-      is:inline
-      src="https://giscus.app/client.js"
-      data-repo="IkariDevGIT/IkariDevGIT.github.io"
-      data-repo-id="R_kgDOKDwj0g"
-      data-category="Blog"
-      data-category-id="DIC_kwDOKDwj0s4DFrHn"
-      data-mapping="pathname"
-      data-strict="0"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="top"
-      data-theme="purple_dark"
-      data-lang="en"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async></script>
+    <div class="comments-rules panel" id="comments-rules" hidden>
+      <p><strong>Before you comment:</strong></p>
+      <ul>
+        <li>Be decent, no harassment, slurs or spam.</li>
+        <li>Stay roughly on topic.</li>
+        <li>Your comment is a <a href={DISCUSSIONS_URL}>GitHub Discussion</a> under my repo, public and tied to your GitHub account.</li>
+        <li>It also falls under <a href="https://docs.github.com/en/site-policy/github-terms/github-community-guidelines">GitHub's community guidelines</a> and is served by <a href="https://giscus.app/">giscus</a>.</li>
+        <li>I can edit, delete or lock anything in there.</li>
+      </ul>
+      <p>Okay with that?</p>
+      <button type="button" class="btn" id="comments-accept">Yes</button>
+    </div>
+
+    <div class="comments-widget is-locked" id="comments-widget">
+      <script
+        is:inline
+        src="https://giscus.app/client.js"
+        data-repo="IkariDevGIT/IkariDevGIT.github.io"
+        data-repo-id="R_kgDOKDwj0g"
+        data-category="Blog"
+        data-category-id="DIC_kwDOKDwj0s4DFrHn"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="purple_dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async></script>
+    </div>
 
     <noscript>
       <p>Comments need JavaScript. You can read and post them on <a href={DISCUSSIONS_URL}>GitHub Discussions</a> instead.</p>
     </noscript>
   </div>
 </section>
+
+<script is:inline type="module" src="/scripts/comments-gate.js"></script>
 
 <style>
   .comments {

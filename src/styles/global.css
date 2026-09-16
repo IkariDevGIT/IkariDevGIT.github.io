@@ -394,8 +394,14 @@ hr {
   box-shadow: inset 0 2px 15px 0 rgba(230, 185, 60, 0.35);
 }
 
-.notice a {
+.notice a,
+.notice :is(h1, h2, h3, h4, h5, h6),
+.notice strong {
   color: rgb(230, 185, 60);
+}
+
+.notice :is(h1, h2, h3, h4, h5, h6) {
+  text-shadow: none;
 }
 
 .legacy-projects {
@@ -877,6 +883,57 @@ hr {
 
 .post-embed {
   margin: 1.4em 0;
+}
+
+.comments-rules {
+  border-color: rgba(230, 185, 60, 0.7);
+  box-shadow: inset 0 2px 15px 0 rgba(230, 185, 60, 0.35);
+}
+
+.comments-rules a,
+.comments-rules :is(h1, h2, h3, h4, h5, h6),
+.comments-rules strong {
+  color: rgb(230, 185, 60);
+}
+
+.comments-rules ul {
+  margin-bottom: 1em;
+}
+
+.comments-widget {
+  position: relative;
+}
+
+.comments-widget.is-locked {
+  pointer-events: none;
+  user-select: none;
+}
+
+.comments-widget.is-locked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(230, 185, 60, 0.12);
+}
+
+.comments-widget.is-locked::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: -24px;
+  right: -24px;
+  height: 34px;
+  transform: translateY(200px) rotate(-12deg);
+  border-top: 1px solid rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  background-image: repeating-linear-gradient(
+    45deg,
+    #e6b93c 0,
+    #e6b93c 18px,
+    #1a1405 18px,
+    #1a1405 36px
+  );
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
 .post-history {
