@@ -173,7 +173,7 @@ export async function renderOgImage(options: OgImageOptions): Promise<Response> 
     height: OG_HEIGHT,
     fonts: [...fonts],
   });
-  const png = await sharp(Buffer.from(svg)).png().toBuffer();
+  const png = await sharp(Buffer.from(svg)).png({ compressionLevel: 9, effort: 10 }).toBuffer();
 
   return new Response(new Uint8Array(png), {
     headers: { 'Content-Type': 'image/png' },
