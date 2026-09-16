@@ -10,6 +10,7 @@ import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
 import { rehypeCustomTags } from './src/plugins/rehype-custom-tags.mjs';
 import { rehypePostEmbed } from './src/plugins/rehype-post-embed.mjs';
 import { kaoFontProvider } from './src/plugins/kao-font-provider.mjs';
+import { rehypeLastUpdated } from './src/plugins/rehype-last-updated.mjs';
 import {
   getBlogPostLastmods,
   getPageLastmod,
@@ -93,6 +94,7 @@ export default defineConfig({
           },
         ],
         rehypePostEmbed,
+        rehypeLastUpdated,
       ],
     }),
   },

@@ -4,8 +4,10 @@ export const REPO_URL = 'https://github.com/IkariDevGIT/IkariDevGIT.github.io';
 
 export function getBuildInfo() {
   let commit = null;
+  let committedAt = null;
   try {
     commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf-8' }).trim();
+    committedAt = new Date(execFileSync('git', ['log', '-1', '--format=%cI'], { encoding: 'utf-8' }).trim());
   } catch {
     commit = null;
   }
@@ -13,6 +15,7 @@ export function getBuildInfo() {
   return {
     commit,
     commitUrl: commit ? `${REPO_URL}/commit/${commit}` : null,
+    committedAt: committedAt ?? new Date(),
     builtAt: new Date(),
   };
 }

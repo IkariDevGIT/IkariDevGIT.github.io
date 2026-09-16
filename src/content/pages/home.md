@@ -7,6 +7,9 @@ description: "My personal site: machine learning, anime, and software, plus the 
 
 <p class="notice panel">This site was inactive and not maintained for about 2 years. It got rebuilt on 15 September 2026, read more about that in the <a href="/blog/site-rebuild-2026/">rebuild post</a>.</p>
 
+<lastupdated/>
+<br>
+
 Moin, i am Ikari.
 
 I am a AI/ML enthusiast from germany, in my blog, i talk about all kinds of things, here some examples:

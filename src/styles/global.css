@@ -879,6 +879,47 @@ hr {
   margin: 1.4em 0;
 }
 
+.last-updated {
+  margin-top: 2rem;
+}
+
+.last-updated .box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5em;
+  margin: 0;
+  padding: 12px;
+  text-align: center;
+}
+
+.last-updated-label {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--color-text);
+  text-shadow: 0 0 8px var(--color-accent-glow);
+}
+
+.last-updated time {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  text-shadow: 0 0 10px var(--color-accent-glow);
+}
+
+.last-updated-ago:not(:empty) {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-faint);
+}
+
+.last-updated-ago:not(:empty)::before {
+  content: '· ';
+}
+
 .repost-redirect {
   display: grid;
   place-items: center;
