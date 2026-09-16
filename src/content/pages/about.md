@@ -3,9 +3,9 @@ title: About
 description: "Hey, i am IkariDev. A developer from germany doing machine learning, watching anime, and writing software/scripts."
 ---
 
-### Hey, i am IkariDev.
+## Hey, i am IkariDev.
 
-#### I am a developer from germany doing various things, such as:
+### I am a developer from germany doing various things, such as:
 
 - Machine learning [ Large Language Models, ~~Stable diffusion~~(I distanced myself from this, i hate seeing slop everywhere now), Upscaling, other small stuff ]
 - Watching anime
@@ -13,21 +13,21 @@ description: "Hey, i am IkariDev. A developer from germany doing machine learnin
 - Drawing
 - Modding games [ C#, Unity, currently modding MDRG via MelonLoader ]
 
-#### My main programming languages i use:
+### My main programming languages i use:
 
 - C#
 - Python
 
-#### Also know a bit of:
+### Also know a bit of:
 
 - Rust
 - TypeScript/JavaScript
 
-#### Programming languages i want to learn more:
+### Programming languages i want to learn more:
 
 - Rust
 
-### What i like:
+## What i like:
 
 - Anime
 - Edgy stuff (I mean, look at my website LMFAO)
@@ -43,12 +43,12 @@ description: "Hey, i am IkariDev. A developer from germany doing machine learnin
   </picture>
 - The Coffin of Andy and Leyley ~ best SFW game
 
-### What i dislike:
+## What i dislike:
 
 - OpenAI
 - People who don't read HuggingFace descriptions before asking questions
 
-#### You can also check me out on these places:
+### You can also check me out on these places:
 
 - [Github](https://github.com/IkariDevGIT)
 - [Civitai](https://civitai.com/user/ikaridev)

@@ -32,9 +32,13 @@ const redirectParams = [];
 if (sort !== 'newest') redirectParams.push(`sort=${sort}`);
 if (page.currentPage !== 1) redirectParams.push(`page=${page.currentPage}`);
 const redirectTarget = `/blog/${redirectParams.length ? `?${redirectParams.join('&')}` : ''}`;
+
+const sortLabel = { newest: 'newest first', oldest: 'oldest first', 'latest-update': 'last updated' }[sort];
+const title = `Blog, ${sortLabel}, page ${page.currentPage}`;
+const description = `${blogPage.data.description} Page ${page.currentPage} of ${page.lastPage}, sorted ${sortLabel}.`;
 ---
 
-<BaseLayout title={blogPage.data.title} description={blogPage.data.description} noindex>
+<BaseLayout title={title} description={description} noindex>
   <Fragment slot="head">
     <script is:inline set:html={`location.replace(${JSON.stringify(redirectTarget)});`} />
   </Fragment>

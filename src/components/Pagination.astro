@@ -6,18 +6,22 @@ interface Props {
 }
 
 const { page } = Astro.props;
+
+const withSlash = (url: string | undefined) => (url && !url.endsWith('/') ? `${url}/` : url);
+const prev = withSlash(page.url.prev);
+const next = withSlash(page.url.next);
 ---
 
 {
   (page.url.prev || page.url.next) && (
     <nav class="pagination" aria-label="Blog pages">
-      <a class="btn" href={page.url.prev ?? undefined} aria-disabled={!page.url.prev} rel="prev">
+      <a class="btn" href={prev ?? undefined} aria-disabled={!prev} rel="prev">
         ← Newer
       </a>
       <span class="meta-line">
         Page {page.currentPage} of {page.lastPage}
       </span>
-      <a class="btn" href={page.url.next ?? undefined} aria-disabled={!page.url.next} rel="next">
+      <a class="btn" href={next ?? undefined} aria-disabled={!next} rel="next">
         Older →
       </a>
     </nav>
