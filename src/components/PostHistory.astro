@@ -26,11 +26,11 @@ function tagsFor(hash: string) {
 {commits.length > 0 && (
   <section class="post-history">
     <p class="meta-line">
-      Added in <a href={added.url}><code>{added.hash}</code></a>
+      Added in <a href={added.url} target="_blank" rel="noopener"><code>{added.hash}</code></a>
       {latest.hash !== added.hash && (
         <>
           {' · Last changed in '}
-          <a href={latest.url}><code>{latest.hash}</code></a>
+          <a href={latest.url} target="_blank" rel="noopener"><code>{latest.hash}</code></a>
         </>
       )}
     </p>
@@ -41,7 +41,7 @@ function tagsFor(hash: string) {
       {isLegacy && (
         <p class="notice panel">
           This history is inaccurate. These commits are from migrating the old site, not from when the post
-          was written. The site before the rebuild is <a href={OLD_SITE_TREE_URL}>still in the repo</a>.
+          was written. The site before the rebuild is <a href={OLD_SITE_TREE_URL} target="_blank" rel="noopener">still in the repo</a>.
         </p>
       )}
 
@@ -54,7 +54,7 @@ function tagsFor(hash: string) {
             </p>
             <p class="post-history-what">
               <span class="post-history-subject">{commit.subject}</span>
-              <a href={commit.url}><code>{commit.hash}</code></a>
+              <a href={commit.url} target="_blank" rel="noopener"><code>{commit.hash}</code></a>
               <span class="post-history-diff">
                 <span class="diff-added">+{commit.added}</span>
                 <span class="diff-removed">−{commit.deleted}</span>

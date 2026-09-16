@@ -22,7 +22,7 @@ const nextLevel = Math.min(level + 1, 6) as Props['level'];
     <ul>
       {group.links.map((link) => (
         <li>
-          <a href={link.href}>{link.label}</a>
+          <a href={link.href} target="_blank" rel="noopener">{link.label}</a>
           {link.note && <> ~ {link.note}</>}
         </li>
       ))}

@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeExternalLinks from 'rehype-external-links';
 import { remarkGitDates } from './src/plugins/remark-git-dates.mjs';
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
 import { rehypeCustomTags } from './src/plugins/rehype-custom-tags.mjs';
@@ -94,6 +95,22 @@ export default defineConfig({
         ],
         rehypePostEmbed,
         rehypeLastUpdated,
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: ['noopener'],
+            test: (/** @type {import('hast').Element} */ el) => {
+              const href = el.properties?.href;
+              if (typeof href !== 'string') return false;
+              try {
+                return new URL(href, 'https://ikari.sillytilly.org').hostname !== 'ikari.sillytilly.org';
+              } catch {
+                return false;
+              }
+            },
+          },
+        ],
       ],
     }),
   },
