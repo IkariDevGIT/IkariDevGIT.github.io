@@ -1,0 +1,67 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const page = await getEntry('pages', 'blog');
+if (!page) throw new Error('Missing src/content/pages/blog.md');
+---
+
+<BaseLayout
+  title={page.data.title}
+  description={page.data.description}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog/' },
+  ]}
+>
+  <Fragment slot="head">
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/blog-nojs/newest/" />
+    </noscript>
+  </Fragment>
+
+  <h1>Blog</h1>
+
+  <picture>
+    <source srcset="/images/badges/typos.webp" type="image/webp" />
+    <img src="/images/badges/typos.gif" alt="Typos... who needs backspase!" width="150" height="20" loading="lazy" />
+  </picture>
+
+  <div class="blog-controls">
+    <div class="post-search">
+      <label for="post-search-input">Search posts by title</label>
+      <input type="text" id="post-search-input" autocomplete="off" placeholder="Search by title" disabled />
+    </div>
+    <div class="sort-links" id="sort-buttons" role="group" aria-label="Sort posts">
+      <span>Sort:</span>
+      <button class="btn" type="button" data-sort="newest" aria-current="page" disabled>Newest</button>
+      <button class="btn" type="button" data-sort="oldest" disabled>Oldest</button>
+      <button class="btn" type="button" data-sort="latest-update" disabled>Last updated</button>
+    </div>
+  </div>
+
+  <details class="tag-filter" id="tag-filter" hidden>
+    <summary>Filter by tags</summary>
+    <p class="meta-line tag-filter-hint">
+      Click a tag once to require it, again to exclude it, again to clear it. Required tags must all be present (AND).
+    </p>
+    <div class="tag-filter-chips" id="tag-filter-chips" role="group" aria-label="Filter posts by tag"></div>
+  </details>
+
+  <hr />
+
+  <p id="blog-status" class="meta-line" role="status" aria-live="polite">Loading posts.</p>
+  <ol class="post-list" id="post-list"></ol>
+
+  <nav class="pagination" id="pagination" aria-label="Blog pages" hidden>
+    <button class="btn" type="button" id="prev-page">← Newer</button>
+    <span class="meta-line" id="page-indicator"></span>
+    <button class="btn" type="button" id="next-page">Older →</button>
+  </nav>
+
+  <noscript>
+    <p>This page needs JavaScript for search and pagination. <a href="/blog-nojs/newest/">View the plain version instead.</a></p>
+  </noscript>
+
+  <script is:inline type="module" src="/scripts/blog.js"></script>
+</BaseLayout>

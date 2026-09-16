@@ -1,0 +1,75 @@
+---
+import { NAV_LINKS } from '../consts';
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<nav class="site-nav" aria-label="Primary">
+  <ul>
+    {
+      NAV_LINKS.map((link) => (
+        <li>
+          <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .site-nav {
+    position: relative;
+    background-color: var(--color-navbar);
+    border-bottom: 5px groove rgba(174, 0, 219, 0.28);
+    border-radius: 0 0 8px 8px;
+    box-shadow: inset 0 -24px 50px -30px rgba(255, 0, 245, 0.19);
+    margin-bottom: 10px;
+  }
+
+  .site-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 10px 5px 3px;
+  }
+
+  .site-nav li {
+    padding: 0 10px 5px;
+  }
+
+  .site-nav a {
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .site-nav a::before {
+    content: '[ ';
+    color: var(--color-text-faint);
+  }
+
+  .site-nav a::after {
+    content: ' ]';
+    color: var(--color-text-faint);
+  }
+
+  .site-nav a:hover,
+  .site-nav a:focus-visible {
+    color: var(--color-text-faint);
+    text-decoration: underline;
+  }
+
+  .site-nav a[aria-current='page'] {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,144 @@
+---
+// goatcounter's counter image ignores the style query param, so this fetches the raw count as json instead
+const now = new Date();
+const monthStart = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
+---
+
+<aside class="sidebar">
+  <picture>
+    <source srcset="/images/line-new.webp" type="image/webp" />
+    <img class="top-divider" src="/images/line-new.gif" alt="" loading="lazy" width="420" height="18" />
+  </picture>
+
+  <div class="box2">
+    <div class="box">
+      <p>Smol about</p>
+      <ul class="badge-list">
+        <li><p>Im ikaridev.</p></li>
+        <li><p>I am:</p></li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/coder.webp" type="image/webp" />
+            <img src="/images/badges/coder.png" alt="Coder" loading="lazy" width="86" height="15" />
+          </picture>
+        </li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/hehim.webp" type="image/webp" />
+            <img src="/images/badges/hehim.png" alt="He/him" loading="lazy" width="86" height="15" />
+          </picture>
+        </li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/catlover.webp" type="image/webp" />
+            <img src="/images/badges/catlover.png" alt="Cat lover" loading="lazy" width="86" height="15" />
+          </picture>
+        </li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/german.webp" type="image/webp" />
+            <img src="/images/badges/german.gif" alt="German" loading="lazy" width="80" height="15" />
+          </picture>
+        </li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/nightperson.webp" type="image/webp" />
+            <img src="/images/badges/nightperson.gif" alt="Night person" loading="lazy" width="150" height="20" />
+          </picture>
+        </li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/spoiledbrat.webp" type="image/webp" />
+            <img src="/images/badges/spoiledbrat.gif" alt="Spoiled brat" loading="lazy" width="150" height="20" />
+          </picture>
+        </li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/imbored.webp" type="image/webp" />
+            <img src="/images/badges/imbored.gif" alt="I'm bored" loading="lazy" width="150" height="20" />
+          </picture>
+        </li>
+        <li>
+          <picture>
+            <source srcset="/images/badges/iloveundies.webp" type="image/webp" />
+            <img src="/images/badges/iloveundies.gif" alt="I love undies" loading="lazy" width="150" height="20" />
+          </picture>
+        </li>
+      </ul>
+      <picture>
+        <source srcset="/images/badges/toggle.webp" type="image/webp" />
+        <img class="sidebar-toggle-gif" src="/images/badges/toggle.gif" alt="" loading="lazy" width="255" height="180" />
+      </picture>
+    </div>
+  </div>
+
+  <div class="box2">
+    <div class="box stat-box">
+      <p class="meta-line">Visitors this month</p>
+      <p class="stat-number" id="visitor-count" data-month-start={monthStart}>…</p>
+      <noscript>
+        <style is:inline>
+          #visitor-count {
+            display: none;
+          }
+        </style>
+        <p class="stat-number">NoJS</p>
+      </noscript>
+    </div>
+  </div>
+  <script is:inline src="/scripts/visitor-count.js"></script>
+
+  <nav class="hotline-webring" aria-label="Hotline Webring">
+    <a class="webring-arrow" rel="nofollow" href="https://hotlinewebring.club/ikari/previous" aria-label="Previous site">
+      <span aria-hidden="true">❮❮</span>
+    </a>
+    <span class="webring-label">Hotline Webring</span>
+    <a class="webring-arrow" rel="nofollow" href="https://hotlinewebring.club/ikari/next" aria-label="Next site">
+      <span aria-hidden="true">❯❯</span>
+    </a>
+  </nav>
+
+  <div class="navlink-embed">
+    <iframe
+      width="180"
+      height="180"
+      src="https://dimden.neocities.org/navlink/"
+      title="Neocities navlink"
+      loading="lazy"
+    ></iframe>
+  </div>
+  <div class="navlink-embed">
+    <iframe
+      width="180"
+      height="180"
+      src="https://dimden.neocities.org/navlink/"
+      title="Neocities navlink"
+      loading="lazy"
+    ></iframe>
+  </div>
+
+  <div class="sidebar-gif-row">
+    <picture>
+      <source srcset="/images/badges/tumblr.webp" type="image/webp" />
+      <img src="/images/badges/tumblr.gif" alt="Tumblr" loading="lazy" width="97" height="31" />
+    </picture>
+  </div>
+  <div class="sidebar-gif-row">
+    <picture>
+      <source srcset="/images/badges/firefox.webp" type="image/webp" />
+      <img src="/images/badges/firefox.gif" alt="Firefox" loading="lazy" width="88" height="31" />
+    </picture>
+  </div>
+  <div class="sidebar-gif-row">
+    <picture>
+      <source srcset="/images/badges/linuxnow.webp" type="image/webp" />
+      <img src="/images/badges/linuxnow.jpg" alt="Linux Now!" loading="lazy" width="88" height="31" />
+    </picture>
+  </div>
+  <div class="sidebar-gif-row">
+    <picture>
+      <source srcset="/images/badges/iloverats.webp" type="image/webp" />
+      <img src="/images/badges/iloverats.gif" alt="I love rats stamp" loading="lazy" width="99" height="56" />
+    </picture>
+  </div>
+</aside>

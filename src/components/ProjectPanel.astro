@@ -1,0 +1,29 @@
+---
+import { render } from 'astro:content';
+import { STATUS_LABELS, type Project } from '../lib/projects';
+import { formatPostDate } from '../lib/dateFormat.mjs';
+
+interface Props {
+  project: Project;
+}
+
+const { entry, addedDate, started } = Astro.props.project;
+const { Content } = await render(entry);
+const { title, status, lastUpdate, pinned } = entry.data;
+
+---
+
+<section class:list={['panel', { 'project-pinned': pinned !== undefined }]}>
+  <h2>{title}</h2>
+  <div class="project-info">
+    <span><span class="project-status" data-status={status}>{STATUS_LABELS[status]}</span></span>
+    {started && (
+      <span><span class="project-info-label">Started</span><time datetime={started.datetime}>{started.label}</time></span>
+    )}
+    <span><span class="project-info-label">Added</span><time datetime={addedDate.toISOString()}>{formatPostDate(addedDate)}</time></span>
+    {lastUpdate && (
+      <span><span class="project-info-label">Last update</span><img src={lastUpdate} alt="Last update" height="20" loading="lazy" /></span>
+    )}
+  </div>
+  <Content />
+</section>

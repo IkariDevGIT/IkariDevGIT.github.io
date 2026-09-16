@@ -1,0 +1,35 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectPanel from '../components/ProjectPanel.astro';
+import { getProjects, LEGACY_PROJECTS_NOTICE } from '../lib/projects';
+
+const page = await getEntry('pages', 'projects');
+if (!page) throw new Error('Missing src/content/pages/projects.md');
+const { Content } = await render(page);
+
+const { current, legacy } = await getProjects();
+---
+
+<BaseLayout
+  title={page.data.title}
+  description={page.data.description}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: page.data.title, url: '/projects/' },
+  ]}
+>
+  <h1>{page.data.title}</h1>
+  <Content />
+
+  {current.map((project) => <ProjectPanel project={project} />)}
+
+  {legacy.length > 0 && (
+    <div class="legacy-projects">
+      <p class="notice panel">
+        {LEGACY_PROJECTS_NOTICE} If you wanna read more, check out the <a href="/blog/site-rebuild-2026/">site rebuild post</a>.
+      </p>
+      {legacy.map((project) => <ProjectPanel project={project} />)}
+    </div>
+  )}
+</BaseLayout>

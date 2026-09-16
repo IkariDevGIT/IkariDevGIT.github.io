@@ -1,0 +1,119 @@
+---
+import { SITE_TITLE } from '../consts';
+import { getBuildInfo, REPO_URL } from '../lib/buildInfo.mjs';
+import { formatPostDate } from '../lib/dateFormat.mjs';
+
+const year = new Date().getFullYear();
+const { commit, commitUrl, builtAt } = getBuildInfo();
+---
+
+<footer class="site-footer">
+  <p class="webring-heading meta-line">Inspiring websites:</p>
+  <p class="webring-buttons">
+    <a href="https://dimden.dev/" target="_blank" rel="noopener noreferrer">
+      <img src="https://dimden.dev/services/images/88x31.gif" alt="dimden.dev" width="88" height="31" loading="lazy" />
+    </a>
+    <a href="https://adilene.net" target="_blank" rel="noopener noreferrer">
+      <picture>
+        <source srcset="/images/webring/adilene-net.webp" type="image/webp" />
+        <img src="/images/webring/adilene-net.gif" alt="adilene.net" width="88" height="31" loading="lazy" />
+      </picture>
+    </a>
+  </p>
+
+  <hr class="footer-sep" />
+
+  <p class="footer-blinkies">
+    <picture>
+      <source srcset="/images/badges/gokinky.webp" type="image/webp" />
+      <img src="/images/badges/gokinky.gif" alt="Go kinky, get a blinkie" width="150" height="20" loading="lazy" />
+    </picture>
+    <picture>
+      <source srcset="/images/badges/luvmysite.webp" type="image/webp" />
+      <img src="/images/badges/luvmysite.gif" alt="I love my site" width="80" height="18" loading="lazy" />
+    </picture>
+  </p>
+
+  <p class="meta-line">
+    <a href="/rss.xml">RSS feed</a>
+    · <a href="/rss-no-repost.xml">RSS (no reposts)</a>
+    · <a href="/rss-repost.xml">RSS (reposts)</a>
+    · © {year} {SITE_TITLE}
+  </p>
+
+  <p class="meta-line footer-repo">
+    <a href={REPO_URL} target="_blank" rel="noopener">
+      <img
+        src="https://shieldcn.dev/github/stars/IkariDevGIT/IkariDevGIT.github.io.svg?variant=ghost&mode=dark"
+        alt="This site's source on GitHub"
+        height="20"
+        loading="lazy"
+      />
+    </a>
+    <span>
+      Built <time datetime={builtAt.toISOString()}>{formatPostDate(builtAt)}</time>
+      {commit && (
+        <>
+          {' · '}
+          <a href={commitUrl} target="_blank" rel="noopener">{commit}</a>
+        </>
+      )}
+    </span>
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 10px;
+    background-color: var(--color-navbar);
+    padding: 15px 10px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .webring-heading {
+    margin-bottom: 0.5rem;
+  }
+
+  .webring-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .webring-buttons img {
+    display: block;
+  }
+
+  .footer-sep {
+    width: min(260px, 80%);
+    height: 1px;
+    margin: 0 auto 1rem;
+    border: 0;
+    background: linear-gradient(90deg, transparent, rgba(237, 100, 245, 0.45), transparent);
+  }
+
+  .footer-repo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 0;
+  }
+
+  .footer-blinkies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .footer-blinkies img {
+    display: block;
+  }
+</style>

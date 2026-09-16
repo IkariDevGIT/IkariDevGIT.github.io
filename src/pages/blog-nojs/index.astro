@@ -1,0 +1,19 @@
+---
+const target = '/blog-nojs/newest/';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blog</title>
+    <script is:inline>location.replace('/blog/');</script>
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=${target}`} />
+    </noscript>
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <p>Redirecting to <a href={target}>{target}</a>.</p>
+  </body>
+</html>

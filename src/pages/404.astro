@@ -1,0 +1,16 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const page = await getEntry('pages', '404');
+if (!page) throw new Error('Missing src/content/pages/404.md');
+---
+
+<BaseLayout title={page.data.title} description={page.data.description} noindex>
+  <h1>404</h1>
+  <p>There's nothing here.</p>
+  <p>
+    Try the <a href="/">home page</a>, the <a href="/blog/">blog</a>, or
+    <a href="/resources/">resources</a>.
+  </p>
+</BaseLayout>

@@ -1,0 +1,221 @@
+main:
+  intro: >-
+    Here you can find various resources i am using/i used/i suggest using.
+  sections:
+    - id: ml
+      title: ML
+      groups:
+        - id: llm
+          title: LLM
+          links:
+            - label: HuggingFace - NeverSleep
+              href: https://huggingface.co/NeverSleep
+              note: Org by me and Undi.
+            - label: Ask max
+              href: http://ask-max.neocities.org/
+              note: If you don't know how something works, ask max!
+            - label: Character Tools
+              href: https://character-tools.srjuggernaut.dev
+              note: A collection of tools for creating and managing characters for AI Roleplay.
+            - label: Snombler
+              href: https://snombler.neocities.org/logs
+              note: Model ratings.
+            - label: BestERP
+              href: https://besterp.ai/s/models
+              note: Nice site for model ratings.
+            - label: Ayumi ERP rating
+              href: https://rentry.co/ayumi_erp_rating
+              note: An Erotic Roleplay model rating by weicon.
+            - label: Chub
+              href: https://www.chub.ai
+              note: A site full of chars you can download.
+            - label: koboldcpp
+              href: https://github.com/LostRuins/koboldcpp
+              note: My new main backend for LLM stuff, only for llama.cpp.
+            - label: Aphrodite
+              href: https://github.com/PygmalionAI/aphrodite-engine
+              note: Aphrodite is the official backend engine for PygmalionAI.
+            - label: Tabby
+              href: https://github.com/theroyallab/tabbyAPI
+              note: Backend for exllamav2.
+            - label: OobaBooga-textgen webui
+              href: https://github.com/oobabooga/text-generation-webui
+              note: (old)My main backend for LLM stuff.
+            - label: Kalo's sampler post
+              href: https://www.reddit.com/r/LocalLLaMA/comments/17vonjo/your_settings_are_probably_hurting_your_model_why/
+              note: Your sampler settings are probably hurting your model, why?
+            - label: HuggingFace - TheBloke
+              href: https://huggingface.co/TheBloke
+              note: here you can find various GGUF quantizations.
+            - label: Sillytavern
+              href: https://github.com/SillyTavern/SillyTavern
+              note: A really good RP/ERP ui. Based on TavernAI, but sillytavern is much better.
+            - label: Vali's ChatterUI
+              href: https://github.com/Vali-98/ChatterUI
+              note: Basically SillyTavern but hosted on your phone.
+            - label: Chatbots Webring
+              href: https://chatbots.neocities.org/
+              note: Webring for charcard websites.
+            - label: HuggingFace - AzureBlack
+              href: https://huggingface.co/AzureBlack
+              note: The TheBloke of exl2 quants.
+            - label: OSGA
+              href: https://github.com/ElliottDyson/OSGA
+              note: >-
+                OSGA(Open-Source Generative Agents) is a community-driven initiative
+                that builds upon the foundation of 'Generative Agents', for local LLM
+                models. It is based on this Paper (https://arxiv.org/abs/2304.03442)
+                (Video: https://www.youtube.com/watch?v=nKCJ3BMUy1s).
+            - label: Llama.cpp
+              href: https://github.com/ggerganov/llama.cpp
+              note: >-
+                Inference of LLaMA model in pure C/C++. It can run on cpu+gpu, good
+                option if other model loaders require too much vram.
+            - label: HuggingFace - Undi / Undi's Kofi
+              href: https://huggingface.co/Undi95
+              note: A shit-ton of high quality merged models.
+            - label: Thoughts guide (kinda outdated)
+              href: https://rentry.org/thoughts-guide
+              note: A guide by me on how you can implement characters thoughts into sillytavern.
+            - label: annotated-transformer
+              href: https://nlp.seas.harvard.edu/annotated-transformer/
+              note: Idk what to write here, but someone said i should link it here.
+            - label: Gryphe/MythoMax-L2-13b
+              href: https://huggingface.co/Gryphe/MythoMax-L2-13b
+              note: Was once the best model available for RP/ERP, some still consider it best.
+            - label: LambdaLabs
+              href: https://lambdalabs.com/
+              note: "Really cost efficient gpu cluster (for example: 1x H100 for $1.99/hr)."
+          groups:
+            - id: discords-lm
+              title: Various discords
+              links:
+                - label: NeverSleep
+                  href: https://discord.gg/mGU9CVb6vV
+                  note: NeverSleep server, by me and undi.
+                - label: SillyTavern
+                  href: https://discord.gg/sillytavern
+                  note: SillyTavern server.
+                - label: TheBlock
+                  href: https://discord.gg/theblokeai
+                  note: TheBloke server.
+                - label: KoboldAI
+                  href: https://discord.gg/X3WmRM9Npn
+                  note: KoboldAI server.
+            - id: news-lm
+              title: News
+              links:
+                - label: HuggingFace Daily Papers
+                  href: https://huggingface.co/papers
+                  note: Daily papers.
+                - label: 4chan Lmg
+                  href: "https://boards.4chan.org/g/catalog#s=lmg"
+                  note: Sometimes maybe good sometimes maybe sheet.
+                - label: LocalLLaMA
+                  href: https://www.reddit.com/r/LocalLLaMA/
+                  note: >-
+                    Subreddit to discuss about Llama, the large language model created
+                    by Meta AI. Often really hangs behind news.
+            - id: learn-lm
+              title: Learn
+              links:
+                - label: "Neural Networks: Zero to Hero"
+                  href: https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
+                  note: Learning the basics of how AI works.
+                - label: Attention is all you need
+                  href: https://www.youtube.com/watch?v=bCz4OMemCcA
+                  note: >-
+                    A complete explanation of all the layers of a Transformer Model:
+                    Multi-Head Self-Attention, Positional Encoding, including all the
+                    matrix multiplications and a complete description of the training
+                    and inference process.
+            - id: model_creation-lm
+              title: Model creation/Dataset Creation
+              links:
+                - label: MergeKit
+                  href: https://github.com/cg123/mergekit
+                  note: >-
+                    Suite of merging scripts. With those scripts you can merge LLM
+                    models with a variety of different merging methods.
+                - label: MergeMonster
+                  href: https://github.com/Gryphe/MergeMonster
+                  note: >-
+                    An unsupervised merging algorithm for Transformers-based language
+                    models, using a list of phrases (both good and bad) and a fully
+                    automated strategy that strives to decrease (or increase) the
+                    probability of these phrases occurring in the final merge.
+                - label: Quantization script
+                  href: https://github.com/DocShotgun/LLM-notebooks/
+                  note: >-
+                    Bunch of Colab/Laggle notebooks for quanting models, applying
+                    loras and bunch of other stuff.
+                - label: Huggingface Generation config documentation
+                  href: "https://huggingface.co/docs/transformers/main_classes/text_generation#transformers.GenerationConfig"
+                  note: >-
+                    If you use smth like oobabooga, and you dont know what each gen
+                    setting does, well... here is the place.
+                - label: Augmentoolkit
+                  href: https://github.com/e-p-armstrong/augmentoolkit/tree/master
+                  note: Generate multi-turn training data, about any subject, using Open Source LLMs.
+                - label: airoboros
+                  href: https://github.com/jondurbin/airoboros
+                  note: using large language models to fine-tune large language models.
+            - id: dataset-lm
+              title: Datasets
+              links:
+                - label: Dampf's list
+                  href: https://rentry.org/datasets-llm
+                  note: A collection of datasets.
+                - label: ERP/RP and erotica rawdata collection
+                  href: https://rentry.org/qib8f
+                  note: A collection of datasets.
+                - label: PygmalionAI/PIPPA
+                  href: https://huggingface.co/datasets/PygmalionAI/PIPPA
+                  note: Official Pygmalion dataset.
+                - label: Xilabs/pippa-alpaca
+                  href: https://huggingface.co/datasets/Xilabs/pippa-alpaca
+                  note: Pygmalion PIPPA dataset with alpaca format instead of metharme.
+        - id: sd
+          title: Stable Diffusion
+          links:
+            - label: AUTOMATIC1111
+              href: https://github.com/AUTOMATIC1111/stable-diffusion-webui
+              note: A really good ui.
+            - label: vladmandic
+              href: https://github.com/vladmandic/automatic
+              note: A fork of AUTOMATIC1111 which does things differently. Try which fits best for you.
+            - label: ComfyUI
+              href: https://github.com/comfyanonymous/ComfyUI
+              note: >-
+                Yet another powerful SD UI, here you have way more control than in
+                vlad, or auto1111. ComfyUI will let you design and execute advanced
+                stable diffusion pipelines using a graph/nodes/flowchart based
+                interface.
+            - label: kohya_ss
+              href: https://github.com/bmaltais/kohya_ss
+              note: A tool for training sd Loras/Locon/whatever.
+            - label: CivitAi
+              href: https://civitai.com/
+              note: A place where you can get various loras/models/whatever.
+            - label: YameroYandere Lora
+              href: https://civitai.com/models/48579/yameroyandere
+              note: A really good Yandere lora, made by me with the around 500 images.
+    - id: webdev
+      title: Web development
+      groups:
+        - id: neocities
+          title: Neocities
+          intro: Neocities type of sites.
+          links:
+            - label: sadgrl.online
+              href: https://sadgrl.online/
+              note: Bunch of stuff neocities related.
+            - label: y2k
+              href: https://y2k.neocities.org/
+              note: Like the last one but not sorted.
+            - label: gifcities
+              href: https://gifcities.org/
+              note: Archive of neocities-like gifs you can use on your website.
+            - label: ezgif
+              href: https://ezgif.com
+              note: A really good online tool for modifying gifs.

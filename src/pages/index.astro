@@ -1,0 +1,60 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostListItem from '../components/PostListItem.astro';
+import { getAllPostMeta, sortByNewest } from '../lib/posts';
+import { SITE_TITLE } from '../consts';
+
+const homePage = await getEntry('pages', 'home');
+if (!homePage) throw new Error('Missing src/content/pages/home.md');
+const { Content } = await render(homePage);
+
+const latestPosts = sortByNewest(await getAllPostMeta()).slice(0, 3);
+
+---
+
+<BaseLayout title={SITE_TITLE} description={homePage.data.description}>
+  <Fragment slot="head">
+    <!-- old site linked posts as /index.html?blog=blogid-N -->
+    <script is:inline>
+      (function () {
+        var LEGACY_POSTS = {
+          'blogid-0': 'legacy/new-blog-page-test',
+          'blogid-1': 'legacy/a-couple-of-cool-things',
+          'blogid-2': 'legacy/website-is-finally-done',
+          'blogid-3': 'legacy/resources-page',
+          'blogid-4': 'legacy/minervaai-aesir',
+          'blogid-5': 'legacy/echidna-13b-collab-with-undi',
+          'blogid-6': 'legacy/noromaid-model-series',
+        };
+        var blogId = new URLSearchParams(location.search).get('blog');
+        if (blogId && LEGACY_POSTS[blogId]) {
+          location.replace('/blog/' + LEGACY_POSTS[blogId] + '/');
+        }
+      })();
+    </script>
+  </Fragment>
+
+  <Content />
+
+  <hr />
+
+  <h2>Latest from the blog</h2>
+  {
+    latestPosts.length > 0 ? (
+      <ul class="post-list">
+        {latestPosts.map((post) => <PostListItem post={post} />)}
+      </ul>
+    ) : (
+      <p>No posts yet.</p>
+    )
+  }
+  <p><a href="/blog/">See all posts</a></p>
+</BaseLayout>
+
+<style>
+  :global(.welcome-line) {
+    font-size: 1.4rem;
+    text-decoration: underline;
+  }
+</style>

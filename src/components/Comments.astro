@@ -1,0 +1,54 @@
+---
+const DISCUSSIONS_URL = 'https://github.com/IkariDevGIT/IkariDevGIT.github.io/discussions/categories/blog';
+---
+
+<section class="comments box2">
+  <div class="box">
+    <h2>Comments</h2>
+
+    <p class="comments-blinkies">
+      <picture>
+        <source srcset="/images/badges/chatroom.webp" type="image/webp" />
+        <img src="/images/badges/chatroom.gif" alt="You looked better in the chatroom" width="150" height="20" loading="lazy" />
+      </picture>
+      <picture>
+        <source srcset="/images/badges/nawwreally.webp" type="image/webp" />
+        <img src="/images/badges/nawwreally.gif" alt="Naww... really... yah think?" width="150" height="20" loading="lazy" />
+      </picture>
+    </p>
+
+    <script
+      is:inline
+      src="https://giscus.app/client.js"
+      data-repo="IkariDevGIT/IkariDevGIT.github.io"
+      data-repo-id="R_kgDOKDwj0g"
+      data-category="Blog"
+      data-category-id="DIC_kwDOKDwj0s4DFrHn"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="purple_dark"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async></script>
+
+    <noscript>
+      <p>Comments need JavaScript. You can read and post them on <a href={DISCUSSIONS_URL}>GitHub Discussions</a> instead.</p>
+    </noscript>
+  </div>
+</section>
+
+<style>
+  .comments {
+    margin-top: 2rem;
+  }
+
+  .comments-blinkies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+</style>

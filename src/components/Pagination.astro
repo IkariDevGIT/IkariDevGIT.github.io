@@ -1,0 +1,25 @@
+---
+import type { Page } from 'astro';
+
+interface Props {
+  page: Page<unknown>;
+}
+
+const { page } = Astro.props;
+---
+
+{
+  (page.url.prev || page.url.next) && (
+    <nav class="pagination" aria-label="Blog pages">
+      <a class="btn" href={page.url.prev ?? undefined} aria-disabled={!page.url.prev} rel="prev">
+        ← Newer
+      </a>
+      <span class="meta-line">
+        Page {page.currentPage} of {page.lastPage}
+      </span>
+      <a class="btn" href={page.url.next ?? undefined} aria-disabled={!page.url.next} rel="next">
+        Older →
+      </a>
+    </nav>
+  )
+}

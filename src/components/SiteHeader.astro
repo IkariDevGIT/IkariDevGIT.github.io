@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import avatar from '../assets/avatar.png';
+---
+
+<div class="header-obj">
+  <div class="header-banner" role="img" aria-label="IkariDev"></div>
+  <div class="header-overlay">
+    <Image src={avatar} alt="" class="header-character" width={500} loading="eager" />
+  </div>
+</div>
+
+<style>
+  .header-obj {
+    margin-top: 10px;
+    position: relative;
+    height: 180px;
+    width: 100%;
+  }
+
+  .header-banner {
+    width: 100%;
+    height: 180px;
+    background-image: url('/images/header-banner.gif');
+    background-size: 90%;
+    background-position: center right;
+    background-repeat: no-repeat;
+    animation: header-shake 0.02s linear infinite;
+    filter:
+      drop-shadow(0 0 1px rgb(212, 0, 255)) drop-shadow(0 0 0.5rem rgb(162, 0, 255))
+      drop-shadow(0 0 0.1rem rgba(132, 0, 255, 0.623));
+  }
+
+  .header-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .header-character {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 90%;
+    width: auto;
+    transform: scaleX(-1) translateX(25px);
+  }
+
+  @media (max-width: 560px) {
+    .header-character {
+      height: 66%;
+      transform: scaleX(-1) translateX(calc(25px + 10%));
+    }
+  }
+
+  @keyframes header-shake {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(1px);
+    }
+    50% {
+      transform: translateY(-1px);
+    }
+    75% {
+      transform: translateY(1px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-banner {
+      animation: none;
+    }
+  }
+
+  /* same deal as global.css's webp @supports block, see there for why */
+  @supports (
+    background-image: image-set(
+        url('data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6zbAAA/v56QAAAAA==')
+          type('image/webp')
+      )
+  ) {
+    .header-banner {
+      background-image: url('/images/header-banner.webp');
+    }
+  }
+</style>

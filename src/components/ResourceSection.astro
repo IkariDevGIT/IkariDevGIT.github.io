@@ -1,0 +1,32 @@
+---
+import type { ResourceGroup } from '../content.config';
+
+interface Props {
+  group: ResourceGroup;
+  /** Heading level for this group's title; nested groups go one deeper. */
+  level: 2 | 3 | 4 | 5 | 6;
+}
+
+const { group, level } = Astro.props;
+const Heading = `h${level}`;
+const nextLevel = Math.min(level + 1, 6) as Props['level'];
+---
+
+<section id={group.id}>
+  <Heading>
+    {group.title}
+    <a class="heading-anchor" aria-label="Link to this section" href={`#${group.id}`}>#</a>
+  </Heading>
+  {group.intro && <p>{group.intro}</p>}
+  {group.links && group.links.length > 0 && (
+    <ul>
+      {group.links.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+          {link.note && <> ~ {link.note}</>}
+        </li>
+      ))}
+    </ul>
+  )}
+  {group.groups && group.groups.map((subgroup) => <Astro.self group={subgroup} level={nextLevel} />)}
+</section>

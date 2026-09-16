@@ -1,0 +1,20 @@
+---
+import type { ResourceGroup } from '../content.config';
+
+interface Props {
+  groups: ResourceGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+<ul>
+  {
+    groups.map((group) => (
+      <li>
+        <a href={`#${group.id}`}>{group.title}</a>
+        {group.groups && group.groups.length > 0 && <Astro.self groups={group.groups} />}
+      </li>
+    ))
+  }
+</ul>

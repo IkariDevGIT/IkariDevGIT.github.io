@@ -1,0 +1,131 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import Nav from '../components/Nav.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
+import { SITE_TITLE } from '../consts';
+import { ogImagePath } from '../lib/ogImage';
+
+const home = await getEntry('pages', 'home');
+if (!home) throw new Error('Missing src/content/pages/home.md');
+
+interface Props {
+  title: string;
+  description: string;
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+  };
+  noindex?: boolean;
+  hideSidebar?: boolean;
+  breadcrumbs?: { name: string; url: string }[];
+}
+
+const {
+  title,
+  description,
+  article,
+  noindex = false,
+  hideSidebar = false,
+  breadcrumbs,
+} = Astro.props;
+
+const pageTitle = title === SITE_TITLE ? SITE_TITLE : `${title} · ${SITE_TITLE}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(ogImagePath(Astro.url.pathname), Astro.site);
+const imageAlt = pageTitle;
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_TITLE,
+  url: Astro.site?.toString(),
+  description: home.data.description,
+};
+
+const breadcrumbJsonLd = breadcrumbs && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((crumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: crumb.name,
+    item: new URL(crumb.url, Astro.site).toString(),
+  })),
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} RSS feed`} href="/rss.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE_TITLE} RSS feed (no reposts)`}
+      href="/rss-no-repost.xml"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE_TITLE} RSS feed (reposts only)`}
+      href="/rss-repost.xml"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="image" href="/images/tiles/stars4.webp" />
+    <link rel="preload" as="image" href="/images/tiles/bac22.webp" />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    {article && <meta property="article:published_time" content={article.publishedTime} />}
+    {article?.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+    {breadcrumbJsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />}
+
+    <script is:inline data-goatcounter="https://ikaridev.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <SiteHeader />
+      <Nav />
+      <div class="page-flex">
+        <main id="main-content" class="content-column">
+          <slot />
+        </main>
+        {!hideSidebar && <Sidebar />}
+      </div>
+      <Footer />
+    </div>
+    <div class="noise-overlay" aria-hidden="true"></div>
+  </body>
+</html>

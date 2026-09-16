@@ -1,0 +1,46 @@
+---
+import type { PostMeta } from '../lib/posts';
+import { formatPostDate } from '../lib/dateFormat.mjs';
+
+interface Props {
+  post: PostMeta;
+}
+
+const { post } = Astro.props;
+const isLegacy = post.tags.includes('legacy');
+
+---
+
+<li class:list={['post-card', 'panel', { 'legacy-card': isLegacy, 'repost-card': post.repost }]}>
+  <a class="post-card-link" href={`/blog/${post.slug}/`}>
+    {post.cover && <img class="post-card-cover" src={post.cover} alt={post.coverAlt ?? ''} loading="lazy" />}
+    <div class="post-card-body">
+      <h2 class="post-card-title">
+        {post.repost && <span class="repost-mark" aria-hidden="true">⟳</span>}{post.title}
+      </h2>
+      <p class="meta-line">
+        {post.repost ? 'Reposted on ' : 'Published '}
+        <time datetime={post.pubDate}>{formatPostDate(post.pubDate)}</time>
+        {post.updatedDate && (
+          <>
+            {' · Updated '}
+            <time datetime={post.updatedDate}>{formatPostDate(post.updatedDate)}</time>
+          </>
+        )}
+      </p>
+      {post.repost ? (
+        <p class="meta-line">Reposted from {new URL(post.repost).hostname}</p>
+      ) : (
+        <p class="meta-line">{post.wordCount} words · {post.minutesRead} min read</p>
+      )}
+      <p class="post-card-description">{post.description}</p>
+      {post.tags.length > 0 && (
+        <ul class="tag-list">
+          {post.tags.map((tag) => (
+            <li class="tag">{tag}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </a>
+</li>

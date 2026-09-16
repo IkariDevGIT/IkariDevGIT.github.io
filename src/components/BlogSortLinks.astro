@@ -1,0 +1,27 @@
+---
+import type { SortMode } from '../lib/posts';
+
+interface Props {
+  sort: SortMode;
+  base?: string;
+}
+
+const { sort, base = '/blog-nojs' } = Astro.props;
+
+const options: { mode: SortMode; label: string }[] = [
+  { mode: 'newest', label: 'Newest' },
+  { mode: 'oldest', label: 'Oldest' },
+  { mode: 'latest-update', label: 'Last updated' },
+];
+---
+
+<div class="sort-links">
+  <span>Sort:</span>
+  {
+    options.map((option) => (
+      <a class="btn" href={`${base}/${option.mode}/`} aria-current={sort === option.mode ? 'page' : undefined}>
+        {option.label}
+      </a>
+    ))
+  }
+</div>
