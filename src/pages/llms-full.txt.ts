@@ -22,14 +22,12 @@ export const GET: APIRoute = async ({ site }) => {
   async function renderPostSection(slug: string): Promise<string[]> {
     const entry = entryBySlug.get(slug);
     if (!entry) return [];
-    if (entry.data.repost) {
-      return [`### ${entry.data.title}`, '', `Repost, full text hosted at ${entry.data.repost}`, '', entry.data.description, ''];
-    }
     const { remarkPluginFrontmatter } = await render(entry);
     const { pubDate, updatedDate } = resolvePostDates(entry.data, remarkPluginFrontmatter);
 
-    const legacy = slug.startsWith('legacy/') ? ' (legacy)' : '';
-    const out = [`### ${entry.data.title}${legacy}`, '', `${base}/blog/${slug}.md`, ''];
+    const kind = slug.startsWith('legacy/') ? ' (legacy)' : entry.data.repost ? ' (repost)' : '';
+    const out = [`### ${entry.data.title}${kind}`, '', `${base}/blog/${slug}.md`, ''];
+    if (entry.data.repost) out.push(`Reposted from: ${entry.data.repost}`);
     out.push(`Published: ${pubDate.toISOString()}`);
     if (updatedDate) out.push(`Updated: ${updatedDate.toISOString()}`);
     out.push('', entry.body ?? '', '');

@@ -66,41 +66,21 @@ const blogPostingJsonLd = {
     { name: 'Blog', url: '/blog/' },
     { name: entry.data.title, url: `/blog/${entry.id}/` },
   ]}
-  markdown={isNsfw || isUnlisted || isRepost ? null : `/blog/${entry.id}.md`}
-  noindex={isNsfw || isUnlisted || isRepost}
+  markdown={isNsfw || isUnlisted ? null : `/blog/${entry.id}.md`}
+  noindex={isNsfw || isUnlisted}
   hideSidebar
 >
   <Fragment slot="head">
-    {isRepost ? (
-      <noscript>
-        <meta http-equiv="refresh" content={`0; url=${repostTarget}`} />
-      </noscript>
-    ) : (
-      <script is:inline type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
-    )}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
   </Fragment>
-  {isRepost && repostTarget && (
-    <div class="repost-redirect">
-      <article class="panel repost-card">
-        <h1>
-          <span class="repost-mark" aria-hidden="true">⟳</span>
-          Taking you to <a href={repostTarget}>{new URL(repostTarget).hostname}</a>.
-        </h1>
-      </article>
-      <script is:inline define:vars={{ repostTarget }}>
-        addEventListener('load', () => location.replace(repostTarget));
-      </script>
-    </div>
-  )}
-  {!isRepost && isLegacy && (
+  {isLegacy && (
     <p class="notice panel">
       This post wont be updated as of 15 September 2026. Its mostly outdated and was only
       migrated to the new site to keep the history around. If you wanna read more, check out
       the <a href="/blog/site-rebuild-2026/">site rebuild post</a>.
     </p>
   )}
-  {!isRepost && (
-  <article class:list={['panel', 'post-panel', { 'legacy-card': isLegacy }]}>
+  <article class:list={['panel', 'post-panel', { 'legacy-card': isLegacy, 'repost-card': isRepost }]}>
     <h1>{entry.data.title}</h1>
     <p class="meta-line">
       Published <time datetime={pubDate.toISOString()}>{formatPostDate(pubDate)}</time>
@@ -139,10 +119,20 @@ const blogPostingJsonLd = {
     )}
     <div class="post-content" id="post-content" hidden={isNsfw}>
       <Content />
+      {isRepost && repostTarget && (
+        <a class="repost-source" href={repostTarget} target="_blank" rel="noopener">
+          <span class="repost-source-mark" aria-hidden="true">⟳</span>
+          <span class="repost-source-text">
+            <span class="repost-source-label">Reposted from</span>
+            <span class="repost-source-host">{new URL(repostTarget).hostname}</span>
+          </span>
+          <span class="repost-source-hint">go check it out</span>
+          <span class="repost-source-arrow" aria-hidden="true">↗</span>
+        </a>
+      )}
       <PostHistory slug={entry.id} isLegacy={isLegacy} />
     </div>
   </article>
-  )}
-  {!isRepost && !isNsfw && <Comments />}
+  {!isNsfw && <Comments />}
   {isNsfw && <script is:inline type="module" src="/scripts/nsfw-gate.js"></script>}
 </BaseLayout>

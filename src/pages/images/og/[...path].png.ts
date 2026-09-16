@@ -7,8 +7,7 @@ type Props = Omit<OgImageOptions, 'url'> & { pathname: string; url?: string };
 
 export const getStaticPaths = (async () => {
   const resources = await getEntry('resources', 'main');
-  const posts = await getCollection('blog', ({ id }) => !id.startsWith('repost/'));
-  const reposts = await getCollection('blog', ({ id }) => id.startsWith('repost/'));
+  const posts = await getCollection('blog');
 
   const page = async (id: string, label: string, pathname: string, title?: string): Promise<{ path: string; props: Props }> => {
     const entry = await getEntry('pages', id);
@@ -26,20 +25,20 @@ export const getStaticPaths = (async () => {
     },
     await page('blog', 'Blog', '/blog/'),
     { ...(await page('404', '404', '/404')), path: '404' },
-    ...posts.map((entry) => ({
-      path: `blog/${entry.id}`,
-      props: { label: 'Blog', title: entry.data.title, description: entry.data.description, pathname: `/blog/${entry.id}/` },
-    })),
-    ...reposts.map((entry) => ({
-      path: `blog/${entry.id}`,
-      props: {
-        label: 'Repost',
-        title: entry.data.title,
-        description: entry.data.description,
-        pathname: `/blog/${entry.id}/`,
-        url: entry.data.repost!.replace(/^https?:\/\//, '').replace(/\/$/, ''),
-      },
-    })),
+    ...posts.map((entry) => {
+      const isRepost = entry.id.startsWith('repost/');
+      const isLegacy = entry.id.startsWith('legacy/');
+      return {
+        path: `blog/${entry.id}`,
+        props: {
+          label: isRepost ? 'Repost' : isLegacy ? 'Legacy' : 'Blog',
+          theme: isRepost ? ('repost' as const) : isLegacy ? ('legacy' as const) : ('default' as const),
+          title: entry.data.title,
+          description: entry.data.description,
+          pathname: `/blog/${entry.id}/`,
+        },
+      };
+    }),
   ];
 
   return pages.map(({ path, props }) => ({ params: { path }, props }));

@@ -38,21 +38,31 @@ function titleFontSize(title: string) {
   return 34;
 }
 
+export type OgTheme = 'default' | 'legacy' | 'repost';
+
+const THEMES: Record<OgTheme, { accent: string; glow: string; content: string; halo: string }> = {
+  default: { accent: COLOR_ACCENT, glow: COLOR_ACCENT_GLOW, content: COLOR_CONTENT, halo: '#4a006b' },
+  legacy: { accent: '#f19bf6', glow: '#ff9ff8a8', content: '#3a0b4d', halo: '#5c2a70' },
+  repost: { accent: '#7cc4ff', glow: '#7cc4ff8c', content: '#102844', halo: '#124a7a' },
+};
+
 export interface OgImageOptions {
   label: string;
   title: string;
   description: string;
   url: string;
+  theme?: OgTheme;
 }
 
-function buildElement({ label, title, description, url }: OgImageOptions) {
+function buildElement({ label, title, description, url, theme = 'default' }: OgImageOptions) {
   const fill: Style = { position: 'absolute', top: 0, left: 0, width: `${OG_WIDTH}px`, height: `${OG_HEIGHT}px` };
+  const { accent, glow, content, halo } = THEMES[theme];
 
   return h(
     'div',
     { width: `${OG_WIDTH}px`, height: `${OG_HEIGHT}px`, display: 'flex', position: 'relative', backgroundColor: COLOR_BG },
     [
-      h('div', { ...fill, backgroundImage: `radial-gradient(circle at 840px 300px, #4a006b 0%, ${COLOR_BG} 62%)` }),
+      h('div', { ...fill, backgroundImage: `radial-gradient(circle at 840px 300px, ${halo} 0%, ${COLOR_BG} 62%)` }),
       h('div', {
         ...fill,
         backgroundImage: 'repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0px, rgba(0, 0, 0, 0.28) 2px, transparent 2px, transparent 5px)',
@@ -79,8 +89,8 @@ function buildElement({ label, title, description, url }: OgImageOptions) {
             {
               fontFamily: 'Ambitsek',
               fontSize: '34px',
-              color: COLOR_ACCENT,
-              textShadow: `0 0 10px ${COLOR_ACCENT_GLOW}, 0 0 24px ${COLOR_ACCENT_GLOW}`,
+              color: accent,
+              textShadow: `0 0 10px ${glow}, 0 0 24px ${glow}`,
               marginBottom: '30px',
             },
             'IkariDev',
@@ -93,9 +103,9 @@ function buildElement({ label, title, description, url }: OgImageOptions) {
               display: 'flex',
               flexDirection: 'column',
               padding: '44px 38px 30px',
-              backgroundColor: COLOR_CONTENT,
-              border: `2px solid ${COLOR_ACCENT}`,
-              boxShadow: `12px 12px 0 rgba(0, 0, 0, 0.78), 0 0 30px ${COLOR_ACCENT_GLOW}`,
+              backgroundColor: content,
+              border: `2px solid ${accent}`,
+              boxShadow: `12px 12px 0 rgba(0, 0, 0, 0.78), 0 0 30px ${glow}`,
             },
             [
               h(
@@ -109,8 +119,8 @@ function buildElement({ label, title, description, url }: OgImageOptions) {
                   fontSize: '22px',
                   color: COLOR_TEXT,
                   backgroundColor: COLOR_BOX,
-                  border: `2px solid ${COLOR_ACCENT}`,
-                  boxShadow: `0 0 12px ${COLOR_ACCENT_GLOW}`,
+                  border: `2px solid ${accent}`,
+                  boxShadow: `0 0 12px ${glow}`,
                 },
                 label,
               ),
@@ -123,14 +133,14 @@ function buildElement({ label, title, description, url }: OgImageOptions) {
                   fontSize: `${titleFontSize(title)}px`,
                   lineHeight: 1.2,
                   color: COLOR_TEXT,
-                  textShadow: `0 0 10px ${COLOR_ACCENT_GLOW}, 0 0 28px ${COLOR_ACCENT_GLOW}`,
+                  textShadow: `0 0 10px ${glow}, 0 0 28px ${glow}`,
                 },
                 title,
               ),
               h('div', {
                 height: '2px',
                 margin: '26px 0 22px',
-                backgroundImage: `linear-gradient(90deg, ${COLOR_ACCENT}, transparent)`,
+                backgroundImage: `linear-gradient(90deg, ${accent}, transparent)`,
               }),
               h(
                 'div',
@@ -146,7 +156,7 @@ function buildElement({ label, title, description, url }: OgImageOptions) {
               ),
               h(
                 'div',
-                { marginTop: 'auto', fontFamily: 'Russo One', fontSize: '22px', color: COLOR_ACCENT },
+                { marginTop: 'auto', fontFamily: 'Russo One', fontSize: '22px', color: accent },
                 url,
               ),
             ],

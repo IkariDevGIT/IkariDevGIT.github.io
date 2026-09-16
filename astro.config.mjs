@@ -44,7 +44,6 @@ export default defineConfig({
         // duplicates /blog/ under different sort/pagination urls, also noindex on the pages themselves
         if (page.includes('/blog-nojs/')) return false;
         const pathname = new URL(page).pathname;
-        if (pathname.startsWith('/blog/repost/')) return false;
 
         if (pathname.startsWith('/blog/')) {
           const slug = pathname.replace(/^\/blog\//, '').replace(/\/$/, '');

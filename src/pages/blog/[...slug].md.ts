@@ -6,7 +6,7 @@ import { withLegacyTag } from '../../lib/posts';
 export const getStaticPaths = (async () => {
   const posts = await getCollection(
     'blog',
-    ({ id, data }) => !data.unlisted && !id.startsWith('repost/') && !data.tags.includes('nsfw'),
+    ({ data }) => !data.unlisted && !data.tags.includes('nsfw'),
   );
   return posts.map((entry) => ({
     params: { slug: entry.id },

@@ -14,12 +14,8 @@ export const GET: APIRoute = async () => {
     '',
   ];
   for (const post of posts) {
-    const legacy = post.tags.includes('legacy') ? ' (legacy)' : '';
-    lines.push(
-      post.repost
-        ? `- [${post.title}](${post.repost}) (repost): ${post.description}`
-        : `- [${post.title}](/blog/${post.slug}.md)${legacy}: ${post.description}`,
-    );
+    const kind = post.tags.includes('legacy') ? ' (legacy)' : post.repost ? ' (repost)' : '';
+    lines.push(`- [${post.title}](/blog/${post.slug}.md)${kind}: ${post.description}`);
   }
 
   return new Response(lines.join('\n'), {

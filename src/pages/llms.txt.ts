@@ -47,13 +47,8 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push('## Blog posts', '');
   lines.push(LEGACY_NOTE, '');
   for (const post of posts) {
-    if (post.repost) {
-      lines.push(`- [${post.title}](${post.repost}) (repost, hosted elsewhere): ${post.description}`);
-    } else if (post.tags.includes('legacy')) {
-      lines.push(`- [${post.title}](${base}/blog/${post.slug}.md) (legacy): ${post.description}`);
-    } else {
-      lines.push(link(`/blog/${post.slug}.md`, post.title, post.description));
-    }
+    const kind = post.tags.includes('legacy') ? ' (legacy)' : post.repost ? ' (repost)' : '';
+    lines.push(`- [${post.title}](${base}/blog/${post.slug}.md)${kind}: ${post.description}`);
   }
   lines.push('');
 
