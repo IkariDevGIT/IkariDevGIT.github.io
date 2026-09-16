@@ -1,6 +1,3 @@
-const time = document.getElementById('last-updated-at');
-const out = document.getElementById('last-updated-ago');
-
 function plural(value, unit) {
   return `${value} ${unit}${value === 1 ? '' : 's'}`;
 }
@@ -23,8 +20,7 @@ function timeAgo(then, now) {
     days -= 1;
   }
   if (days < 0) {
-    const daysInPrevMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0)).getUTCDate();
-    days += daysInPrevMonth;
+    days += new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0)).getUTCDate();
     months -= 1;
   }
   if (months < 0) {
@@ -48,6 +44,7 @@ function timeAgo(then, now) {
   return `${parts.join(', ')} ago`;
 }
 
-if (time?.dateTime && out) {
-  out.textContent = timeAgo(new Date(time.dateTime), new Date());
+const now = new Date();
+for (const el of document.querySelectorAll('[data-ago]')) {
+  el.textContent = timeAgo(new Date(el.dataset.ago), now);
 }

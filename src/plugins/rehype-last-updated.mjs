@@ -13,8 +13,8 @@ export function rehypeLastUpdated() {
         '<div class="last-updated box2">',
         '<p class="box">',
         '<span class="last-updated-label">Website last updated at</span>',
-        `<time id="last-updated-at" datetime="${committedAt.toISOString()}">${formatPostDate(committedAt)}</time>`,
-        '<span id="last-updated-ago" class="last-updated-ago"></span>',
+        `<time datetime="${committedAt.toISOString()}">${formatPostDate(committedAt)}</time>`,
+        `<span class="last-updated-ago" data-ago="${committedAt.toISOString()}"></span>`,
         '</p>',
         '</div>',
       ].join('');

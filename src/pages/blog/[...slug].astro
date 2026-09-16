@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import { ogImagePath } from '../../lib/ogImage';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Comments from '../../components/Comments.astro';
+import PostHistory from '../../components/PostHistory.astro';
 import { resolvePostDates } from '../../lib/postDates';
 import { isRepostPost, withLegacyTag } from '../../lib/posts';
 import { formatPostDate } from '../../lib/dateFormat.mjs';
@@ -137,6 +138,7 @@ const blogPostingJsonLd = {
     )}
     <div class="post-content" id="post-content" hidden={isNsfw}>
       <Content />
+      <PostHistory slug={entry.id} isLegacy={isLegacy} />
     </div>
   </article>
   )}

@@ -879,6 +879,90 @@ hr {
   margin: 1.4em 0;
 }
 
+.post-history {
+  margin-top: 2.5rem;
+}
+
+.post-history-details summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+}
+
+.post-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  border-left: 1px dashed rgba(237, 100, 245, 0.4);
+}
+
+.post-history-list li {
+  position: relative;
+  margin: 0 0 1.1rem;
+  padding-left: 1rem;
+}
+
+.post-history-list li::before {
+  content: '';
+  position: absolute;
+  top: 0.45em;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 6px var(--color-accent-glow);
+}
+
+.post-history-when {
+  margin: 0;
+}
+
+.post-history-ago:not(:empty)::before {
+  content: ' · ';
+}
+
+.post-history-what {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0.15em 0 0;
+}
+
+.post-history-subject {
+  color: var(--color-text);
+}
+
+.post-history-diff {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.diff-added {
+  color: #6ee7a0;
+}
+
+.diff-removed {
+  margin-left: 0.4em;
+  color: #ff9a9a;
+}
+
+.post-history-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.post-history-note {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+}
+
 .last-updated {
   margin-top: 2rem;
 }
