@@ -4,7 +4,7 @@ import { getAllPostMeta, sortByNewest } from '../lib/posts';
 import { resolvePostDates } from '../lib/postDates';
 import { projectsToMarkdown } from '../lib/projects';
 import { resourceGroupToMarkdown } from '../lib/resourcesText';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, LEGACY_NOTE } from '../consts';
 
 // https://llmstxt.org/
 export const GET: APIRoute = async ({ site }) => {
@@ -28,7 +28,8 @@ export const GET: APIRoute = async ({ site }) => {
     const { remarkPluginFrontmatter } = await render(entry);
     const { pubDate, updatedDate } = resolvePostDates(entry.data, remarkPluginFrontmatter);
 
-    const out = [`### ${entry.data.title}`, '', `${base}/blog/${slug}.md`, ''];
+    const legacy = slug.startsWith('legacy/') ? ' (legacy)' : '';
+    const out = [`### ${entry.data.title}${legacy}`, '', `${base}/blog/${slug}.md`, ''];
     out.push(`Published: ${pubDate.toISOString()}`);
     if (updatedDate) out.push(`Updated: ${updatedDate.toISOString()}`);
     out.push('', entry.body ?? '', '');
@@ -57,13 +58,8 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
-  lines.push('## Blog posts', '');
-  for (const post of posts.filter((p) => !p.tags.includes('legacy'))) {
-    lines.push(...(await renderPostSection(post.slug)));
-  }
-
-  lines.push('## Optional', '');
-  for (const post of posts.filter((p) => p.tags.includes('legacy'))) {
+  lines.push('## Blog posts', '', LEGACY_NOTE, '');
+  for (const post of posts) {
     lines.push(...(await renderPostSection(post.slug)));
   }
 

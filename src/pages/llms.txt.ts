@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getEntry } from 'astro:content';
 import { getAllPostMeta, sortByNewest } from '../lib/posts';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, LEGACY_NOTE } from '../consts';
 
 // https://llmstxt.org/
 export const GET: APIRoute = async ({ site }) => {
@@ -14,8 +14,6 @@ export const GET: APIRoute = async ({ site }) => {
   const blog = await getEntry('pages', 'blog');
 
   const posts = sortByNewest(await getAllPostMeta()).filter((post) => !post.tags.includes('nsfw'));
-  const currentPosts = posts.filter((post) => !post.tags.includes('legacy'));
-  const legacyPosts = posts.filter((post) => post.tags.includes('legacy'));
 
   function link(path: string, label: string, description?: string): string {
     const url = `${base}${path}`;
@@ -47,9 +45,12 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push('');
 
   lines.push('## Blog posts', '');
-  for (const post of currentPosts) {
+  lines.push(LEGACY_NOTE, '');
+  for (const post of posts) {
     if (post.repost) {
       lines.push(`- [${post.title}](${post.repost}) (repost, hosted elsewhere): ${post.description}`);
+    } else if (post.tags.includes('legacy')) {
+      lines.push(`- [${post.title}](${base}/blog/${post.slug}.md) (legacy): ${post.description}`);
     } else {
       lines.push(link(`/blog/${post.slug}.md`, post.title, post.description));
     }
@@ -65,9 +66,6 @@ export const GET: APIRoute = async ({ site }) => {
       'This same file, with full page and post content inlined instead of just links.',
     ),
   );
-  for (const post of legacyPosts) {
-    lines.push(link(`/blog/${post.slug}.md`, post.title, post.description));
-  }
   lines.push('');
 
   return new Response(lines.join('\n'), {
