@@ -80,10 +80,10 @@ const blogPostingJsonLd = {
   {isRepost && repostTarget && (
     <div class="repost-redirect">
       <article class="panel repost-card">
-        <p>
+        <h1>
           <span class="repost-mark" aria-hidden="true">⟳</span>
           Taking you to <a href={repostTarget}>{new URL(repostTarget).hostname}</a>.
-        </p>
+        </h1>
       </article>
       <script is:inline define:vars={{ repostTarget }}>
         addEventListener('load', () => location.replace(repostTarget));

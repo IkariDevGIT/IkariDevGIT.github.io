@@ -879,6 +879,24 @@ hr {
   margin: 1.4em 0;
 }
 
+.repost-redirect {
+  display: grid;
+  place-items: center;
+}
+
+.repost-redirect .panel {
+  margin: 0;
+  text-align: center;
+}
+
+.repost-redirect h1 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  text-shadow: none;
+}
+
 :is(h1, h2, h3, h4, h5, h6):has(.heading-anchor) {
   scroll-margin-top: 1rem;
 }
