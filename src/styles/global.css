@@ -13,22 +13,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'M PLUS Rounded 1c';
-  src:
-    url('/fonts/MPLUSRounded1c-kao.woff2') format('woff2'),
-    url('/fonts/MPLUSRounded1c-Regular.ttf') format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Noto Sans JP';
-  src:
-    url('/fonts/NotoSansJP-kao.woff2') format('woff2'),
-    url('/fonts/NotoSansJP-Regular.ttf') format('truetype');
-  font-display: swap;
-}
-
 :root {
   color-scheme: dark;
 
@@ -605,7 +589,7 @@ hr {
 }
 
 .kaomoji {
-  font-family: 'M PLUS Rounded 1c', 'Noto Sans JP', 'MS PGothic', sans-serif;
+  font-family: var(--font-kaomoji);
 }
 
 .spoiler {

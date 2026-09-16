@@ -7,9 +7,9 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { remarkGitDates } from './src/plugins/remark-git-dates.mjs';
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
-import { rehypeCustomTags, kaoChars } from './src/plugins/rehype-custom-tags.mjs';
-import { kaoFontSubset } from './src/plugins/kao-font-subset.mjs';
+import { rehypeCustomTags } from './src/plugins/rehype-custom-tags.mjs';
 import { rehypePostEmbed } from './src/plugins/rehype-post-embed.mjs';
+import { kaoFontProvider } from './src/plugins/kao-font-provider.mjs';
 import {
   getBlogPostLastmods,
   getPageLastmod,
@@ -29,8 +29,15 @@ const hiddenFromSitemap = new Set([...getNsfwPostSlugs(), ...getUnlistedPostSlug
 // https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 export default defineConfig({
   site: 'https://ikari.sillytilly.org',
+  fonts: [
+    {
+      name: 'M PLUS Rounded 1c',
+      cssVariable: '--font-kaomoji',
+      provider: kaoFontProvider(),
+      fallbacks: ['MS PGothic', 'sans-serif'],
+    },
+  ],
   integrations: [
-    kaoFontSubset(kaoChars),
     sitemap({
       filter: (page) => {
         // duplicates /blog/ under different sort/pagination urls, also noindex on the pages themselves
