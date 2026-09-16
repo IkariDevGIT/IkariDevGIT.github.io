@@ -66,6 +66,7 @@ const blogPostingJsonLd = {
     { name: 'Blog', url: '/blog/' },
     { name: entry.data.title, url: `/blog/${entry.id}/` },
   ]}
+  markdown={isNsfw || isUnlisted || isRepost ? null : `/blog/${entry.id}.md`}
   noindex={isNsfw || isUnlisted || isRepost}
   hideSidebar
 >

@@ -8,6 +8,7 @@ import { getEntry } from 'astro:content';
 import { Font } from 'astro:assets';
 import { SITE_TITLE } from '../consts';
 import { ogImagePath } from '../lib/ogImage';
+import { markdownAlternate } from '../lib/markdownAlternate';
 
 const home = await getEntry('pages', 'home');
 if (!home) throw new Error('Missing src/content/pages/home.md');
@@ -21,6 +22,7 @@ interface Props {
   };
   noindex?: boolean;
   hideSidebar?: boolean;
+  markdown?: string | null;
   breadcrumbs?: { name: string; url: string }[];
 }
 
@@ -30,6 +32,7 @@ const {
   article,
   noindex = false,
   hideSidebar = false,
+  markdown = markdownAlternate(Astro.url.pathname),
   breadcrumbs,
 } = Astro.props;
 
@@ -67,6 +70,8 @@ const breadcrumbJsonLd = breadcrumbs && {
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="describedby" type="text/plain" href="/llms.txt" title="llms.txt" />
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} title="Markdown version" />}
     <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} RSS feed`} href="/rss.xml" />
     <link
       rel="alternate"
