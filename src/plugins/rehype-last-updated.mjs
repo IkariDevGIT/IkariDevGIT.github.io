@@ -19,7 +19,6 @@ export function rehypeLastUpdated() {
         '</div>',
       ].join('');
 
-      console.log("[dbg] children:", (node.children??[]).length, JSON.stringify((node.children??[]).map(c=>c.tagName||c.type)).slice(0,200));
       const block = fromHtml(html, { fragment: true }).children[0];
       parent.children.splice(index, 1, block, ...(node.children ?? []));
     });
