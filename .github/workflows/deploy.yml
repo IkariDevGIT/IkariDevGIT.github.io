@@ -26,6 +26,7 @@ jobs:
           # touching each file) when not set explicitly in frontmatter, and
           # that needs the full log to be accurate.
           fetch-depth: 0
+          submodules: true
       - name: Install, check, and build
         uses: withastro/action@v6
 

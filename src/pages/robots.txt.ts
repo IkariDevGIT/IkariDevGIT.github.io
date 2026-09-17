@@ -7,6 +7,7 @@ export const GET: APIRoute = ({ site }) => {
   for (const slug of new Set([...getNsfwPostSlugs(), ...getUnlistedPostSlugs()])) {
     lines.push(`Disallow: /blog/${slug}/`);
   }
+  lines.push('Disallow: /webdeck/');
 
   lines.push('', `Sitemap: ${new URL('sitemap-index.xml', site).toString()}`);
 

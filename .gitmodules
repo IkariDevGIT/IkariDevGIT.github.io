@@ -1,0 +1,3 @@
+[submodule "public/webdeck-player"]
+	path = public/webdeck-player
+	url = https://github.com/cristiancfm/webdeck-player.git

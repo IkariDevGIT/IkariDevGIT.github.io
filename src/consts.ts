@@ -12,4 +12,5 @@ export const NAV_LINKS = [
   { label: 'About', href: '/about/' },
   { label: 'Projects', href: '/projects/' },
   { label: 'Resources', href: '/resources/' },
+  { label: 'Webdeck', href: '/webdeck/' },
 ] as const;

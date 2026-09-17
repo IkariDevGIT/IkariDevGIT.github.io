@@ -1,0 +1,42 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const page = await getEntry('pages', 'webdeck');
+if (!page) throw new Error('Missing src/content/pages/webdeck.md');
+---
+
+<BaseLayout
+  title={page.data.title}
+  description={page.data.description}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: page.data.title, url: '/webdeck/' },
+  ]}
+  noindex
+  hideSidebar
+>
+  <h1>{page.data.title}</h1>
+  <div class="webdeck-embed" id="webdeck-embed">
+    <iframe src="/webdeck-player/index.html" width="600" height="250" scrolling="no" title="Webdeck player"></iframe>
+  </div>
+  <noscript>
+    <p>The player needs JavaScript to work.</p>
+  </noscript>
+  <script is:inline src="/scripts/webdeck-resize.js"></script>
+</BaseLayout>
+
+<style>
+  .webdeck-embed {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .webdeck-embed iframe {
+    display: block;
+    width: 600px;
+    height: 250px;
+    border: 0;
+    transform-origin: top left;
+  }
+</style>

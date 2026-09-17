@@ -1,0 +1,18 @@
+initialPlaylist: Webmistress's Hits
+initialTheme: Violet
+
+playlists:
+  - name: Webmistress's Hits
+    id: PLBlelZa8Ujak
+
+themes:
+  - name: Default
+    folder: default
+  - name: Silver
+    folder: silver
+  - name: Violet
+    folder: violet
+  - name: Minimal
+    folder: minimal
+  - name: Red Grunge
+    folder: red-grunge

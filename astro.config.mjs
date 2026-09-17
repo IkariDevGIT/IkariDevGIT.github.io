@@ -12,6 +12,7 @@ import { rehypeCustomTags } from './src/plugins/rehype-custom-tags.mjs';
 import { rehypePostEmbed } from './src/plugins/rehype-post-embed.mjs';
 import { kaoFontProvider } from './src/plugins/kao-font-provider.mjs';
 import { rehypeLastUpdated } from './src/plugins/rehype-last-updated.mjs';
+import { webdeckConfig } from './src/plugins/webdeck-config.mjs';
 import {
   getBlogPostLastmods,
   getPageLastmod,
@@ -40,11 +41,14 @@ export default defineConfig({
     },
   ],
   integrations: [
+    webdeckConfig(),
     sitemap({
       filter: (page) => {
         // duplicates /blog/ under different sort/pagination urls, also noindex on the pages themselves
         if (page.includes('/blog-nojs/')) return false;
         const pathname = new URL(page).pathname;
+
+        if (pathname === '/webdeck/') return false;
 
         if (pathname.startsWith('/blog/')) {
           const slug = pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
