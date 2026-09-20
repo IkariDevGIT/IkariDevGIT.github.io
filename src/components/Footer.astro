@@ -11,7 +11,10 @@ const { commit, commitUrl, builtAt } = getBuildInfo();
   <p class="webring-heading meta-line">Inspiring websites:</p>
   <p class="webring-buttons">
     <a href="https://dimden.dev/" target="_blank" rel="noopener">
-      <img src="https://dimden.dev/services/images/88x31.gif" alt="dimden.dev" width="88" height="31" loading="lazy" />
+      <picture>
+        <source srcset="/images/webring/dimden.webp" type="image/webp" />
+        <img src="/images/webring/dimden.gif" alt="dimden.dev" width="88" height="31" loading="lazy" />
+      </picture>
     </a>
     <a href="https://adilene.net" target="_blank" rel="noopener">
       <picture>
@@ -47,7 +50,8 @@ const { commit, commitUrl, builtAt } = getBuildInfo();
       <img
         src="https://shieldcn.dev/github/stars/IkariDevGIT/IkariDevGIT.github.io.svg?variant=ghost&mode=dark"
         alt="This site's source on GitHub"
-        height="20"
+        width="95"
+        height="32"
         loading="lazy"
       />
     </a>
