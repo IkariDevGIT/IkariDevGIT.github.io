@@ -84,7 +84,7 @@ export function getUnlistedPostSlugs() {
 }
 
 export function getEmptyRepostSlugs() {
-  return collectSlugs((data, slug, content) => slug.startsWith('repost/') && !content.trim());
+  return collectSlugs((_data, slug, content) => slug.startsWith('repost/') && !content.trim());
 }
 
 export function getPageLastmod(name) {

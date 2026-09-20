@@ -4,7 +4,12 @@ import avatar from '../assets/avatar.png';
 ---
 
 <div class="header-obj">
-  <div class="header-banner" role="img" aria-label="IkariDev"></div>
+  <div class="header-banner">
+    <picture>
+      <source srcset="/images/header-banner.webp" type="image/webp" />
+      <img src="/images/header-banner.gif" alt="IkariDev" width="873" height="222" loading="eager" fetchpriority="high" />
+    </picture>
+  </div>
   <div class="header-overlay">
     <Image src={avatar} alt="IkariDev" class="header-character" width={500} loading="eager" />
   </div>
@@ -19,16 +24,23 @@ import avatar from '../assets/avatar.png';
   }
 
   .header-banner {
+    position: relative;
     width: 100%;
     height: 180px;
-    background-image: url('/images/header-banner.gif');
-    background-size: 90%;
-    background-position: center right;
-    background-repeat: no-repeat;
+    overflow: hidden;
     animation: header-shake 0.02s linear infinite;
     filter:
       drop-shadow(0 0 1px rgb(212, 0, 255)) drop-shadow(0 0 0.5rem rgb(162, 0, 255))
       drop-shadow(0 0 0.1rem rgba(132, 0, 255, 0.623));
+  }
+
+  .header-banner img {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 90%;
+    aspect-ratio: 873 / 222;
+    transform: translateY(-50%);
   }
 
   .header-overlay {
@@ -75,18 +87,6 @@ import avatar from '../assets/avatar.png';
   @media (prefers-reduced-motion: reduce) {
     .header-banner {
       animation: none;
-    }
-  }
-
-  /* same deal as global.css's webp @supports block, see there for why */
-  @supports (
-    background-image: image-set(
-        url('data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6zbAAA/v56QAAAAA==')
-          type('image/webp')
-      )
-  ) {
-    .header-banner {
-      background-image: url('/images/header-banner.webp');
     }
   }
 </style>
