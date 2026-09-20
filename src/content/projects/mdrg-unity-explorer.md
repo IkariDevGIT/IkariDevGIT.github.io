@@ -8,3 +8,4 @@ lastUpdate: https://shieldcn.dev/github/last-commit/IkariDevGIT/MDRGUnityExplore
 A [UnityExplorer](https://github.com/yukieiji/UnityExplorer) fork that works with [My Dystopian Robot Girlfriend](https://incontinentcell.itch.io/factorial-omega).
 
 - [GitHub](https://github.com/IkariDevGIT/MDRGUnityExplorer)
+- [MDRGUniverseLib - GitHub](https://github.com/IkariDevGIT/MDRGUniverseLib)
