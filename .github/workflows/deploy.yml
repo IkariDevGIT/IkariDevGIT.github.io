@@ -29,6 +29,8 @@ jobs:
           submodules: true
       - name: Install, check, and build
         uses: withastro/action@v6
+        with:
+          cache: false # its cache kept serving stale pages, RIP
 
   deploy:
     needs: build
