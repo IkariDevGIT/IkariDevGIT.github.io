@@ -33,6 +33,8 @@ const isNsfw = tags.includes('nsfw');
 const isUnlisted = entry.data.unlisted;
 const isRepost = isRepostPost(entry);
 const repostTarget = entry.data.repost;
+const hasContent = Boolean(entry.body?.trim());
+const isEmptyRepost = isRepost && !hasContent;
 
 
 const blogPostingJsonLd = {
@@ -67,7 +69,7 @@ const blogPostingJsonLd = {
     { name: entry.data.title, url: `/blog/${entry.id}/` },
   ]}
   markdown={isNsfw || isUnlisted ? null : `/blog/${entry.id}.md`}
-  noindex={isNsfw || isUnlisted}
+  noindex={isNsfw || isUnlisted || isEmptyRepost}
   hideSidebar
 >
   <Fragment slot="head">
@@ -133,6 +135,6 @@ const blogPostingJsonLd = {
       <PostHistory slug={entry.id} isLegacy={isLegacy} />
     </div>
   </article>
-  {!isNsfw && <Comments />}
+  {!isNsfw && !isEmptyRepost && <Comments />}
   {isNsfw && <script is:inline type="module" src="/scripts/nsfw-gate.js"></script>}
 </BaseLayout>

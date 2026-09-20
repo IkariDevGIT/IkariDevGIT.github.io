@@ -20,13 +20,14 @@ import {
   getResourcesLastmod,
   getNsfwPostSlugs,
   getUnlistedPostSlugs,
+  getEmptyRepostSlugs,
 } from './src/lib/contentFiles.mjs';
 
 // computed once here, looked up per url in serialize() below
 const blogLastmods = getBlogPostLastmods();
 const newestPostDate = [...blogLastmods.values()].sort((a, b) => b - a)[0] ?? new Date();
 const homeLastmod = new Date(Math.max(getPageLastmod('home').getTime(), newestPostDate.getTime()));
-const hiddenFromSitemap = new Set([...getNsfwPostSlugs(), ...getUnlistedPostSlugs()]);
+const hiddenFromSitemap = new Set([...getNsfwPostSlugs(), ...getUnlistedPostSlugs(), ...getEmptyRepostSlugs()]);
 
 // custom domain 301s from the github.io url once set up in repo settings, so only one url needs to be canonical
 // https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site

@@ -66,9 +66,10 @@ export function getBlogPostLastmods() {
 function collectSlugs(match) {
   const slugs = new Set();
   for (const file of listMarkdownFiles(BLOG_DIR)) {
-    const { data } = matter(readFileSync(file, 'utf-8'));
-    if (match(data)) {
-      slugs.add(path.relative(BLOG_DIR, file).replace(/\.md$/, '').split(path.sep).join('/'));
+    const { data, content } = matter(readFileSync(file, 'utf-8'));
+    const slug = path.relative(BLOG_DIR, file).replace(/\.md$/, '').split(path.sep).join('/');
+    if (match(data, slug, content)) {
+      slugs.add(slug);
     }
   }
   return slugs;
@@ -80,6 +81,10 @@ export function getNsfwPostSlugs() {
 
 export function getUnlistedPostSlugs() {
   return collectSlugs((data) => data.unlisted === true);
+}
+
+export function getEmptyRepostSlugs() {
+  return collectSlugs((data, slug, content) => slug.startsWith('repost/') && !content.trim());
 }
 
 export function getPageLastmod(name) {
