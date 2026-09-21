@@ -1183,6 +1183,10 @@ hr {
   transition: opacity 0.15s;
 }
 
+.heading-anchor::before {
+  content: '#';
+}
+
 :is(h1, h2, h3, h4, h5, h6):hover .heading-anchor,
 .heading-anchor:focus-visible {
   opacity: 1;

@@ -15,7 +15,7 @@ const nextLevel = Math.min(level + 1, 6) as Props['level'];
 <section id={group.id}>
   <Heading>
     {group.title}
-    <a class="heading-anchor" aria-label="Link to this section" href={`#${group.id}`}>#</a>
+    <a class="heading-anchor" aria-label="Link to this section" href={`#${group.id}`}></a>
   </Heading>
   {group.intro && <p>{group.intro}</p>}
   {group.links && group.links.length > 0 && (

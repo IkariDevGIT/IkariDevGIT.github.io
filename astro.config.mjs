@@ -95,7 +95,7 @@ export default defineConfig({
           {
             behavior: 'append',
             properties: { className: ['heading-anchor'], ariaLabel: 'Link to this section' },
-            content: { type: 'text', value: '#' },
+            content: [],
           },
         ],
         rehypePostEmbed,
