@@ -791,7 +791,7 @@ hr {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 10px;
 }
 
 .post-card {
@@ -887,14 +887,6 @@ hr {
 .repost-card .tag,
 .repost-card .post-history-list {
   border-color: rgba(124, 196, 255, 0.45);
-}
-
-.post-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  list-style: none;
-  padding: 0;
 }
 
 .post-list > .panel {

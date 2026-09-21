@@ -5,6 +5,7 @@ import { load as loadYaml } from 'js-yaml';
 
 const CONFIG_FILE = 'webdeck.config.yaml';
 const SUBMODULE_SCRIPT = 'public/webdeck-player/script.js';
+const SUBMODULE_PAGE = 'webdeck-player/index.html';
 const CONFIG_VARS = ['myPlaylists', 'currentPlaylist', 'myThemes', 'currentTheme'];
 
 function findConfigVarRanges(source) {
@@ -56,6 +57,15 @@ export function buildWebdeckScript(root) {
   return out;
 }
 
+function noindexPlayerPage(outRoot) {
+  const file = path.join(outRoot, SUBMODULE_PAGE);
+  const html = readFileSync(file, 'utf-8');
+  if (!html.includes('<head>')) {
+    throw new Error(`webdeck-config: no <head> in ${SUBMODULE_PAGE}, check src/plugins/webdeck-config.mjs`);
+  }
+  writeFileSync(file, html.replace('<head>', '<head>\n        <meta name="robots" content="noindex"/>'));
+}
+
 export function webdeckConfig() {
   return {
     name: 'webdeck-config',
@@ -74,6 +84,7 @@ export function webdeckConfig() {
       'astro:build:done': ({ dir, logger }) => {
         const outRoot = path.normalize(new URL(dir).pathname.replace(/^\/([a-z]:)/i, '$1'));
         writeFileSync(path.join(outRoot, 'webdeck-player/script.js'), buildWebdeckScript(process.cwd()));
+        noindexPlayerPage(outRoot);
         logger.info('generated webdeck-player/script.js from webdeck.config.yaml');
       },
     },
