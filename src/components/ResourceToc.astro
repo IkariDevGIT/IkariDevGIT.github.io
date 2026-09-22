@@ -1,8 +1,8 @@
 ---
-import type { ResourceGroup } from '../content.config';
+import type { ResolvedGroup } from '../lib/resources';
 
 interface Props {
-  groups: ResourceGroup[];
+  groups: ResolvedGroup[];
 }
 
 const { groups } = Astro.props;

@@ -4,6 +4,7 @@ import { getAllPostMeta, sortByNewest } from '../lib/posts';
 import { resolvePostDates } from '../lib/postDates';
 import { projectsToMarkdown } from '../lib/projects';
 import { resourceGroupToMarkdown, resourceListMarkdownUrl } from '../lib/resourcesText';
+import { resolveResourceList } from '../lib/resources';
 import { SITE_TITLE, LEGACY_NOTE } from '../consts';
 
 // https://llmstxt.org/
@@ -54,7 +55,7 @@ export const GET: APIRoute = async ({ site }) => {
     const page = await getEntry('pages', `resources/${list.id}`);
     if (!page) continue;
     lines.push(`### ${page.data.title}`, '', `${base}${resourceListMarkdownUrl(list.id)}`, '', page.data.description, '');
-    for (const section of list.data.sections) {
+    for (const section of resolveResourceList(list)) {
       lines.push(resourceGroupToMarkdown(section), '');
     }
     if (page.body?.trim()) lines.push(page.body, '');

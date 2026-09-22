@@ -16,7 +16,7 @@ const { title, status, lastUpdate, pinned } = entry.data;
 <section class:list={['panel', { 'project-pinned': pinned !== undefined }]}>
   <h2>{title}</h2>
   <div class="project-info">
-    <span><span class="project-status" data-status={status}>{STATUS_LABELS[status]}</span></span>
+    <span><span class="status-badge" data-status={status}>{STATUS_LABELS[status]}</span></span>
     {started && (
       <span><span class="project-info-label">Started</span><time datetime={started.datetime}>{started.label}</time></span>
     )}

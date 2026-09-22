@@ -1,8 +1,10 @@
 ---
-import type { ResourceGroup } from '../content.config';
+import type { ResolvedGroup } from '../lib/resources';
+import { RESOURCE_STATUS_LABEL } from '../lib/resources';
+import { formatShortDate } from '../lib/dateFormat.mjs';
 
 interface Props {
-  group: ResourceGroup;
+  group: ResolvedGroup;
   /** Heading level for this group's title; nested groups go one deeper. */
   level: 2 | 3 | 4 | 5 | 6;
 }
@@ -21,9 +23,25 @@ const nextLevel = Math.min(level + 1, 6) as Props['level'];
   {group.links && group.links.length > 0 && (
     <ul>
       {group.links.map((link) => (
-        <li>
-          <a href={link.href} target="_blank" rel="noopener">{link.label}</a>
-          {link.note && <> ~ {link.note}</>}
+        <li class:list={{ 'resource-inactive': Boolean(link.status) }}>
+          <span class="resource-row">
+            <span class="resource-main">
+              {link.favorite && <><span class="resource-fav" title="Favourite">*</span>{' '}</>}
+              <a href={link.href} target="_blank" rel={link.status ? 'noopener nofollow' : 'noopener'}>{link.label}</a>
+              {link.note && <>{' '}<span class="resource-sep">~</span>{' '}<span class="resource-note">{link.note}</span></>}
+            </span>
+            {link.addedDate ? (
+              <time class="resource-added" datetime={link.addedDate.toISOString()}>{formatShortDate(link.addedDate)}</time>
+            ) : (
+              <span class="resource-added">unknown</span>
+            )}
+          </span>
+          {link.status && (
+            <span class="resource-status">
+              <span class="status-badge" data-status="inactive">{RESOURCE_STATUS_LABEL}</span>
+              {' '}{link.status}
+            </span>
+          )}
         </li>
       ))}
     </ul>

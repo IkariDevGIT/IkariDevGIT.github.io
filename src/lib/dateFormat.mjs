@@ -12,3 +12,14 @@ const postDateFormat = new Intl.DateTimeFormat('en-GB', {
 export function formatPostDate(value) {
   return postDateFormat.format(value instanceof Date ? value : new Date(value));
 }
+
+const shortDateFormat = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+
+export function formatShortDate(value) {
+  return shortDateFormat.format(value instanceof Date ? value : new Date(value));
+}

@@ -49,7 +49,11 @@ const resourceLinkSchema = z.object({
   label: z.string(),
   href: z.url(),
   note: z.string().optional(),
+  favorite: z.boolean().default(false),
+  status: z.string().optional(),
 });
+
+export type ResourceLink = z.infer<typeof resourceLinkSchema>;
 
 export interface ResourceGroup {
   id: string;
@@ -72,6 +76,7 @@ const resourceGroupSchema: z.ZodType<ResourceGroup> = z.lazy(() =>
 const resources = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/resources' }),
   schema: z.object({
+    defaultStatus: z.string().optional(),
     sections: z.array(resourceGroupSchema),
   }),
 });

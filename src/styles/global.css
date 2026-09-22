@@ -404,10 +404,6 @@ hr {
   text-shadow: none;
 }
 
-.notice-lead {
-  font-size: 1.05rem;
-}
-
 .notice p:last-child {
   margin-bottom: 0;
 }
@@ -439,6 +435,73 @@ hr {
 .legacy-projects .panel:not(.notice) {
   background-color: rgba(237, 100, 245, 0.1);
   background-blend-mode: overlay;
+}
+
+.resource-list section section {
+  margin-left: 0.4em;
+  padding-left: 1em;
+  border-left: 1px solid rgba(237, 100, 245, 0.35);
+}
+
+.resource-list li {
+  margin-bottom: 0;
+  padding: 0.3em 0;
+  border-bottom: 1px solid rgba(237, 100, 245, 0.16);
+}
+
+.resource-list li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.resource-row {
+  display: flex;
+  align-items: baseline;
+  column-gap: 0.8em;
+}
+
+.resource-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.resource-fav {
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: 1.6em;
+  line-height: 0;
+  vertical-align: -0.16em;
+  color: rgb(230, 185, 60);
+  text-shadow: 0 0 8px rgba(230, 185, 60, 0.75);
+}
+
+.resource-sep {
+  color: var(--color-text-faint);
+  opacity: 0.7;
+}
+
+.resource-note {
+  font-size: 0.88em;
+}
+
+.resource-inactive {
+  opacity: 0.6;
+}
+
+.resource-added {
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+
+.resource-status {
+  display: block;
+  margin-top: 0.3em;
+  padding-left: 0.6em;
+  border-left: 2px solid #ff7b7b;
+  font-size: 0.8rem;
+  color: #ff9d9d;
 }
 
 .project-pinned {
@@ -482,7 +545,7 @@ hr {
   text-shadow: 0 0 8px var(--color-accent-glow);
 }
 
-.project-status {
+.status-badge {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -494,25 +557,29 @@ hr {
   border-radius: 3px;
 }
 
-.project-status[data-status='active'] {
+.status-badge[data-status='active'] {
   color: #6ee7a0;
   box-shadow: 0 0 6px rgba(110, 231, 160, 0.45);
 }
 
-.project-status[data-status='on hold'] {
+.status-badge[data-status='on hold'] {
   color: rgb(230, 185, 60);
 }
 
-.project-status[data-status='finished'] {
+.status-badge[data-status='finished'] {
   color: #7cc4ff;
 }
 
-.project-status[data-status='archived'] {
+.status-badge[data-status='archived'] {
   color: var(--color-text-faint);
 }
 
-.project-status[data-status='legacy'] {
+.status-badge[data-status='legacy'] {
   color: var(--color-accent);
+}
+
+.status-badge[data-status='inactive'] {
+  color: #ff7b7b;
 }
 
 .nsfw-gate #nsfw-gate-prompt {

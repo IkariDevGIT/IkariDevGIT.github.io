@@ -1,5 +1,6 @@
 import { getEntry, type CollectionEntry } from 'astro:content';
-import type { ResourceGroup } from '../content.config';
+import { formatShortDate } from './dateFormat.mjs';
+import { resolveResourceList, RESOURCE_STATUS_LABEL, type ResolvedGroup } from './resources';
 
 export function resourceListUrl(id: string): string {
   return id === 'main' ? '/resources/' : `/resources/${id}/`;
@@ -14,7 +15,7 @@ export async function resourceListMarkdown(list: CollectionEntry<'resources'>): 
   if (!page) return new Response('Not found', { status: 404 });
 
   const lines = [`# ${page.data.title}`, '', page.data.description, ''];
-  for (const section of list.data.sections) {
+  for (const section of resolveResourceList(list)) {
     lines.push(resourceGroupToMarkdown(section), '');
   }
   if (page.body?.trim()) lines.push(page.body, '');
@@ -22,7 +23,7 @@ export async function resourceListMarkdown(list: CollectionEntry<'resources'>): 
   return new Response(lines.join('\n'), { headers: { 'Content-Type': 'text/markdown; charset=utf-8' } });
 }
 
-export function resourceGroupToMarkdown(group: ResourceGroup, level = 2): string {
+export function resourceGroupToMarkdown(group: ResolvedGroup, level = 2): string {
   const heading = '#'.repeat(Math.min(level, 6));
   const lines = [`${heading} ${group.title}`];
 
@@ -33,7 +34,11 @@ export function resourceGroupToMarkdown(group: ResourceGroup, level = 2): string
   if (group.links && group.links.length > 0) {
     lines.push('');
     for (const link of group.links) {
-      lines.push(`- [${link.label}](${link.href})${link.note ? ` ~ ${link.note}` : ''}`);
+      const parts = [`- ${link.favorite ? '* ' : ''}[${link.label}](${link.href})`];
+      if (link.note) parts.push(` ~ ${link.note}`);
+      if (link.status) parts.push(` (${RESOURCE_STATUS_LABEL.toLowerCase()}: ${link.status})`);
+      parts.push(` — added ${link.addedDate ? formatShortDate(link.addedDate) : 'unknown'}`);
+      lines.push(parts.join(''));
     }
   }
 
