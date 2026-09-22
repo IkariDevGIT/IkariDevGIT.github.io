@@ -3,6 +3,7 @@ const PAGE_MARKDOWN: Record<string, string> = {
   '/about/': '/about.md',
   '/projects/': '/projects.md',
   '/resources/': '/resources.md',
+  '/resources/legacy/': '/resources/legacy.md',
   '/blog/': '/blog.md',
 };
 

@@ -7,7 +7,7 @@ import { resolvePostDates } from './postDates.ts';
 const BLOG_DIR = path.join(process.cwd(), 'src/content/blog');
 const PAGES_DIR = path.join(process.cwd(), 'src/content/pages');
 const PROJECTS_DIR = path.join(process.cwd(), 'src/content/projects');
-const RESOURCES_FILE = path.join(process.cwd(), 'src/content/resources.yaml');
+const RESOURCES_DIR = path.join(process.cwd(), 'src/content/resources');
 
 function resolveMarkdownLastmod(absPath) {
   const raw = readFileSync(absPath, 'utf-8');
@@ -97,7 +97,9 @@ export function getProjectsLastmod() {
   return new Date(Math.max(...dates.map((d) => d.getTime())));
 }
 
-export function getResourcesLastmod() {
-  const gitDates = getGitDates(RESOURCES_FILE);
-  return gitDates?.updated ? new Date(gitDates.updated) : new Date();
+export function getResourcesLastmod(id) {
+  const dates = [getPageLastmod(`resources/${id}`)];
+  const gitDates = getGitDates(path.join(RESOURCES_DIR, `${id}.yaml`));
+  if (gitDates?.updated) dates.push(new Date(gitDates.updated));
+  return new Date(Math.max(...dates.map((d) => d.getTime())));
 }

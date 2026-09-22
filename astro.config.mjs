@@ -68,7 +68,9 @@ export default defineConfig({
         } else if (pathname === '/projects/') {
           item.lastmod = getProjectsLastmod().toISOString();
         } else if (pathname === '/resources/') {
-          item.lastmod = getResourcesLastmod().toISOString();
+          item.lastmod = getResourcesLastmod('main').toISOString();
+        } else if (/^\/resources\/[^/]+\/$/.test(pathname)) {
+          item.lastmod = getResourcesLastmod(pathname.split('/')[2]).toISOString();
         } else if (pathname === '/blog/' || /^\/blog\/\d+\/$/.test(pathname)) {
           item.lastmod = newestPostDate.toISOString();
         } else if (pathname.startsWith('/blog/')) {

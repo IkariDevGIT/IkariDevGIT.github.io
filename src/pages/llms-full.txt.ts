@@ -3,7 +3,7 @@ import { getCollection, getEntry, render, type CollectionEntry } from 'astro:con
 import { getAllPostMeta, sortByNewest } from '../lib/posts';
 import { resolvePostDates } from '../lib/postDates';
 import { projectsToMarkdown } from '../lib/projects';
-import { resourceGroupToMarkdown } from '../lib/resourcesText';
+import { resourceGroupToMarkdown, resourceListMarkdownUrl } from '../lib/resourcesText';
 import { SITE_TITLE, LEGACY_NOTE } from '../consts';
 
 // https://llmstxt.org/
@@ -13,7 +13,9 @@ export const GET: APIRoute = async ({ site }) => {
   const home = await getEntry('pages', 'home');
   const about = await getEntry('pages', 'about');
   const projects = await getEntry('pages', 'projects');
-  const resources = await getEntry('resources', 'main');
+  const resourceLists = (await getCollection('resources')).sort((a, b) =>
+    a.id === 'main' ? -1 : b.id === 'main' ? 1 : a.id.localeCompare(b.id),
+  );
 
   const posts = sortByNewest(await getAllPostMeta()).filter((post) => !post.tags.includes('nsfw'));
   const blogEntries = await getCollection('blog');
@@ -48,12 +50,14 @@ export const GET: APIRoute = async ({ site }) => {
     if (page.entry === projects) lines.push(await projectsToMarkdown(4), '');
   }
 
-  lines.push('### Resources', '', `${base}/resources.md`, '');
-  if (resources) {
-    if (resources.data.intro) lines.push(resources.data.intro, '');
-    for (const section of resources.data.sections) {
+  for (const list of resourceLists) {
+    const page = await getEntry('pages', `resources/${list.id}`);
+    if (!page) continue;
+    lines.push(`### ${page.data.title}`, '', `${base}${resourceListMarkdownUrl(list.id)}`, '', page.data.description, '');
+    for (const section of list.data.sections) {
       lines.push(resourceGroupToMarkdown(section), '');
     }
+    if (page.body?.trim()) lines.push(page.body, '');
   }
 
   lines.push('## Blog posts', '', LEGACY_NOTE, '');

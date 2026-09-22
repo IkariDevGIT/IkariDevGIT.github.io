@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResourceSection from '../../components/ResourceSection.astro';
+import ResourceToc from '../../components/ResourceToc.astro';
+import { resourceListUrl } from '../../lib/resourcesText';
+
+export const getStaticPaths = (async () => {
+  const lists = await getCollection('resources');
+  return lists.map((list) => ({
+    params: { slug: list.id === 'main' ? undefined : list.id },
+    props: { list },
+  }));
+}) satisfies GetStaticPaths;
+
+const { list } = Astro.props;
+
+const page = await getEntry('pages', `resources/${list.id}`);
+if (!page) throw new Error(`Missing src/content/pages/resources/${list.id}.md`);
+const { Content } = await render(page);
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Resources', url: '/resources/' },
+];
+if (list.id !== 'main') breadcrumbs.push({ name: page.data.title, url: resourceListUrl(list.id) });
+---
+
+<BaseLayout title={page.data.title} description={page.data.description} breadcrumbs={breadcrumbs}>
+  <h1>{page.data.title}</h1>
+  <p>{page.data.description}</p>
+
+  <h2>Overview</h2>
+  <ResourceToc groups={list.data.sections} />
+
+  <hr />
+
+  <div class="panel">
+    {list.data.sections.map((section) => <ResourceSection group={section} level={2} />)}
+  </div>
+
+  <Content />
+</BaseLayout>

@@ -10,7 +10,8 @@ export const GET: APIRoute = async ({ site }) => {
   const home = await getEntry('pages', 'home');
   const about = await getEntry('pages', 'about');
   const projects = await getEntry('pages', 'projects');
-  const resources = await getEntry('resources', 'main');
+  const resources = await getEntry('pages', 'resources/main');
+  const resourcesLegacy = await getEntry('pages', 'resources/legacy');
   const blog = await getEntry('pages', 'blog');
 
   const posts = sortByNewest(await getAllPostMeta()).filter((post) => !post.tags.includes('nsfw'));
@@ -38,7 +39,8 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push(link('/index.md', 'Home', home?.data.description));
   lines.push(link('/about.md', 'About', about?.data.description));
   lines.push(link('/projects.md', 'Projects', projects?.data.description));
-  lines.push(link('/resources.md', 'Resources', resources?.data.intro));
+  lines.push(link('/resources.md', 'Resources', resources?.data.description));
+  lines.push(link('/resources/legacy.md', 'Legacy resources', resourcesLegacy?.data.description));
   lines.push(link('/blog.md', 'Blog', blog?.data.description));
   lines.push('');
 

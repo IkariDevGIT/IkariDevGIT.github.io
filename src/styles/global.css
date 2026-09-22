@@ -404,6 +404,14 @@ hr {
   text-shadow: none;
 }
 
+.notice-lead {
+  font-size: 1.05rem;
+}
+
+.notice p:last-child {
+  margin-bottom: 0;
+}
+
 .legacy-projects {
   position: relative;
   margin-top: 1.5rem;

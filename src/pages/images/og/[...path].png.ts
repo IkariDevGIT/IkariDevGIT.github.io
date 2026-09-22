@@ -1,12 +1,13 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { renderOgImage, type OgImageOptions } from '../../../lib/ogImage';
+import { resourceListUrl } from '../../../lib/resourcesText';
 import { SITE_TITLE } from '../../../consts';
 
 type Props = Omit<OgImageOptions, 'url'> & { pathname: string; url?: string };
 
 export const getStaticPaths = (async () => {
-  const resources = await getEntry('resources', 'main');
+  const resourceLists = await getCollection('resources');
   const posts = await getCollection('blog');
 
   const page = async (id: string, label: string, pathname: string, title?: string): Promise<{ path: string; props: Props }> => {
@@ -19,10 +20,12 @@ export const getStaticPaths = (async () => {
     { ...(await page('home', 'Home', '/', SITE_TITLE)), path: 'index' },
     await page('about', 'About', '/about/'),
     await page('projects', 'Projects', '/projects/'),
-    {
-      path: 'resources',
-      props: { label: 'Resources', title: 'Resources', description: resources?.data.intro ?? '', pathname: '/resources/' },
-    },
+    ...(await Promise.all(
+      resourceLists.map(async (list) => ({
+        ...(await page(`resources/${list.id}`, 'Resources', resourceListUrl(list.id))),
+        path: list.id === 'main' ? 'resources' : `resources/${list.id}`,
+      })),
+    )),
     await page('blog', 'Blog', '/blog/'),
     { ...(await page('404', '404', '/404')), path: '404' },
     ...posts.map((entry) => {

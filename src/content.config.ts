@@ -1,6 +1,6 @@
 import { z } from 'astro/zod';
 import { defineCollection } from 'astro:content';
-import { glob, file } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
@@ -70,9 +70,8 @@ const resourceGroupSchema: z.ZodType<ResourceGroup> = z.lazy(() =>
 );
 
 const resources = defineCollection({
-  loader: file('src/content/resources.yaml'),
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/resources' }),
   schema: z.object({
-    intro: z.string(),
     sections: z.array(resourceGroupSchema),
   }),
 });
