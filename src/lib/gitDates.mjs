@@ -28,7 +28,7 @@ export function getLineDates(filepath) {
 
   let output;
   try {
-    output = execFileSync('git', ['blame', '--line-porcelain', '--', filepath], {
+    output = execFileSync('git', ['blame', '--line-porcelain', '-M', '-C', '--', filepath], {
       encoding: 'utf-8',
       maxBuffer: 64 * 1024 * 1024,
     });
