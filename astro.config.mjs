@@ -69,7 +69,7 @@ export default defineConfig({
           item.lastmod = getProjectsLastmod().toISOString();
         } else if (pathname === '/resources/') {
           item.lastmod = getResourcesLastmod().toISOString();
-        } else if (pathname === '/blog/') {
+        } else if (pathname === '/blog/' || /^\/blog\/\d+\/$/.test(pathname)) {
           item.lastmod = newestPostDate.toISOString();
         } else if (pathname.startsWith('/blog/')) {
           const slug = pathname.replace(/^\/blog\//, '').replace(/\/$/, '');

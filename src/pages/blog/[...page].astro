@@ -21,6 +21,10 @@ const title = firstPage ? blogPage.data.title : `Blog, page ${page.currentPage}`
 const description = firstPage
   ? blogPage.data.description
   : `${blogPage.data.description} Page ${page.currentPage} of ${page.lastPage}.`;
+
+const withSlash = (url: string | undefined) => (url && !url.endsWith('/') ? `${url}/` : url);
+const prev = withSlash(page.url.prev);
+const next = withSlash(page.url.next);
 ---
 
 <BaseLayout
@@ -32,6 +36,8 @@ const description = firstPage
   ]}
 >
   <Fragment slot="head">
+    {prev && <link rel="prev" href={prev} />}
+    {next && <link rel="next" href={next} />}
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script>
       import '../../scripts/blog.js';

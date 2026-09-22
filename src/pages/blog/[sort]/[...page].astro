@@ -26,10 +26,16 @@ const { page } = Astro.props;
 const sortLabel = { newest: 'newest first', oldest: 'oldest first', 'latest-update': 'last updated' }[sort];
 const title = `Blog, ${sortLabel}, page ${page.currentPage}`;
 const description = `${blogPage.data.description} Page ${page.currentPage} of ${page.lastPage}, sorted ${sortLabel}.`;
+
+const withSlash = (url: string | undefined) => (url && !url.endsWith('/') ? `${url}/` : url);
+const prev = withSlash(page.url.prev);
+const next = withSlash(page.url.next);
 ---
 
 <BaseLayout title={title} description={description} noindex>
   <Fragment slot="head">
+    {prev && <link rel="prev" href={prev} />}
+    {next && <link rel="next" href={next} />}
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script>
       import '../../../scripts/blog.js';
