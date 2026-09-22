@@ -48,9 +48,6 @@ export function withLegacyTag(entry: CollectionEntry<'blog'>): string[] {
 }
 
 async function toPostMeta(entry: CollectionEntry<'blog'>): Promise<PostMeta> {
-  if (isRepostPost(entry) && entry.data.updatedDate) {
-    throw new Error(`reposts only show when they were added, remove updatedDate from ${entry.id}`);
-  }
   if (isRepostPost(entry) && !entry.data.repost) {
     throw new Error(`${entry.id} is in repost/ but has no repost: url`);
   }
@@ -66,7 +63,7 @@ async function toPostMeta(entry: CollectionEntry<'blog'>): Promise<PostMeta> {
     cover: await resolveCover(entry.data),
     coverAlt: entry.data.coverAlt,
     pubDate: pubDate.toISOString(),
-    updatedDate: isRepostPost(entry) ? undefined : updatedDate?.toISOString(),
+    updatedDate: updatedDate?.toISOString(),
     wordCount: remarkPluginFrontmatter.wordCount ?? 0,
     minutesRead: remarkPluginFrontmatter.minutesRead ?? 1,
     repost: entry.data.repost,

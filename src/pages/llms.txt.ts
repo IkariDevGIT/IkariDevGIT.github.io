@@ -28,11 +28,9 @@ export const GET: APIRoute = async ({ site }) => {
     'extension (e.g. `/about.md`, `/blog/some-post.md`). Fetch that, not the linked HTML',
     'page, which carries nav/sidebar/footer chrome with no content value.',
     '',
-    'Do not use `/blog/` (client-side rendered: search, sort, and pagination all run in',
-    'JavaScript, so it returns an empty shell without it) or `/blog-nojs/*` (a static',
-    'fallback for that, but splits posts across several sort/pagination URLs instead of',
-    'listing them in one place). Use `/blog.md` instead: one flat, complete list of every',
-    'post, plain markdown, no JavaScript involved.',
+    'Do not use `/blog/` (it splits posts across several sort/pagination URLs, and its',
+    'search, sort, and pagination run in JavaScript). Use `/blog.md` instead: one flat,',
+    'complete list of every post, plain markdown, no JavaScript involved.',
     '',
   );
 

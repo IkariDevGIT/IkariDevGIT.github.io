@@ -794,6 +794,15 @@ hr {
   gap: 10px;
 }
 
+.js [data-static] {
+  display: none;
+}
+
+.sort-links[hidden],
+.pagination[hidden] {
+  display: none;
+}
+
 .post-card {
   padding: 0;
   overflow: hidden;

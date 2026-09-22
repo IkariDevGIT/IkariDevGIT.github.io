@@ -37,7 +37,7 @@ export function readPost(slug) {
 
   const { data } = matter(readFileSync(file, 'utf-8'));
   const gitDates = getGitDates(file);
-  const { pubDate } = resolvePostDates(
+  const { pubDate, updatedDate } = resolvePostDates(
     { pubDate: data.pubDate, updatedDate: data.updatedDate },
     { gitCreated: gitDates?.created ?? null, gitUpdated: gitDates?.updated ?? null },
   );
@@ -47,6 +47,7 @@ export function readPost(slug) {
     title: data.title,
     description: data.description,
     pubDate,
+    updatedDate: updatedDate ?? null,
     isLegacy: clean.startsWith('legacy/'),
     isRepost: clean.startsWith('repost/'),
     repost: data.repost,

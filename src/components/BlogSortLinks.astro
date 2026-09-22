@@ -6,20 +6,22 @@ interface Props {
   base?: string;
 }
 
-const { sort, base = '/blog-nojs' } = Astro.props;
+const { sort, base = '/blog' } = Astro.props;
 
 const options: { mode: SortMode; label: string }[] = [
   { mode: 'newest', label: 'Newest' },
   { mode: 'oldest', label: 'Oldest' },
   { mode: 'latest-update', label: 'Last updated' },
 ];
+
+const hrefFor = (mode: SortMode) => (mode === 'newest' ? `${base}/` : `${base}/${mode}/`);
 ---
 
 <div class="sort-links">
   <span>Sort:</span>
   {
     options.map((option) => (
-      <a class="btn" href={`${base}/${option.mode}/`} aria-current={sort === option.mode ? 'page' : undefined}>
+      <a class="btn" href={hrefFor(option.mode)} aria-current={sort === option.mode ? 'page' : undefined}>
         {option.label}
       </a>
     ))

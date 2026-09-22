@@ -1,7 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PostListItem from '../components/PostListItem.astro';
+import PostCard from '../components/PostCard.astro';
 import { getAllPostMeta, sortByNewest } from '../lib/posts';
 import { SITE_TITLE } from '../consts';
 
@@ -43,7 +43,7 @@ const latestPosts = sortByNewest(await getAllPostMeta()).slice(0, 3);
   {
     latestPosts.length > 0 ? (
       <ul class="post-list">
-        {latestPosts.map((post) => <PostListItem post={post} />)}
+        {latestPosts.map((post) => <PostCard post={post} />)}
       </ul>
     ) : (
       <p>No posts yet.</p>

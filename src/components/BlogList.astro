@@ -1,0 +1,65 @@
+---
+import type { Page } from 'astro';
+import PostCard from './PostCard.astro';
+import BlogSortLinks from './BlogSortLinks.astro';
+import Pagination from './Pagination.astro';
+import type { PostMeta, SortMode } from '../lib/posts';
+
+interface Props {
+  page: Page<PostMeta>;
+  sort: SortMode;
+}
+
+const { page, sort } = Astro.props;
+---
+
+<h1>Blog</h1>
+
+<picture>
+  <source srcset="/images/badges/typos.webp" type="image/webp" />
+  <img src="/images/badges/typos.gif" alt="Typos... who needs backspase!" width="150" height="20" loading="lazy" />
+</picture>
+
+<div class="blog-controls">
+  <div class="post-search">
+    <label for="post-search-input">Search posts by title</label>
+    <input type="text" id="post-search-input" autocomplete="off" placeholder="Search by title" disabled />
+  </div>
+  <div class="sort-links-static" data-static>
+    <BlogSortLinks sort={sort} />
+  </div>
+  <div class="sort-links" id="sort-buttons" role="group" aria-label="Sort posts" hidden>
+    <span>Sort:</span>
+    <button class="btn" type="button" data-sort="newest" disabled>Newest</button>
+    <button class="btn" type="button" data-sort="oldest" disabled>Oldest</button>
+    <button class="btn" type="button" data-sort="latest-update" disabled>Last updated</button>
+  </div>
+</div>
+
+<details class="tag-filter tag-filter-disabled" data-static>
+  <summary tabindex="-1" aria-disabled="true">Filter by tags</summary>
+</details>
+
+<details class="tag-filter" id="tag-filter" hidden>
+  <summary>Filter by tags</summary>
+  <p class="meta-line tag-filter-hint">
+    Click a tag once to require it, again to exclude it, again to clear it. Required tags must all be present (AND).
+  </p>
+  <div class="tag-filter-chips" id="tag-filter-chips" role="group" aria-label="Filter posts by tag"></div>
+</details>
+
+<hr />
+
+<p id="blog-status" class="meta-line" role="status" aria-live="polite" hidden>Loading posts.</p>
+
+<ol class="post-list" id="post-list" data-static>
+  {page.data.map((post) => <PostCard post={post} full />)}
+</ol>
+
+<Pagination page={page} />
+
+<nav class="pagination" id="pagination" aria-label="Blog pages" hidden>
+  <button class="btn" type="button" id="prev-page">← Newer</button>
+  <span class="meta-line" id="page-indicator"></span>
+  <button class="btn" type="button" id="next-page">Older →</button>
+</nav>

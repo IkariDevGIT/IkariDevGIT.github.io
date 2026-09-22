@@ -1,3 +1,5 @@
+import { postCardHtml } from '../lib/postCard.mjs';
+
 function normalize(str) {
   return str
     .normalize('NFD')
@@ -45,86 +47,23 @@ function sortPosts(posts, sort) {
   return arr.sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate));
 }
 
-function buildCard(post) {
-  const li = document.createElement('li');
-  li.className = 'post-card panel';
-  if (post.tags.includes('legacy')) li.classList.add('legacy-card');
-  if (post.repost) li.classList.add('repost-card');
+function cardHtml(post) {
+  return postCardHtml({
+    ...post,
+    isLegacy: post.tags.includes('legacy'),
+    isRepost: post.tags.includes('repost'),
+    full: true,
+  });
+}
 
-  const link = document.createElement('a');
-  link.className = 'post-card-link';
-  link.href = `/blog/${post.slug}/`;
-
-  if (post.cover) {
-    const img = document.createElement('img');
-    img.className = 'post-card-cover';
-    img.src = post.cover;
-    img.alt = post.coverAlt ?? '';
-    img.loading = 'lazy';
-    link.append(img);
-  }
-
-  const body = document.createElement('div');
-  body.className = 'post-card-body';
-
-  const title = document.createElement('h2');
-  title.className = 'post-card-title';
-  if (post.repost) {
-    const mark = document.createElement('span');
-    mark.className = 'repost-mark';
-    mark.setAttribute('aria-hidden', 'true');
-    mark.textContent = '⟳';
-    title.append(mark);
-  }
-  title.append(post.title);
-
-  const dates = document.createElement('p');
-  dates.className = 'meta-line';
-
-  const pubTime = document.createElement('time');
-  pubTime.dateTime = post.pubDate;
-  pubTime.textContent = post.pubDateLabel;
-  dates.append(post.repost ? 'Reposted on ' : 'Published ', pubTime);
-
-  if (post.updatedDate) {
-    const updTime = document.createElement('time');
-    updTime.dateTime = post.updatedDate;
-    updTime.textContent = post.updatedDateLabel;
-    dates.append(' · Updated ', updTime);
-  }
-
-  const stats = document.createElement('p');
-  stats.className = 'meta-line';
-  stats.textContent = post.repost
-    ? `Reposted from ${new URL(post.repost).hostname}`
-    : `${post.wordCount} words · ${post.minutesRead} min read`;
-
-  const description = document.createElement('p');
-  description.className = 'post-card-description';
-  description.textContent = post.description;
-
-  body.append(title, dates, stats, description);
-
-  if (post.tags.length > 0) {
-    const tagList = document.createElement('ul');
-    tagList.className = 'tag-list';
-    for (const tag of post.tags) {
-      const tagItem = document.createElement('li');
-      tagItem.className = 'tag';
-      tagItem.textContent = tag;
-      tagList.append(tagItem);
-    }
-    body.append(tagList);
-  }
-
-  link.append(body);
-  li.append(link);
-  return li;
+function fallBackToStatic() {
+  document.documentElement.classList.remove('js');
 }
 
 async function main() {
   const searchInput = document.getElementById('post-search-input');
   const sortButtons = document.querySelectorAll('#sort-buttons button');
+  const sortButtonGroup = document.getElementById('sort-buttons');
   const tagFilter = document.getElementById('tag-filter');
   const tagFilterChips = document.getElementById('tag-filter-chips');
   const postList = document.getElementById('post-list');
@@ -136,6 +75,7 @@ async function main() {
 
   if (
     !searchInput ||
+    !sortButtonGroup ||
     !tagFilter ||
     !tagFilterChips ||
     !postList ||
@@ -145,19 +85,26 @@ async function main() {
     !pageIndicator ||
     !status
   ) {
+    fallBackToStatic();
     return;
   }
+
+  status.hidden = false;
+  sortButtonGroup.hidden = false;
 
   let allPosts = [];
   let pageSize = 6;
 
   const SORT_MODES = ['newest', 'oldest', 'latest-update'];
   const urlParams = new URLSearchParams(location.search);
+  const pathParts = location.pathname.replace(/^\/blog\/?/, '').replace(/\/$/, '').split('/').filter(Boolean);
+  const pathSort = SORT_MODES.includes(pathParts[0]) ? pathParts[0] : null;
+  const pathPage = parseInt(pathParts[pathSort ? 1 : 0], 10);
 
   const state = {
-    sort: SORT_MODES.includes(urlParams.get('sort')) ? urlParams.get('sort') : 'newest',
+    sort: SORT_MODES.includes(urlParams.get('sort')) ? urlParams.get('sort') : (pathSort ?? 'newest'),
     query: urlParams.get('q') ?? '',
-    page: Math.max(1, parseInt(urlParams.get('page'), 10) || 1),
+    page: Math.max(1, parseInt(urlParams.get('page'), 10) || pathPage || 1),
     /** @type {Set<string>} */
     requiredTags: new Set((urlParams.get('tag') ?? '').split(',').filter(Boolean)),
     /** @type {Set<string>} */
@@ -172,7 +119,7 @@ async function main() {
     if (state.requiredTags.size > 0) params.set('tag', [...state.requiredTags].join(','));
     if (state.excludedTags.size > 0) params.set('extag', [...state.excludedTags].join(','));
     const qs = params.toString();
-    history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+    history.replaceState(null, '', qs ? `/blog/?${qs}` : '/blog/');
   }
 
   function currentList() {
@@ -192,7 +139,8 @@ async function main() {
     const start = (state.page - 1) * pageSize;
     const pageItems = list.slice(start, start + pageSize);
 
-    postList.replaceChildren(...pageItems.map(buildCard));
+    postList.innerHTML = pageItems.map(cardHtml).join('');
+    postList.removeAttribute('data-static');
 
     const filtering = state.query || state.requiredTags.size > 0 || state.excludedTags.size > 0;
     if (list.length === 0) {
@@ -239,7 +187,9 @@ async function main() {
       }
     }
   } catch {
-    status.textContent = 'Could not load posts. Try the plain version instead.';
+    status.textContent = 'Could not load search and sorting, showing the plain list instead.';
+    sortButtonGroup.hidden = true;
+    fallBackToStatic();
     return;
   }
 

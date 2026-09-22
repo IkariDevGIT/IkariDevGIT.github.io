@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogList from '../../components/BlogList.astro';
+import { getAllPostMeta, sortByNewest } from '../../lib/posts';
+import { BLOG_PAGE_SIZE } from '../../consts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = sortByNewest(await getAllPostMeta());
+  return paginate(posts, { pageSize: BLOG_PAGE_SIZE });
+}) satisfies GetStaticPaths;
+
+const blogPage = await getEntry('pages', 'blog');
+if (!blogPage) throw new Error('Missing src/content/pages/blog.md');
+
+const { page } = Astro.props;
+const firstPage = page.currentPage === 1;
+
+const title = firstPage ? blogPage.data.title : `Blog, page ${page.currentPage}`;
+const description = firstPage
+  ? blogPage.data.description
+  : `${blogPage.data.description} Page ${page.currentPage} of ${page.lastPage}.`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog/' },
+  ]}
+>
+  <Fragment slot="head">
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script>
+      import '../../scripts/blog.js';
+    </script>
+  </Fragment>
+
+  <BlogList page={page} sort="newest" />
+</BaseLayout>

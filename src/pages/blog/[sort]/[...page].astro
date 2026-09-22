@@ -1,0 +1,40 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogList from '../../../components/BlogList.astro';
+import { getAllPostMeta, sortByLatestUpdate, sortByOldest, type SortMode } from '../../../lib/posts';
+import { BLOG_PAGE_SIZE } from '../../../consts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getAllPostMeta();
+
+  const groups: { sort: SortMode; posts: Awaited<ReturnType<typeof getAllPostMeta>> }[] = [
+    { sort: 'oldest', posts: sortByOldest(allPosts) },
+    { sort: 'latest-update', posts: sortByLatestUpdate(allPosts) },
+  ];
+
+  return groups.flatMap(({ sort, posts }) => paginate(posts, { params: { sort }, pageSize: BLOG_PAGE_SIZE }));
+}) satisfies GetStaticPaths;
+
+const blogPage = await getEntry('pages', 'blog');
+if (!blogPage) throw new Error('Missing src/content/pages/blog.md');
+
+const { sort } = Astro.params as { sort: SortMode };
+const { page } = Astro.props;
+
+const sortLabel = { newest: 'newest first', oldest: 'oldest first', 'latest-update': 'last updated' }[sort];
+const title = `Blog, ${sortLabel}, page ${page.currentPage}`;
+const description = `${blogPage.data.description} Page ${page.currentPage} of ${page.lastPage}, sorted ${sortLabel}.`;
+---
+
+<BaseLayout title={title} description={description} noindex>
+  <Fragment slot="head">
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script>
+      import '../../../scripts/blog.js';
+    </script>
+  </Fragment>
+
+  <BlogList page={page} sort={sort} />
+</BaseLayout>

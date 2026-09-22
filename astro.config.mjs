@@ -45,9 +45,9 @@ export default defineConfig({
     webdeckConfig(),
     sitemap({
       filter: (page) => {
-        // duplicates /blog/ under different sort/pagination urls, also noindex on the pages themselves
-        if (page.includes('/blog-nojs/')) return false;
         const pathname = new URL(page).pathname;
+
+        if (/^\/blog\/(oldest|latest-update)\//.test(pathname)) return false;
 
         if (pathname === '/webdeck/') return false;
 

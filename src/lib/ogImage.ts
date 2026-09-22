@@ -183,6 +183,6 @@ export async function renderOgImage(options: OgImageOptions): Promise<Response> 
 export function ogImagePath(pathname: string): string {
   let key = pathname.replace(/^\/+|\/+$/g, '');
   if (key === '') key = 'index';
-  if (key === 'blog-nojs' || key.startsWith('blog-nojs/')) key = 'blog';
+  if (/^blog(\/(oldest|latest-update|newest))?(\/\d+)?$/.test(key)) key = 'blog';
   return `/images/og/${key}.png`;
 }

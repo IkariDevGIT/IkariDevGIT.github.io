@@ -14,7 +14,7 @@ const next = withSlash(page.url.next);
 
 {
   (page.url.prev || page.url.next) && (
-    <nav class="pagination" aria-label="Blog pages">
+    <nav class="pagination" aria-label="Blog pages" data-static>
       <a class="btn" href={prev ?? undefined} aria-disabled={!prev} rel="prev">
         ← Newer
       </a>
