@@ -12,7 +12,7 @@ description: "My personal site: machine learning, anime, and software, plus the 
 
 Moin, i am Ikari.
 
-I am a AI/ML enthusiast from germany, in my blog, i talk about all kinds of things, here some examples:
+I am a AI/ML enthusiast from germany (she/her, he/him also works), in my blog, i talk about all kinds of things, here some examples:
 
 - AI/ML
 - Drawing

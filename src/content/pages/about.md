@@ -5,7 +5,7 @@ description: "Hey, i am IkariDev. A developer from germany doing machine learnin
 
 ## Hey, i am IkariDev.
 
-### I am a developer from germany doing various things, such as:
+### I am a developer from germany (she/her, he/him also works) doing various things, such as:
 
 - Machine learning [ Large Language Models, ~~Stable diffusion~~(I distanced myself from this, i hate seeing slop everywhere now), Upscaling, other small stuff ]
 - Watching anime
@@ -46,7 +46,7 @@ description: "Hey, i am IkariDev. A developer from germany doing machine learnin
 ## What i dislike:
 
 - OpenAI
-- People who don't read HuggingFace descriptions before asking questions
+- People who don't read Readme files before asking questions
 
 ### You can also check me out on these places:
 
