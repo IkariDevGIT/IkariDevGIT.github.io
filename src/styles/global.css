@@ -294,6 +294,23 @@ hr {
   margin-bottom: 5px;
 }
 
+.pronouns {
+  margin-bottom: 14px;
+}
+
+.pronouns picture,
+.pronouns img {
+  display: block;
+  margin-bottom: 0;
+}
+
+.pronouns p {
+  margin: -3px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-text-faint);
+}
+
 .sidebar-toggle-gif {
   width: 100%;
   height: auto;
