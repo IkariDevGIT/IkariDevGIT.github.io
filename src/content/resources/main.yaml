@@ -158,3 +158,12 @@ sections:
           - label: ezgif
             href: https://ezgif.com
             note: A really good online tool for modifying gifs.
+  - id: archiving
+    title: Archiving
+    links:
+      - label: ArchiveBox
+        href: https://github.com/ArchiveBox/ArchiveBox
+        note: Self hosted archiving, saves whole pages as html/pdf/screenshots so they dont just vanish. I host it myself too.
+      - label: gallery-dl
+        href: https://codeberg.org/mikf/gallery-dl
+        note: Command line downloader for image galleries and collections from a ton of sites.
