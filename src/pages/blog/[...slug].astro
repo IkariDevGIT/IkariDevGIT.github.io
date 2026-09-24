@@ -137,4 +137,5 @@ const blogPostingJsonLd = {
   </article>
   {!isNsfw && !isEmptyRepost && <Comments />}
   {isNsfw && <script is:inline type="module" src="/scripts/nsfw-gate.js"></script>}
+  <script is:inline type="module" src="/scripts/code-copy.js"></script>
 </BaseLayout>

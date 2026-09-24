@@ -84,6 +84,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    shikiConfig: { theme: 'css-variables', wrap: true },
     // explicit processor instead of the deprecated top-level remarkPlugins option
     // https://docs.astro.build/en/guides/markdown-content/#setting-up-a-markdown-processor
     processor: unified({

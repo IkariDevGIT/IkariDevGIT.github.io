@@ -165,6 +165,46 @@ pre code {
   padding: 0;
 }
 
+pre.astro-code {
+  --astro-code-background: #0a0418;
+  --astro-code-foreground: var(--color-text);
+  --astro-code-token-comment: var(--color-text-faint);
+  --astro-code-token-keyword: var(--color-accent);
+  --astro-code-token-string: #9ce6b0;
+  --astro-code-token-string-expression: #9ce6b0;
+  --astro-code-token-constant: rgb(230, 185, 60);
+  --astro-code-token-function: #7cc4ff;
+  --astro-code-token-parameter: var(--color-text);
+  --astro-code-token-punctuation: var(--color-text-faint);
+  --astro-code-token-link: var(--color-accent);
+
+  border: 1px solid rgba(190, 84, 196, 0.4);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.code-copy {
+  float: right;
+  margin: 0 0 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1;
+  color: var(--color-text-faint);
+  background: rgba(237, 100, 245, 0.12);
+  border: 1px solid rgba(237, 100, 245, 0.4);
+  border-radius: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.code-copy:hover {
+  color: var(--color-text);
+  background: rgba(237, 100, 245, 0.25);
+  border-color: rgba(237, 100, 245, 0.7);
+}
+
 hr {
   border: none;
   height: 10px;
