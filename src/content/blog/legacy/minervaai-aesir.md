@@ -2,7 +2,7 @@
 title: MinervaAI / Aesir
 description: A little team working on an LLM model + dataset called Aesir.
 pubDate: 2023-09-16T23:31:00+02:00
-tags: [llm, minervaai, aesir]
+tags: [ai, llm]
 ---
 
 Sooo.. hey.. me, Gryphepadar, Doctorshotgun, Lordgoonery, M1xx3l, Nruaif are in sort of(?) a little team making LLM models no.

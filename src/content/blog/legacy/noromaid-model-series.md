@@ -2,8 +2,7 @@
 title: Noromaid model series
 description: The Noromaid model series (with Undi) and its Mixtral/Miqu spin-offs.
 pubDate: 2023-12-19T22:51:00+02:00
-updatedDate: 2024-02-07T20:20:00+02:00
-tags: [llm, merge, noromaid, neversleep]
+tags: [ai, llm, neversleep]
 ---
 
 [NeverSleep Discord](https://discord.gg/w6C8mys35E)

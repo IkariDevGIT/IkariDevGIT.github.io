@@ -2,7 +2,6 @@
 title: Wanna check out my resources page?
 description: A new Resources page with programming/ML/LLM/SD links, plus a Projects page.
 pubDate: 2023-08-14T23:17:00+02:00
-updatedDate: 2023-08-15T00:49:00+02:00
 tags: [meta, resources]
 ---
 

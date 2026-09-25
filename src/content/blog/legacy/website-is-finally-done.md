@@ -2,7 +2,6 @@
 title: Website is finally "done"
 description: The site finally has content, plus a loading screen and a vote button.
 pubDate: 2023-08-13T22:29:00+02:00
-updatedDate: 2023-08-14T00:39:00+02:00
 tags: [meta]
 ---
 
