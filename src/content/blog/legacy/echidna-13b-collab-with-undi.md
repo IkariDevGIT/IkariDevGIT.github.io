@@ -2,6 +2,7 @@
 title: Echidna-13b and Nethena-13B, a collab with Undi
 description: A merge collab with Undi, Echidna-13b v0.1 through v0.3, and Nethena-13B.
 pubDate: 2023-10-27T19:57:00+02:00
+updatedDate: 2023-10-31T01:50:00+02:00
 tags: [ai, llm]
 ---
 

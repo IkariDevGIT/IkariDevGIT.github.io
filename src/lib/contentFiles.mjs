@@ -12,7 +12,7 @@ const RESOURCES_DIR = path.join(process.cwd(), 'src/content/resources');
 function resolveMarkdownLastmod(absPath) {
   const raw = readFileSync(absPath, 'utf-8');
   const { data } = matter(raw);
-  const gitDates = getGitDates(absPath);
+  const gitDates = getGitDates(absPath, { bodyOnly: absPath.startsWith(BLOG_DIR) });
   const { pubDate, updatedDate } = resolvePostDates(
     { pubDate: data.pubDate, updatedDate: data.updatedDate },
     { gitCreated: gitDates?.created ?? null, gitUpdated: gitDates?.updated ?? null },
@@ -36,7 +36,7 @@ export function readPost(slug) {
   if (!existsSync(file)) return null;
 
   const { data } = matter(readFileSync(file, 'utf-8'));
-  const gitDates = getGitDates(file);
+  const gitDates = getGitDates(file, { bodyOnly: true });
   const { pubDate, updatedDate } = resolvePostDates(
     { pubDate: data.pubDate, updatedDate: data.updatedDate },
     { gitCreated: gitDates?.created ?? null, gitUpdated: gitDates?.updated ?? null },

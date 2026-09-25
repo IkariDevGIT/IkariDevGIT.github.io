@@ -1,9 +1,42 @@
 import { execFileSync } from 'node:child_process';
 
+const bodyOf = (text) => text.replace(/\r\n/g, '\n').replace(/^---\n[\s\S]*?\n---\n?/, '').trim();
+
+function bodyAt(rev, filepath) {
+  try {
+    const text = execFileSync('git', ['show', `${rev}:${filepath}`], { encoding: 'utf-8', maxBuffer: 16 * 1024 * 1024 });
+    return bodyOf(text);
+  } catch {
+    return null;
+  }
+}
+
+function lastBodyChange(filepath) {
+  const output = execFileSync(
+    'git',
+    ['-c', 'core.quotepath=false', 'log', '--follow', '--name-status', '--format=%x00%H %cI', '--', filepath],
+    { encoding: 'utf-8' },
+  );
+
+  for (const chunk of output.split('\0').slice(1)) {
+    const [header, statusLine] = chunk.split('\n').filter(Boolean);
+    if (!statusLine) continue;
+
+    const [hash, date] = header.split(' ');
+    const [status, ...paths] = statusLine.split('\t');
+    if (status.startsWith('A')) return date;
+
+    const after = bodyAt(hash, paths[paths.length - 1]);
+    const before = bodyAt(`${hash}^`, paths[0]);
+    if (after === null || before === null || after !== before) return date;
+  }
+  return null;
+}
+
 // git log for one file, newest first. null if no history yet or git unavailable.
 // CI needs fetch-depth: 0 (not the default shallow clone) or every file's
 // "created" date collapses to the same single commit
-export function getGitDates(filepath) {
+export function getGitDates(filepath, { bodyOnly = false } = {}) {
   try {
     const output = execFileSync(
       'git',
@@ -15,7 +48,7 @@ export function getGitDates(filepath) {
 
     const dates = output.split('\n');
     return {
-      updated: dates[0],
+      updated: (bodyOnly && lastBodyChange(filepath)) || dates[0],
       created: dates[dates.length - 1],
     };
   } catch {

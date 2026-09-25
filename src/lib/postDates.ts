@@ -29,7 +29,8 @@ export function resolvePostDates(
     : undefined;
 
   const pubDate = data.pubDate ?? gitCreated ?? gitUpdated ?? new Date();
-  const updatedDate = data.updatedDate ?? gitUpdated;
+  const gitHasUpdate = gitCreated && gitUpdated && gitUpdated.getTime() > gitCreated.getTime();
+  const updatedDate = data.updatedDate ?? (gitHasUpdate ? gitUpdated : undefined);
 
   // only show "updated" when it's strictly after publish
   const hasRealUpdate = updatedDate !== undefined && updatedDate.getTime() > pubDate.getTime();

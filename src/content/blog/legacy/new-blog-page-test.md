@@ -2,6 +2,7 @@
 title: Hey, this is a little test for the new blog page
 description: A test post for the new blog page.
 pubDate: 2023-08-12T04:15:00+02:00
+updatedDate: 2023-08-12T04:33:52+02:00
 tags: [meta]
 ---
 
