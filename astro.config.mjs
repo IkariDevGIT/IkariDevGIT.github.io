@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
+import expressiveCode from 'astro-expressive-code';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -42,6 +44,29 @@ export default defineConfig({
     },
   ],
   integrations: [
+    expressiveCode({
+      themes: ['laserwave'],
+      plugins: [pluginLineNumbers()],
+      defaultProps: { wrap: true, showLineNumbers: false },
+      styleOverrides: {
+        borderRadius: '0',
+        borderWidth: '1px',
+        borderColor: '#ed64f5',
+        codeBackground: '#13092d',
+        codeFontSize: '0.9rem',
+        codeLineHeight: '1.6',
+        uiFontFamily: 'var(--font-mono)',
+        frames: {
+          frameBoxShadowCssValue: '5px 5px rgba(0, 0, 0, 0.78)',
+          editorTabBarBackground: '#08031a',
+          editorActiveTabBackground: '#13092d',
+          editorActiveTabIndicatorTopColor: '#ed64f5',
+          terminalTitlebarBackground: '#08031a',
+          terminalBackground: '#13092d',
+          inlineButtonForeground: '#ed64f5',
+        },
+      },
+    }),
     webdeckConfig(),
     sitemap({
       filter: (page) => {
@@ -84,7 +109,6 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    shikiConfig: { theme: 'css-variables', wrap: true },
     // explicit processor instead of the deprecated top-level remarkPlugins option
     // https://docs.astro.build/en/guides/markdown-content/#setting-up-a-markdown-processor
     processor: unified({

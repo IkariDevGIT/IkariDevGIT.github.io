@@ -62,7 +62,7 @@ That branch isnt really meant for anyone else, its just my own thing that i keep
 
 And this is what i actually start it with:
 
-```
+```sh
 python -X faulthandler -m iw3.desktop --local-viewer-fullscreen-display-mode --monitor-index 1 --disable-draw-cursor --synthetic-view both --compile --foreground-scale 0.5 --screenshot wc_cuda --full-sbs --stream-fps 60 --depth-model VDA_Stream_B --scene-detect --divergence 1 --convergence 2 --edge-dilation 2 --method row_flow_v3 --stream-height 1080 --ema-decay 0.99 --ema-buffer 2 --ema-normalize --stream-quality 100 --local-viewer
 ```
 
