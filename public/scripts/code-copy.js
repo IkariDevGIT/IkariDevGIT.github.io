@@ -1,7 +1,7 @@
 function makeButton(text) {
   const button = document.createElement('button');
   button.type = 'button';
-  button.className = 'code-copy';
+  button.className = 'btn code-copy';
   button.textContent = 'Copy';
 
   let reset;
