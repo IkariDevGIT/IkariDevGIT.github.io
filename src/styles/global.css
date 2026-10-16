@@ -465,6 +465,10 @@ hr {
   margin-bottom: 0;
 }
 
+.comments-disabled {
+  margin-top: 2rem;
+}
+
 .legacy-projects {
   position: relative;
   margin-top: 1.5rem;

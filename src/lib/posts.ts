@@ -47,6 +47,12 @@ export function withLegacyTag(entry: CollectionEntry<'blog'>): string[] {
   return tags;
 }
 
+export const COMMENTS_DISABLED_NOTICE = 'Comments are disabled for this post.';
+
+export function commentsDisabled(entry: CollectionEntry<'blog'>, tags: string[]): boolean {
+  return entry.data.comments === false || tags.includes(NSFW_TAG) || tags.includes('legacy');
+}
+
 async function toPostMeta(entry: CollectionEntry<'blog'>): Promise<PostMeta> {
   if (isRepostPost(entry) && !entry.data.repost) {
     throw new Error(`${entry.id} is in repost/ but has no repost: url`);

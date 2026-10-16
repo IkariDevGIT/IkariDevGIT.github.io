@@ -16,6 +16,7 @@ const blog = defineCollection({
       cover: image().optional(),
       coverAlt: z.string().optional(),
       unlisted: z.boolean().default(false),
+      comments: z.boolean().default(true),
       repost: z.url().optional(),
     }),
 });
