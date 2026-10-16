@@ -672,34 +672,41 @@ hr {
 }
 
 .btn {
-  display: inline-block;
   font-family: var(--font-display);
-  font-size: 0.85rem;
-  color: var(--color-text);
-  background-color: #68005f63;
-  border: 1px solid #9100918a;
-  border-radius: 5px;
-  box-shadow: inset 0 1px 3px 0 #cc00ff;
-  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--color-accent);
+  background: none;
+  border: 0;
+  padding: 2px 0;
   cursor: pointer;
   text-decoration: none;
-  line-height: 1.2;
+}
+
+.btn::before {
+  content: '[ ';
+  color: var(--color-text-faint);
+}
+
+.btn::after {
+  content: ' ]';
+  color: var(--color-text-faint);
 }
 
 .btn:hover,
 .btn:focus-visible {
-  color: var(--color-accent);
+  color: var(--color-text-faint);
+  text-decoration: underline;
 }
 
 .btn[aria-current='page'] {
-  color: var(--color-accent);
-  box-shadow:
-    inset 0 1px 3px 0 #cc00ff,
-    0 0 8px var(--color-accent-glow);
+  text-decoration: underline;
 }
 
 .btn:disabled,
 .btn[aria-disabled='true'] {
+  color: var(--color-text-faint);
   opacity: 0.45;
   cursor: not-allowed;
   pointer-events: none;
@@ -888,20 +895,28 @@ hr {
 }
 
 .post-search input {
-  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  appearance: none;
+  color-scheme: dark;
   background: var(--color-bg);
-  border: 1px solid var(--color-accent);
-  border-radius: 5px;
+  border: 1px solid rgba(237, 100, 245, 0.4);
+  border-radius: 3px;
   color: var(--color-text);
-  padding: 0.55em 0.8em;
+  padding: 0.45em 0.6em;
   min-width: 10rem;
   width: 100%;
   max-width: 16rem;
 }
 
+.post-search input::placeholder {
+  color: var(--color-text-faint);
+}
+
 .post-search input:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 6px var(--color-accent-glow);
 }
 
 .post-search input:disabled {
@@ -913,7 +928,7 @@ hr {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.4rem 0.75rem;
 }
 
 .sort-links > span {
