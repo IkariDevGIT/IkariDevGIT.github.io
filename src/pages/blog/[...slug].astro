@@ -139,4 +139,5 @@ const blogPostingJsonLd = {
   {!isEmptyRepost && (noComments ? <p class="notice panel comments-disabled">{COMMENTS_DISABLED_NOTICE}</p> : <Comments />)}
   {isNsfw && <script is:inline type="module" src="/scripts/nsfw-gate.js"></script>}
   <script is:inline type="module" src="/scripts/code-copy.js"></script>
+  <script is:inline type="module" src="/scripts/tag-links.js"></script>
 </BaseLayout>

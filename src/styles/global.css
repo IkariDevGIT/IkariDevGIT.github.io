@@ -671,6 +671,15 @@ hr {
   padding: 0.35em 0.5em;
 }
 
+.tag-links .tag {
+  cursor: pointer;
+}
+
+.tag-links .tag:hover {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
 .btn {
   font-family: var(--font-display);
   font-size: 0.9rem;

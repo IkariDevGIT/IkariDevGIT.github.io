@@ -185,6 +185,7 @@ async function main() {
         chip.setAttribute('aria-pressed', String(chip.dataset.state !== 'neutral'));
         tagFilterChips.append(chip);
       }
+      tagFilter.open = state.requiredTags.size > 0 || state.excludedTags.size > 0;
     }
   } catch {
     status.textContent = 'Could not load search and sorting, showing the plain list instead.';
