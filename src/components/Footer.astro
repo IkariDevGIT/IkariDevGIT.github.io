@@ -38,10 +38,10 @@ const { commit, commitUrl, builtAt } = getBuildInfo();
   </p>
 
   <p class="meta-line">
-    <a href="/rss.xml">RSS feed</a>{' · '}
-    <a href="/rss-no-repost.xml">RSS (no reposts)</a>{' · '}
-    <a href="/rss-repost.xml">RSS (reposts)</a>{' · '}
-    <a href="/llms.txt">llms.txt</a>{' · '}
+    <a href="/rss.xml">RSS feed</a>{' ~ '}
+    <a href="/rss-no-repost.xml">RSS (no reposts)</a>{' ~ '}
+    <a href="/rss-repost.xml">RSS (reposts)</a>{' ~ '}
+    <a href="/llms.txt">llms.txt</a>{' ~ '}
     © {year} {SITE_TITLE}
   </p>
 
@@ -59,7 +59,7 @@ const { commit, commitUrl, builtAt } = getBuildInfo();
       Built <time datetime={builtAt.toISOString()}>{formatPostDate(builtAt)}</time>
       {commit && (
         <>
-          {' · '}
+          {' ~ '}
           <a href={commitUrl} target="_blank" rel="noopener">{commit}</a>
         </>
       )}

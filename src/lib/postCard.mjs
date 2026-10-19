@@ -46,7 +46,7 @@ export function postCardHtml({
   full = false,
 }) {
   const dates = `${isRepost ? 'Reposted on ' : 'Published '}${timeTag(pubDate)}${
-    updatedDate ? ` · Updated ${timeTag(updatedDate)}` : ''
+    updatedDate ? ` ~Updated ${timeTag(updatedDate)}` : ''
   }`;
   const mark = isRepost ? '<span class="repost-mark" aria-hidden="true">⟳</span>' : '';
   const className = [full && 'post-card', 'panel', isLegacy && 'legacy-card', isRepost && 'repost-card']
@@ -57,7 +57,7 @@ export function postCardHtml({
   if (full) {
     const stats = repost
       ? `Reposted from ${escapeHtml(new URL(repost).hostname)}`
-      : `${wordCount} words · ${minutesRead} min read`;
+      : `${wordCount} words ~${minutesRead} min read`;
 
     return [
       `<li class="${className}">`,
@@ -80,9 +80,9 @@ export function postCardHtml({
   }
 
   const kind = repost
-    ? `Blog repost · links to ${escapeHtml(new URL(repost).hostname)}`
+    ? `Blog repost ~links to ${escapeHtml(new URL(repost).hostname)}`
     : isLegacy
-      ? 'Blog post · legacy'
+      ? 'Blog post ~legacy'
       : 'Blog post';
 
   return [

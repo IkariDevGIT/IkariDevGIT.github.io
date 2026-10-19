@@ -773,7 +773,7 @@ hr {
 }
 
 .post-meta-item:not(:first-child)::before {
-  content: '· ';
+  content: '~ ';
   color: var(--color-text-faint);
 }
 
@@ -1194,7 +1194,7 @@ hr {
 }
 
 .post-history-ago:not(:empty)::before {
-  content: ' · ';
+  content: ' ~ ';
 }
 
 .post-history-what {
@@ -1276,7 +1276,7 @@ hr {
 }
 
 .last-updated-ago:not(:empty)::before {
-  content: '· ';
+  content: '~ ';
 }
 
 .repost-source {

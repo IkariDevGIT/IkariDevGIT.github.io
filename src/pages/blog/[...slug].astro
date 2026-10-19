@@ -90,12 +90,12 @@ const blogPostingJsonLd = {
       Published <time datetime={pubDate.toISOString()}>{formatPostDate(pubDate)}</time>
       {updatedDate && (
         <>
-          {' · Updated '}
+          {' ~ Updated '}
           <time datetime={updatedDate.toISOString()}>{formatPostDate(updatedDate)}</time>
         </>
       )}
     </p>
-    <p class="meta-line">{wordCount} words · {minutesRead} min read</p>
+    <p class="meta-line">{wordCount} words ~ {minutesRead} min read</p>
     {tags.length > 0 && (
       <ul class="tag-list">
         {tags.map((tag) => (
