@@ -6,6 +6,7 @@ import { ogImagePath } from '../../lib/ogImage';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Comments from '../../components/Comments.astro';
 import PostHistory from '../../components/PostHistory.astro';
+import RecommendedPost from '../../components/RecommendedPost.astro';
 import { resolvePostDates } from '../../lib/postDates';
 import { isRepostPost, withLegacyTag, commentsDisabled, COMMENTS_DISABLED_NOTICE } from '../../lib/posts';
 import { formatPostDate } from '../../lib/dateFormat.mjs';
@@ -136,6 +137,7 @@ const blogPostingJsonLd = {
       <PostHistory slug={entry.id} isLegacy={isLegacy} />
     </div>
   </article>
+  <RecommendedPost currentSlug={entry.id} />
   {!isEmptyRepost && (noComments ? <p class="notice panel comments-disabled">{COMMENTS_DISABLED_NOTICE}</p> : <Comments />)}
   {isNsfw && <script is:inline type="module" src="/scripts/nsfw-gate.js"></script>}
   <script is:inline type="module" src="/scripts/tag-links.js"></script>

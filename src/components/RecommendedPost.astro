@@ -1,0 +1,39 @@
+---
+import { getAllPostMeta, sortByNewest, NSFW_TAG } from '../lib/posts';
+import { postCardHtml } from '../lib/postCard.mjs';
+
+interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+
+const post = sortByNewest(await getAllPostMeta()).find(
+  (candidate) =>
+    candidate.slug !== currentSlug &&
+    !candidate.repost &&
+    !candidate.tags.includes('legacy') &&
+    !candidate.tags.includes(NSFW_TAG),
+);
+---
+
+{
+  post && (
+    <section class="recommended box2">
+      <div class="box">
+        <h2>Liked this post? Read this one too</h2>
+        <ul
+          class="post-list post-embed"
+          set:html={postCardHtml({
+            slug: post.slug,
+            title: post.title,
+            description: post.description,
+            pubDate: post.pubDate,
+            updatedDate: post.updatedDate,
+            isEmbed: true,
+          })}
+        />
+      </div>
+    </section>
+  )
+}

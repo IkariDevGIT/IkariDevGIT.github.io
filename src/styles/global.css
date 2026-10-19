@@ -429,6 +429,14 @@ hr {
   margin-top: 2rem;
 }
 
+.recommended {
+  margin-top: 2rem;
+}
+
+.recommended .post-embed {
+  margin-bottom: 0;
+}
+
 .legacy-projects {
   position: relative;
   margin-top: 1.5rem;
