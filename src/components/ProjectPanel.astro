@@ -13,7 +13,7 @@ const { title, status, lastUpdate, pinned } = entry.data;
 
 ---
 
-<section class:list={['panel', { 'project-pinned': pinned !== undefined }]}>
+<section id={entry.id} class:list={['panel', { 'project-pinned': pinned !== undefined }]}>
   <h2>{title}</h2>
   <div class="project-info">
     <span><span class="status-badge" data-status={status}>{STATUS_LABELS[status]}</span></span>

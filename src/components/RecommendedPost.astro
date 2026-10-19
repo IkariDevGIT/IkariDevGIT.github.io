@@ -1,5 +1,5 @@
 ---
-import { getAllPostMeta, sortByNewest, NSFW_TAG } from '../lib/posts';
+import { getFeaturablePosts } from '../lib/posts';
 import { postCardHtml } from '../lib/postCard.mjs';
 
 interface Props {
@@ -8,13 +8,7 @@ interface Props {
 
 const { currentSlug } = Astro.props;
 
-const post = sortByNewest(await getAllPostMeta()).find(
-  (candidate) =>
-    candidate.slug !== currentSlug &&
-    !candidate.repost &&
-    !candidate.tags.includes('legacy') &&
-    !candidate.tags.includes(NSFW_TAG),
-);
+const post = (await getFeaturablePosts()).find((candidate) => candidate.slug !== currentSlug);
 ---
 
 {

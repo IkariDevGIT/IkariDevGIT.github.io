@@ -1,0 +1,72 @@
+---
+import { getAllPostMeta, getFeaturablePosts } from '../lib/posts';
+import { getProjects } from '../lib/projects';
+import { getBuildInfo } from '../lib/buildInfo.mjs';
+import { formatPostDate } from '../lib/dateFormat.mjs';
+
+interface Item {
+  label: string;
+  text: string;
+  href?: string;
+  datetime?: string;
+}
+
+const [newest] = await getFeaturablePosts();
+const allPosts = await getAllPostMeta();
+const { current } = await getProjects();
+const { committedAt } = getBuildInfo();
+
+const projectDate = (project: (typeof current)[number]) => (project.started?.sortDate ?? project.addedDate).getTime();
+const latestProject = [...current].sort((a, b) => projectDate(b) - projectDate(a))[0];
+const pinnedProject = current.find((project) => project.entry.data.pinned !== undefined);
+const words = allPosts.reduce((sum, post) => sum + post.wordCount, 0);
+
+const items: Item[] = [];
+if (newest) items.push({ label: 'Newest post', text: newest.title, href: `/blog/${newest.slug}/` });
+if (latestProject) {
+  items.push({ label: 'Latest project', text: latestProject.entry.data.title, href: `/projects/#${latestProject.entry.id}` });
+}
+if (pinnedProject && pinnedProject !== latestProject) {
+  items.push({ label: 'Pinned project', text: pinnedProject.entry.data.title, href: `/projects/#${pinnedProject.entry.id}` });
+}
+items.push({
+  label: 'Blog',
+  text: `${allPosts.length} posts, ${words.toLocaleString('en-GB')} words written`,
+  href: '/blog/',
+});
+items.push({ label: 'Site last updated', text: formatPostDate(committedAt), datetime: committedAt.toISOString() });
+
+const length = items.reduce((sum, item) => sum + item.label.length + item.text.length + 8, 0);
+const duration = `${Math.round(length * 0.4)}s`;
+---
+
+<div class="marquee box2" style={`--marquee-duration: ${duration}`}>
+  <div class="box">
+    <div class="marquee-viewport">
+      <div class="marquee-track">
+        {
+          [0, 1, 2, 3].map((copy) => (
+            <p class="marquee-content" aria-hidden={copy > 0 ? 'true' : undefined}>
+              {items.map((item) => (
+                <span class="marquee-item">
+                  <span class="marquee-label">{item.label}</span>
+                  {item.href ? (
+                    <a class="marquee-value" href={item.href} tabindex={copy > 0 ? -1 : undefined}>
+                      {item.text}
+                    </a>
+                  ) : item.datetime ? (
+                    <time class="marquee-value" datetime={item.datetime}>
+                      {item.text}
+                    </time>
+                  ) : (
+                    <span class="marquee-value">{item.text}</span>
+                  )}
+                </span>
+              ))}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -81,6 +81,12 @@ export async function getAllPostMeta(): Promise<PostMeta[]> {
   return Promise.all(entries.map(toPostMeta));
 }
 
+export async function getFeaturablePosts(): Promise<PostMeta[]> {
+  return sortByNewest(await getAllPostMeta()).filter(
+    (post) => !post.repost && !post.tags.includes('legacy') && !post.tags.includes(NSFW_TAG),
+  );
+}
+
 export function sortByNewest(posts: PostMeta[]): PostMeta[] {
   return [...posts].sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate));
 }

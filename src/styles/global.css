@@ -206,6 +206,73 @@ hr {
   margin: 0 auto;
 }
 
+.marquee {
+  margin: 0 10px 10px;
+}
+
+.marquee .box {
+  padding: 8px 0;
+}
+
+.marquee-viewport {
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.marquee-item::after {
+  content: '~';
+  margin: 0 1.5em;
+  color: var(--color-text-faint);
+}
+
+.marquee a.marquee-value {
+  text-decoration: none;
+}
+
+.marquee a.marquee-value:hover,
+.marquee a.marquee-value:focus-visible {
+  text-decoration: underline;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 .page-flex {
   display: flex;
   align-items: flex-start;
@@ -1184,14 +1251,16 @@ hr {
   text-align: center;
 }
 
-.last-updated-label {
+.last-updated-label,
+.marquee-label {
   font-family: var(--font-pixel);
   font-size: 0.75rem;
   color: var(--color-text);
   text-shadow: 0 0 8px var(--color-accent-glow);
 }
 
-.last-updated time {
+.last-updated time,
+.marquee-value {
   font-family: var(--font-display);
   font-size: 0.9rem;
   color: var(--color-accent);

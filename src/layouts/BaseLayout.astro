@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import Nav from '../components/Nav.astro';
+import Marquee from '../components/Marquee.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 import { getEntry } from 'astro:content';
@@ -126,6 +127,7 @@ const breadcrumbJsonLd = breadcrumbs && {
     <div class="site-shell">
       <SiteHeader />
       <Nav />
+      <Marquee />
       <div class="page-flex">
         <main id="main-content" class="content-column">
           <slot />
