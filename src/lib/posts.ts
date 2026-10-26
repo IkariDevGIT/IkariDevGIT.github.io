@@ -1,6 +1,12 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
 import { resolvePostDates } from './postDates';
+import { resolveAuthors } from './authors.mjs';
+
+export interface PostAuthor {
+  id: string;
+  name: string;
+}
 
 export interface PostMeta {
   slug: string;
@@ -16,6 +22,19 @@ export interface PostMeta {
   wordCount: number;
   minutesRead: number;
   repost?: string;
+  authors: PostAuthor[];
+}
+
+export function postAuthors(entry: CollectionEntry<'blog'>) {
+  return resolveAuthors(entry.data.authors, `src/content/blog/${entry.id}.md`);
+}
+
+const escapeXml = (value: string) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+
+export const RSS_NAMESPACES = { dc: 'http://purl.org/dc/elements/1.1/' };
+
+export function rssCreators(post: PostMeta): string {
+  return post.authors.map((author) => `<dc:creator>${escapeXml(author.name)}</dc:creator>`).join('');
 }
 
 async function resolveCover(data: CollectionEntry<'blog'>['data']): Promise<string | undefined> {
@@ -73,6 +92,7 @@ async function toPostMeta(entry: CollectionEntry<'blog'>): Promise<PostMeta> {
     wordCount: remarkPluginFrontmatter.wordCount ?? 0,
     minutesRead: remarkPluginFrontmatter.minutesRead ?? 1,
     repost: entry.data.repost,
+    authors: postAuthors(entry).map(({ id, name }) => ({ id, name })),
   };
 }
 

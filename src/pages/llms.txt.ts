@@ -48,7 +48,8 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push(LEGACY_NOTE, '');
   for (const post of posts) {
     const kind = post.tags.includes('legacy') ? ' (legacy)' : post.repost ? ' (repost)' : '';
-    lines.push(`- [${post.title}](${base}/blog/${post.slug}.md)${kind}: ${post.description}`);
+    const by = post.authors.map((author) => author.name).join(', ');
+    lines.push(`- [${post.title}](${base}/blog/${post.slug}.md)${kind} by ${by}: ${post.description}`);
   }
   lines.push('');
 

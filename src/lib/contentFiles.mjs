@@ -3,6 +3,7 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { getGitDates } from './gitDates.mjs';
 import { resolvePostDates } from './postDates.ts';
+import { resolveAuthors } from './authors.mjs';
 
 const BLOG_DIR = path.join(process.cwd(), 'src/content/blog');
 const PAGES_DIR = path.join(process.cwd(), 'src/content/pages');
@@ -51,6 +52,7 @@ export function readPost(slug) {
     isLegacy: clean.startsWith('legacy/'),
     isRepost: clean.startsWith('repost/'),
     repost: data.repost,
+    authors: resolveAuthors(data.authors, `src/content/blog/${clean}.md`).map(({ id, name }) => ({ id, name })),
   };
 }
 

@@ -7,10 +7,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Comments from '../../components/Comments.astro';
 import PostHistory from '../../components/PostHistory.astro';
 import RecommendedPost from '../../components/RecommendedPost.astro';
+import PostAuthors from '../../components/PostAuthors.astro';
 import { resolvePostDates } from '../../lib/postDates';
-import { isRepostPost, withLegacyTag, commentsDisabled, COMMENTS_DISABLED_NOTICE } from '../../lib/posts';
+import { isRepostPost, withLegacyTag, commentsDisabled, postAuthors, COMMENTS_DISABLED_NOTICE } from '../../lib/posts';
+import { DEFAULT_AUTHOR_ID } from '../../lib/authors.mjs';
 import { formatPostDate } from '../../lib/dateFormat.mjs';
-import { SITE_TITLE } from '../../consts';
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('blog');
@@ -37,7 +38,10 @@ const repostTarget = entry.data.repost;
 const hasContent = Boolean(entry.body?.trim());
 const isEmptyRepost = isRepost && !hasContent;
 const noComments = commentsDisabled(entry, tags);
+const authors = postAuthors(entry);
 
+const absolute = (url: string) => new URL(url, Astro.site).toString();
+const authorUrl = (author: (typeof authors)[number]) => author.url ?? author.links[0]?.href;
 
 const blogPostingJsonLd = {
   '@context': 'https://schema.org',
@@ -46,11 +50,13 @@ const blogPostingJsonLd = {
   description: entry.data.description,
   datePublished: pubDate.toISOString(),
   dateModified: (updatedDate ?? pubDate).toISOString(),
-  author: {
+  author: authors.map((author) => ({
     '@type': 'Person',
-    name: SITE_TITLE,
-    url: new URL('/about/', Astro.site).toString(),
-  },
+    ...(author.id === DEFAULT_AUTHOR_ID ? { '@id': absolute('/#ikari') } : {}),
+    name: author.name,
+    ...(authorUrl(author) ? { url: absolute(authorUrl(author)!) } : {}),
+    ...(author.links.length > 0 ? { sameAs: author.links.map((link) => link.href) } : {}),
+  })),
   image: [new URL(ogImagePath(Astro.url.pathname), Astro.site).toString()],
   mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
   wordCount,
@@ -64,6 +70,10 @@ const blogPostingJsonLd = {
   article={{
     publishedTime: pubDate.toISOString(),
     modifiedTime: updatedDate?.toISOString(),
+    authors: authors.map((author) => ({
+      name: author.name,
+      url: authorUrl(author) ? absolute(authorUrl(author)!) : undefined,
+    })),
   }}
   breadcrumbs={[
     { name: 'Home', url: '/' },
@@ -85,24 +95,28 @@ const blogPostingJsonLd = {
     </p>
   )}
   <article class:list={['panel', 'post-panel', { 'legacy-card': isLegacy, 'repost-card': isRepost }]}>
-    <h1>{entry.data.title}</h1>
-    <p class="meta-line">
-      Published <time datetime={pubDate.toISOString()}>{formatPostDate(pubDate)}</time>
-      {updatedDate && (
-        <>
-          {' ~ Updated '}
-          <time datetime={updatedDate.toISOString()}>{formatPostDate(updatedDate)}</time>
-        </>
+    <header class="post-header">
+      <h1>{entry.data.title}</h1>
+      <PostAuthors authors={authors} />
+      <p class="meta-line">
+        Published <time datetime={pubDate.toISOString()}>{formatPostDate(pubDate)}</time>
+        {updatedDate && (
+          <>
+            {' ~ Updated '}
+            <time datetime={updatedDate.toISOString()}>{formatPostDate(updatedDate)}</time>
+          </>
+        )}
+      </p>
+      <p class="meta-line">{wordCount} words ~ {minutesRead} min read</p>
+      {tags.length > 0 && (
+        <ul class="tag-list">
+          {tags.map((tag) => (
+            <li class="tag">{tag}</li>
+          ))}
+        </ul>
       )}
-    </p>
-    <p class="meta-line">{wordCount} words ~ {minutesRead} min read</p>
-    {tags.length > 0 && (
-      <ul class="tag-list">
-        {tags.map((tag) => (
-          <li class="tag">{tag}</li>
-        ))}
-      </ul>
-    )}
+    </header>
+    <hr />
     {entry.data.cover && (
       <figure class="post-cover">
         <Image src={entry.data.cover} alt={entry.data.coverAlt ?? ''} width={1200} loading="lazy" />

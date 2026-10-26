@@ -1,7 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection, render } from 'astro:content';
 import { resolvePostDates } from '../../lib/postDates';
-import { withLegacyTag } from '../../lib/posts';
+import { postAuthors, withLegacyTag } from '../../lib/posts';
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection(
@@ -23,6 +23,7 @@ export const GET: APIRoute = async ({ props }) => {
   const lines = [
     `# ${entry.data.title}`,
     '',
+    `Authors: ${postAuthors(entry).map((author) => author.name).join(', ')}`,
     `Published: ${pubDate.toISOString()}`,
     ...(updatedDate ? [`Updated: ${updatedDate.toISOString()}`] : []),
     ...(tags.length > 0 ? [`Tags: ${tags.join(', ')}`] : []),

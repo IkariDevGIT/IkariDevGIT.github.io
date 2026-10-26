@@ -500,6 +500,79 @@ hr {
   margin-top: 2rem;
 }
 
+.post-header h1 {
+  margin-bottom: 0.45em;
+}
+
+.post-header .meta-line {
+  margin: 0.2em 0 0;
+}
+
+.post-header .tag-list {
+  margin-top: 0.7em;
+}
+
+.post-authors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em 0.9em;
+  margin: 0 0 0.6em;
+}
+
+.post-authors-label {
+  margin: 0;
+}
+
+.post-authors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-author {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em 1em;
+  margin: 0;
+}
+
+.post-author-name {
+  text-decoration: none;
+}
+
+.post-author-name:hover,
+.post-author-name:focus-visible {
+  text-decoration: underline;
+}
+
+.post-author-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em 0.8em;
+}
+
+.post-author-links .btn {
+  font-size: 0.75rem;
+}
+
+.post-card-author {
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+.tag-links .post-card-author {
+  cursor: pointer;
+}
+
+.tag-links .post-card-author:hover {
+  text-decoration: underline;
+}
+
 .recommended .post-embed {
   margin-bottom: 0;
 }
@@ -1252,7 +1325,8 @@ hr {
 }
 
 .last-updated-label,
-.marquee-label {
+.marquee-label,
+.post-authors-label {
   font-family: var(--font-pixel);
   font-size: 0.75rem;
   color: var(--color-text);
@@ -1260,7 +1334,8 @@ hr {
 }
 
 .last-updated time,
-.marquee-value {
+.marquee-value,
+.post-author-name {
   font-family: var(--font-display);
   font-size: 0.9rem;
   color: var(--color-accent);

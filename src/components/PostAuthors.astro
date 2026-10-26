@@ -1,0 +1,33 @@
+---
+import type { Author } from '../lib/authors.mjs';
+
+interface Props {
+  authors: Author[];
+}
+
+const { authors } = Astro.props;
+---
+
+<div class="post-authors">
+  <p class="post-authors-label">Written by</p>
+  <ul class="post-authors-list" aria-label={authors.length > 1 ? 'Authors' : 'Author'}>
+    {
+      authors.map((author) => (
+        <li class="post-author">
+          <a class="post-author-name" href={`/blog/?author=${encodeURIComponent(author.id)}`}>
+            {author.name}
+          </a>
+          {author.links.length > 0 && (
+            <span class="post-author-links">
+              {author.links.map((link) => (
+                <a class="btn" href={link.href} target="_blank" rel="noopener">
+                  {link.label}
+                </a>
+              ))}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>

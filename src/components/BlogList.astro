@@ -48,6 +48,18 @@ const { page, sort } = Astro.props;
   <div class="tag-filter-chips" id="tag-filter-chips" role="group" aria-label="Filter posts by tag"></div>
 </details>
 
+<details class="tag-filter tag-filter-disabled" data-static>
+  <summary tabindex="-1" aria-disabled="true">Filter by authors</summary>
+</details>
+
+<details class="tag-filter" id="author-filter" hidden>
+  <summary>Filter by authors</summary>
+  <p class="meta-line tag-filter-hint">
+    Click an author once to require them, again to exclude them, again to clear it. Required authors must all be present (AND).
+  </p>
+  <div class="tag-filter-chips" id="author-filter-chips" role="group" aria-label="Filter posts by author"></div>
+</details>
+
 <hr />
 
 <p id="blog-status" class="meta-line" role="status" aria-live="polite" hidden>Loading posts.</p>

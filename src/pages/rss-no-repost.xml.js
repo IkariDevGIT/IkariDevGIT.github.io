@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import { getEntry } from 'astro:content';
-import { getAllPostMeta, sortByNewest, REPOST_TAG } from '../lib/posts';
+import { getAllPostMeta, sortByNewest, rssCreators, REPOST_TAG, RSS_NAMESPACES } from '../lib/posts';
 import { SITE_TITLE } from '../consts';
 
 export async function GET(context) {
@@ -11,11 +11,13 @@ export async function GET(context) {
     title: `${SITE_TITLE} (no reposts)`,
     description: home.data.description,
     site: context.site,
+    xmlns: RSS_NAMESPACES,
     items: posts.map((post) => ({
       title: post.title,
       pubDate: post.pubDate,
       description: post.description,
       link: `/blog/${post.slug}/`,
+      customData: rssCreators(post),
     })),
   });
 }

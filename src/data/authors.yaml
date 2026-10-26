@@ -1,0 +1,14 @@
+ikaridev:
+  name: IkariDev
+  url: /about/
+  links:
+    - label: HuggingFace
+      href: https://huggingface.co/IkariDev
+    - label: GitHub
+      href: https://github.com/IkariDevGIT
+    - label: itch.io
+      href: https://ikaridev.itch.io/
+    - label: Civitai
+      href: https://civitai.com/user/ikaridev
+    - label: X
+      href: https://x.com/IkariDev_tw

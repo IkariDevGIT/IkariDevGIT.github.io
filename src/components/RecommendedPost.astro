@@ -24,6 +24,7 @@ const post = (await getFeaturablePosts()).find((candidate) => candidate.slug !==
             description: post.description,
             pubDate: post.pubDate,
             updatedDate: post.updatedDate,
+            authors: post.authors,
             isEmbed: true,
           })}
         />

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
-import { getAllPostMeta, sortByNewest } from '../lib/posts';
+import { getAllPostMeta, postAuthors, sortByNewest } from '../lib/posts';
 import { resolvePostDates } from '../lib/postDates';
 import { projectsToMarkdown } from '../lib/projects';
 import { resourceGroupToMarkdown, resourceListMarkdownUrl } from '../lib/resourcesText';
@@ -31,6 +31,7 @@ export const GET: APIRoute = async ({ site }) => {
     const kind = slug.startsWith('legacy/') ? ' (legacy)' : entry.data.repost ? ' (repost)' : '';
     const out = [`### ${entry.data.title}${kind}`, '', `${base}/blog/${slug}.md`, ''];
     if (entry.data.repost) out.push(`Reposted from: ${entry.data.repost}`);
+    out.push(`Authors: ${postAuthors(entry).map((author) => author.name).join(', ')}`);
     out.push(`Published: ${pubDate.toISOString()}`);
     if (updatedDate) out.push(`Updated: ${updatedDate.toISOString()}`);
     out.push('', entry.body ?? '', '');

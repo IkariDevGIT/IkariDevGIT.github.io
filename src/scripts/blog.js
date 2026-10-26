@@ -66,6 +66,8 @@ async function main() {
   const sortButtonGroup = document.getElementById('sort-buttons');
   const tagFilter = document.getElementById('tag-filter');
   const tagFilterChips = document.getElementById('tag-filter-chips');
+  const authorFilter = document.getElementById('author-filter');
+  const authorFilterChips = document.getElementById('author-filter-chips');
   const postList = document.getElementById('post-list');
   const pagination = document.getElementById('pagination');
   const prevButton = document.getElementById('prev-page');
@@ -78,6 +80,8 @@ async function main() {
     !sortButtonGroup ||
     !tagFilter ||
     !tagFilterChips ||
+    !authorFilter ||
+    !authorFilterChips ||
     !postList ||
     !pagination ||
     !prevButton ||
@@ -105,19 +109,40 @@ async function main() {
     sort: SORT_MODES.includes(urlParams.get('sort')) ? urlParams.get('sort') : (pathSort ?? 'newest'),
     query: urlParams.get('q') ?? '',
     page: Math.max(1, parseInt(urlParams.get('page'), 10) || pathPage || 1),
-    /** @type {Set<string>} */
-    requiredTags: new Set((urlParams.get('tag') ?? '').split(',').filter(Boolean)),
-    /** @type {Set<string>} */
-    excludedTags: new Set((urlParams.get('extag') ?? '').split(',').filter(Boolean)),
   };
+
+  const paramSet = (name) => new Set((urlParams.get(name) ?? '').split(',').filter(Boolean));
+
+  const filters = [
+    {
+      param: 'tag',
+      excludeParam: 'extag',
+      details: tagFilter,
+      chips: tagFilterChips,
+      valuesOf: (post) => post.tags,
+      required: paramSet('tag'),
+      excluded: paramSet('extag'),
+    },
+    {
+      param: 'author',
+      excludeParam: 'exauthor',
+      details: authorFilter,
+      chips: authorFilterChips,
+      valuesOf: (post) => post.authors.map((author) => author.id),
+      required: paramSet('author'),
+      excluded: paramSet('exauthor'),
+    },
+  ];
 
   function syncUrl() {
     const params = new URLSearchParams();
     if (state.sort !== 'newest') params.set('sort', state.sort);
     if (state.page !== 1) params.set('page', String(state.page));
     if (state.query) params.set('q', state.query);
-    if (state.requiredTags.size > 0) params.set('tag', [...state.requiredTags].join(','));
-    if (state.excludedTags.size > 0) params.set('extag', [...state.excludedTags].join(','));
+    for (const filter of filters) {
+      if (filter.required.size > 0) params.set(filter.param, [...filter.required].join(','));
+      if (filter.excluded.size > 0) params.set(filter.excludeParam, [...filter.excluded].join(','));
+    }
     const qs = params.toString();
     history.replaceState(null, '', qs ? `/blog/?${qs}` : '/blog/');
   }
@@ -127,8 +152,24 @@ async function main() {
     return sorted.filter(
       (post) =>
         titleMatches(post.title, state.query) &&
-        tagsMatch(post.tags, state.requiredTags, state.excludedTags),
+        filters.every((filter) => tagsMatch(filter.valuesOf(post), filter.required, filter.excluded)),
     );
+  }
+
+  function buildChips(filter, options) {
+    if (options.length === 0) return;
+    filter.details.hidden = false;
+    for (const { value, label } of options) {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'tag-chip';
+      chip.textContent = label;
+      chip.dataset.value = value;
+      chip.dataset.state = filter.required.has(value) ? 'include' : filter.excluded.has(value) ? 'exclude' : 'neutral';
+      chip.setAttribute('aria-pressed', String(chip.dataset.state !== 'neutral'));
+      filter.chips.append(chip);
+    }
+    filter.details.open = filter.required.size > 0 || filter.excluded.size > 0;
   }
 
   function render() {
@@ -142,7 +183,7 @@ async function main() {
     postList.innerHTML = pageItems.map(cardHtml).join('');
     postList.removeAttribute('data-static');
 
-    const filtering = state.query || state.requiredTags.size > 0 || state.excludedTags.size > 0;
+    const filtering = state.query || filters.some((filter) => filter.required.size > 0 || filter.excluded.size > 0);
     if (list.length === 0) {
       status.textContent = filtering ? 'No posts match this filter.' : 'No posts yet.';
     } else {
@@ -168,25 +209,8 @@ async function main() {
     allPosts = data.posts ?? [];
     pageSize = data.pageSize ?? pageSize;
 
-    const tags = data.tags ?? [];
-    if (tags.length > 0) {
-      tagFilter.hidden = false;
-      for (const tag of tags) {
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'tag-chip';
-        chip.textContent = tag;
-        chip.dataset.tag = tag;
-        chip.dataset.state = state.requiredTags.has(tag)
-          ? 'include'
-          : state.excludedTags.has(tag)
-            ? 'exclude'
-            : 'neutral';
-        chip.setAttribute('aria-pressed', String(chip.dataset.state !== 'neutral'));
-        tagFilterChips.append(chip);
-      }
-      tagFilter.open = state.requiredTags.size > 0 || state.excludedTags.size > 0;
-    }
+    buildChips(filters[0], (data.tags ?? []).map((tag) => ({ value: tag, label: tag })));
+    buildChips(filters[1], (data.authors ?? []).map((author) => ({ value: author.id, label: author.name })));
   } catch {
     status.textContent = 'Could not load search and sorting, showing the plain list instead.';
     sortButtonGroup.hidden = true;
@@ -213,23 +237,25 @@ async function main() {
   }
 
   // each chip cycles neutral -> require -> exclude -> neutral
-  tagFilterChips.addEventListener('click', (event) => {
-    const chip = event.target.closest('.tag-chip');
-    if (!chip) return;
+  for (const filter of filters) {
+    filter.chips.addEventListener('click', (event) => {
+      const chip = event.target.closest('.tag-chip');
+      if (!chip) return;
 
-    const tag = chip.dataset.tag;
-    const next = { neutral: 'include', include: 'exclude', exclude: 'neutral' }[chip.dataset.state];
+      const value = chip.dataset.value;
+      const next = { neutral: 'include', include: 'exclude', exclude: 'neutral' }[chip.dataset.state];
 
-    chip.dataset.state = next;
-    chip.setAttribute('aria-pressed', String(next !== 'neutral'));
-    state.requiredTags.delete(tag);
-    state.excludedTags.delete(tag);
-    if (next === 'include') state.requiredTags.add(tag);
-    if (next === 'exclude') state.excludedTags.add(tag);
+      chip.dataset.state = next;
+      chip.setAttribute('aria-pressed', String(next !== 'neutral'));
+      filter.required.delete(value);
+      filter.excluded.delete(value);
+      if (next === 'include') filter.required.add(value);
+      if (next === 'exclude') filter.excluded.add(value);
 
-    state.page = 1;
-    render();
-  });
+      state.page = 1;
+      render();
+    });
+  }
 
   prevButton.addEventListener('click', () => {
     state.page = Math.max(1, state.page - 1);

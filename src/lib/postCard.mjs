@@ -8,6 +8,22 @@ const timeTag = (value) => {
   return `<time datetime="${date.toISOString()}">${escapeHtml(formatPostDate(date))}</time>`;
 };
 
+const authorList = new Intl.ListFormat('en', { type: 'conjunction' });
+
+const byline = (authors) => {
+  if (!authors || authors.length === 0) return '';
+  let index = 0;
+  const names = authorList
+    .formatToParts(authors.map((author) => author.name))
+    .map((part) => {
+      if (part.type !== 'element') return escapeHtml(part.value);
+      const author = authors[index++];
+      return `<span class="post-card-author" data-author="${escapeHtml(author.id)}">${escapeHtml(author.name)}</span>`;
+    })
+    .join('');
+  return `<p class="meta-line post-card-authors">By ${names}</p>`;
+};
+
 /**
  * @typedef {object} PostCardData
  * @property {string} slug
@@ -21,6 +37,7 @@ const timeTag = (value) => {
  * @property {number} [wordCount]
  * @property {number} [minutesRead]
  * @property {string} [repost]
+ * @property {{ id: string, name: string }[]} [authors]
  * @property {boolean} [isLegacy]
  * @property {boolean} [isRepost]
  * @property {boolean} [isEmbed]
@@ -40,13 +57,14 @@ export function postCardHtml({
   wordCount,
   minutesRead,
   repost,
+  authors,
   isLegacy = false,
   isRepost = false,
   isEmbed = false,
   full = false,
 }) {
   const dates = `${isRepost ? 'Reposted on ' : 'Published '}${timeTag(pubDate)}${
-    updatedDate ? ` ~Updated ${timeTag(updatedDate)}` : ''
+    updatedDate ? ` ~ Updated ${timeTag(updatedDate)}` : ''
   }`;
   const mark = isRepost ? '<span class="repost-mark" aria-hidden="true">⟳</span>' : '';
   const className = [full && 'post-card', 'panel', isLegacy && 'legacy-card', isRepost && 'repost-card']
@@ -57,7 +75,7 @@ export function postCardHtml({
   if (full) {
     const stats = repost
       ? `Reposted from ${escapeHtml(new URL(repost).hostname)}`
-      : `${wordCount} words ~${minutesRead} min read`;
+      : `${wordCount} words ~ ${minutesRead} min read`;
 
     return [
       `<li class="${className}">`,
@@ -67,6 +85,7 @@ export function postCardHtml({
         : '',
       '<div class="post-card-body">',
       `<h2 class="post-card-title">${mark}${escapeHtml(title)}</h2>`,
+      byline(authors),
       `<p class="meta-line">${dates}</p>`,
       `<p class="meta-line">${stats}</p>`,
       `<p class="post-card-description">${escapeHtml(description)}</p>`,
@@ -80,9 +99,9 @@ export function postCardHtml({
   }
 
   const kind = repost
-    ? `Blog repost ~links to ${escapeHtml(new URL(repost).hostname)}`
+    ? `Blog repost ~ links to ${escapeHtml(new URL(repost).hostname)}`
     : isLegacy
-      ? 'Blog post ~legacy'
+      ? 'Blog post ~ legacy'
       : 'Blog post';
 
   return [
@@ -91,6 +110,7 @@ export function postCardHtml({
     link,
     isEmbed ? `<p class="embed-kind">${kind}</p>` : '',
     `<h3>${mark}${escapeHtml(title)}</h3>`,
+    byline(authors),
     `<p class="meta-line">${dates}</p>`,
     `<p>${escapeHtml(description)}</p>`,
     '</a>',
