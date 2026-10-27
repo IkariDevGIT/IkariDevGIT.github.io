@@ -1123,6 +1123,7 @@ hr {
   display: block;
   position: relative;
   color: inherit;
+  font-weight: normal;
   text-decoration: none;
 }
 

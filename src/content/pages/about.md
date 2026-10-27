@@ -11,7 +11,7 @@ description: "Hey, i am IkariDev. A developer from germany doing machine learnin
 - Watching anime
 - Writing software/scripts
 - Drawing
-- Modding games [ C#, Unity, currently [modding MDRG](/blog/mdrg-moan-mod/) via MelonLoader ]
+- Modding games [ C#, Unity, currently modding MDRG via MelonLoader ([MoanMod](/projects/#moanmod), [UnityExplorer for MDRG](/projects/#mdrg-unity-explorer)) ]
 
 ### My main programming languages i use:
 

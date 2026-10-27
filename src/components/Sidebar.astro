@@ -1,7 +1,5 @@
 ---
 // goatcounter's counter image ignores the style query param, so this fetches the raw count as json instead
-const now = new Date();
-const monthStart = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
 ---
 
 <aside class="sidebar">
@@ -80,7 +78,7 @@ const monthStart = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2
   <div class="box2">
     <div class="box stat-box">
       <p class="meta-line">Visitors this month</p>
-      <p class="stat-number" id="visitor-count" data-month-start={monthStart}>…</p>
+      <p class="stat-number" id="visitor-count">…</p>
       <noscript>
         <style is:inline>
           #visitor-count {
