@@ -8,19 +8,21 @@ const timeTag = (value) => {
   return `<time datetime="${date.toISOString()}">${escapeHtml(formatPostDate(date))}</time>`;
 };
 
-const authorList = new Intl.ListFormat('en', { type: 'conjunction' });
+const authorList = typeof Intl.ListFormat === 'function' ? new Intl.ListFormat('en', { type: 'conjunction' }) : null;
+
+const authorSpan = (author) =>
+  `<span class="post-card-author" data-author="${escapeHtml(author.id)}">${escapeHtml(author.name)}</span>`;
 
 const byline = (authors) => {
   if (!authors || authors.length === 0) return '';
-  let index = 0;
-  const names = authorList
-    .formatToParts(authors.map((author) => author.name))
-    .map((part) => {
-      if (part.type !== 'element') return escapeHtml(part.value);
-      const author = authors[index++];
-      return `<span class="post-card-author" data-author="${escapeHtml(author.id)}">${escapeHtml(author.name)}</span>`;
-    })
-    .join('');
+  let names = authors.map(authorSpan).join(', ');
+  if (authorList) {
+    let index = 0;
+    names = authorList
+      .formatToParts(authors.map((author) => author.name))
+      .map((part) => (part.type === 'element' ? authorSpan(authors[index++]) : escapeHtml(part.value)))
+      .join('');
+  }
   return `<p class="meta-line post-card-authors">By ${names}</p>`;
 };
 

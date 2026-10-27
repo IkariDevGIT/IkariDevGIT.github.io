@@ -128,7 +128,7 @@ async function main() {
       excludeParam: 'exauthor',
       details: authorFilter,
       chips: authorFilterChips,
-      valuesOf: (post) => post.authors.map((author) => author.id),
+      valuesOf: (post) => (post.authors ?? []).map((author) => author.id),
       required: paramSet('author'),
       excluded: paramSet('exauthor'),
     },
