@@ -1,0 +1,61 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { getAllPostMeta, sortByNewest, NSFW_TAG } from '../../../lib/posts';
+import { tagInfo, tagUrl } from '../../../lib/tags.mjs';
+
+export const getStaticPaths = (async () => {
+  const posts = sortByNewest(await getAllPostMeta());
+  const tags = [...new Set(posts.flatMap((post) => post.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((post) => post.tags.includes(tag)) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag, posts } = Astro.props;
+const { title, description } = tagInfo(tag);
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: new URL(tagUrl(tag), Astro.site).toString(),
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: posts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: post.title,
+      url: new URL(`/blog/${post.slug}/`, Astro.site).toString(),
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog/' },
+    { name: title, url: tagUrl(tag) },
+  ]}
+>
+  <Fragment slot="head">
+    {tag === NSFW_TAG && <meta name="rating" content="adult" />}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionJsonLd)} />
+  </Fragment>
+  <h1>{title}</h1>
+  <p>{description}</p>
+  <p class="meta-line">
+    {posts.length} {posts.length === 1 ? 'post' : 'posts'} ~ <a href={`/blog/?tag=${encodeURIComponent(tag)}`}>combine with other tags on the blog</a>
+  </p>
+  <hr />
+  <ol class="post-list">
+    {posts.map((post) => <PostCard post={post} full />)}
+  </ol>
+  <script is:inline type="module" src="/scripts/tag-links.js"></script>
+</BaseLayout>

@@ -12,13 +12,13 @@ The old site was one big jquery single page app: index.html swapping divs around
 
 Anyway, i remade the whole site. It runs on Astro now instead of one giant html, so actual separate pages instead of everything living inside index.html. Blog posts are real markdown files with their own pages now too, instead of all being crammed into one blog.html. All not really interesting for non-devs.
 
-The look stayed mostly the same tho, same colors, same header and same sidebar, i love the look and will never change it <picture><source srcset="/images/badges/luvmysite.webp" type="image/webp" /><img class="inline-blinkie" src="/images/badges/luvmysite.gif" alt="I love my site" width="80" height="18" loading="lazy" /></picture> (<spoiler>I had many people calling my site eye cancer but i dont get it.</spoiler>). About/Projects/Resources content is basically unchanged too.
+The look stayed mostly the same tho, same colors, same header and same sidebar, i love the look and will never change it <picture><source srcset="/images/badges/luvmysite.webp" type="image/webp" /><img class="inline-blinkie" src="/images/badges/luvmysite.gif" alt="I love my site" width="80" height="18" loading="lazy" /></picture> (<spoiler>I had many people calling my site eye cancer but i dont get it.</spoiler>). [About](/about/)/[Projects](/projects/)/[Resources](/resources/) content is basically unchanged too.
 
 I made the site better too, dropped the SD Gallery, Apps, and Experiences pages since they werent worth porting over.
 
-Old posts got migrated over too, so the history's still here if anyone wants to look through it.
+[Old posts](/blog/oldest/) got migrated over too, so the history's still here if anyone wants to look through it.
 
-The roughly 2 year gap was mostly burnout, from AI work and making models and everything around it. If you want to know what i've been doing since, the newer posts cover it.
+The roughly 2 year gap was mostly burnout, from AI work and making models and everything around it. If you want to know what i've been doing since, the [newer posts](/blog/) cover it.
 
 Currently as of writing this, the site has a content and history gap of about 2 years.
 

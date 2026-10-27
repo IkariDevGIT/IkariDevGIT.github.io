@@ -5,6 +5,6 @@ tags: [ai, llm]
 repost: https://huggingface.co/posts/Undi95/589980321681772
 ---
 
-We have been through a lot of finetunes and merges together over the years, Noromaid, Echidna, and so on.
+We have been through a lot of finetunes and merges together over the years, [Noromaid](/blog/legacy/noromaid-model-series/), [Echidna](/blog/legacy/echidna-13b-collab-with-undi/), and so on.
 
 Before he left for the time being he still dropped Hanami as a last gift, a simple, phone friendly frontend with memory management instead. Go check it out.

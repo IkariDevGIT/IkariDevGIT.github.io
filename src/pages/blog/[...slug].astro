@@ -11,6 +11,7 @@ import PostAuthors from '../../components/PostAuthors.astro';
 import { resolvePostDates } from '../../lib/postDates';
 import { isRepostPost, withLegacyTag, commentsDisabled, postAuthors, COMMENTS_DISABLED_NOTICE } from '../../lib/posts';
 import { DEFAULT_AUTHOR_ID } from '../../lib/authors.mjs';
+import { tagUrl } from '../../lib/tags.mjs';
 import { formatPostDate } from '../../lib/dateFormat.mjs';
 
 export const getStaticPaths = (async () => {
@@ -81,10 +82,11 @@ const blogPostingJsonLd = {
     { name: entry.data.title, url: `/blog/${entry.id}/` },
   ]}
   markdown={isNsfw || isUnlisted ? null : `/blog/${entry.id}.md`}
-  noindex={isNsfw || isUnlisted || isEmptyRepost}
+  noindex={isUnlisted || isEmptyRepost}
   hideSidebar
 >
   <Fragment slot="head">
+    {isNsfw && <meta name="rating" content="adult" />}
     <script is:inline type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
   </Fragment>
   {isLegacy && (
@@ -111,7 +113,9 @@ const blogPostingJsonLd = {
       {tags.length > 0 && (
         <ul class="tag-list">
           {tags.map((tag) => (
-            <li class="tag">{tag}</li>
+            <li class="tag">
+              <a href={tagUrl(tag)}>{tag}</a>
+            </li>
           ))}
         </ul>
       )}

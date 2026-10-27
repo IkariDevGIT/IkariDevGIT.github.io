@@ -78,8 +78,22 @@ function collectSlugs(match) {
   return slugs;
 }
 
-export function getNsfwPostSlugs() {
-  return collectSlugs((data) => data.tags?.includes('nsfw'));
+export function getTagLastmods() {
+  const unlisted = getUnlistedPostSlugs();
+  const lastmods = getBlogPostLastmods();
+  const map = new Map();
+  for (const file of listMarkdownFiles(BLOG_DIR)) {
+    const slug = path.relative(BLOG_DIR, file).replace(/\.md$/, '').split(path.sep).join('/');
+    if (unlisted.has(slug)) continue;
+    const tags = [...(matter(readFileSync(file, 'utf-8')).data.tags ?? [])];
+    if (slug.startsWith('legacy/')) tags.push('legacy');
+    if (slug.startsWith('repost/')) tags.push('repost');
+    const date = lastmods.get(slug);
+    for (const tag of tags) {
+      if (!map.has(tag) || map.get(tag) < date) map.set(tag, date);
+    }
+  }
+  return map;
 }
 
 export function getUnlistedPostSlugs() {

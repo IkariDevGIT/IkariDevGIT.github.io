@@ -1,4 +1,10 @@
 const STORAGE_KEY = 'nsfw-ok';
+const CRAWLERS = ['googlebot', 'bingbot', 'duckduckbot', 'yandexbot', 'baiduspider', 'applebot'];
+
+function isCrawler() {
+  const agent = navigator.userAgent.toLowerCase();
+  return CRAWLERS.some((name) => agent.includes(name));
+}
 
 function hasConsent() {
   try {
@@ -25,7 +31,7 @@ function main() {
 
   if (!gate || !prompt || !content || !yesButton || !noButton) return;
 
-  if (hasConsent()) {
+  if (hasConsent() || isCrawler()) {
     gate.hidden = true;
     content.hidden = false;
     return;

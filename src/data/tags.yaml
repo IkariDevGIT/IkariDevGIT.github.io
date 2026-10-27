@@ -1,0 +1,27 @@
+mdrg:
+  title: My Dystopian Robot Girlfriend (MDRG)
+  description: My posts about My Dystopian Robot Girlfriend (MDRG), mostly mods i made for it.
+modding:
+  title: Game modding
+  description: Posts about modding games and the mods i made.
+ai:
+  title: AI and machine learning
+  description: Posts about AI and machine learning.
+llm:
+  title: Large language models (LLMs)
+  description: Posts about large language models and the models i worked on.
+neversleep:
+  title: NeverSleep
+  description: Posts about NeverSleep, the HuggingFace org of Undi and me, and the models released there.
+vr:
+  title: VR
+  description: Posts about VR.
+legacy:
+  title: Legacy posts
+  description: Posts from the old site, migrated over to keep the history around. They wont be updated anymore.
+repost:
+  title: Reposts
+  description: Posts by other people that i reposted, with a few words from me.
+meta:
+  title: About this site
+  description: Posts about the site itself, how it was built and what changed.

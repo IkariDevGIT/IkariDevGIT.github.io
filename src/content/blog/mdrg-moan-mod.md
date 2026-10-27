@@ -1,6 +1,6 @@
 ---
-title: MoanMod for MDRG
-description: A moaning/expression mod i made for My Dystopian Robot Girlfriend.
+title: MoanMod for My Dystopian Robot Girlfriend (MDRG)
+description: A moaning/expression mod i made for My Dystopian Robot Girlfriend (MDRG).
 tags: [modding, mdrg, nsfw]
 ---
 
@@ -23,4 +23,4 @@ As of writing, 32 stars and 6 forks on it, not too shabby for a moan mod. <pictu
 
 Sheep (the MDRG dev) helped with code and put up with a bunch of dumb questions from me, Ivory61 helped with popup code, im-trisha did the shower fix and the entire refactor, KlahTune let me post this on the official itch page, Echo made the Mod Settings Menu this whole thing plugs into, and the MDRG discord in general playtested and helped debug stuff i love u all!
 
-## <kao>ദ്ദി◝ ⩊ ◜.ᐟ</kao>
+<p class="kaomoji-big"><kao>ദ്ദി◝ ⩊ ◜.ᐟ</kao></p>

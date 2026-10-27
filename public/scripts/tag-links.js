@@ -1,6 +1,9 @@
 document.documentElement.classList.add('tag-links');
 
 document.addEventListener('click', (event) => {
+  const link = event.target.closest('a');
+  if (link && !link.classList.contains('post-card-link')) return;
+
   const author = event.target.closest('[data-author]');
   const tag = event.target.closest('.tag');
   if (!author && !tag) return;

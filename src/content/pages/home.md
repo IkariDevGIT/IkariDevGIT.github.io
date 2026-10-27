@@ -26,7 +26,7 @@ I love all kinds of anime, from shitty isekai to romance and stuff like Clevates
 
 Very cute and very <span class="rainbow-text">gay!</span>
 
-Also draw sometimes now, you can check that out on [twitter](https://x.com/IkariDev_tw). Been deep into modding [My Dystopian Robot Girlfriend](https://incontinentcell.itch.io/factorial-omega) with C#/Unity lately too.
+Also draw sometimes now, you can check that out on [twitter](https://x.com/IkariDev_tw). Been deep into [modding](/blog/mdrg-moan-mod/) [My Dystopian Robot Girlfriend](https://incontinentcell.itch.io/factorial-omega) with C#/Unity lately too.
 
 <picture>
   <source srcset="/images/badges/iloverobots.webp" type="image/webp" />

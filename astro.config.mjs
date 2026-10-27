@@ -20,8 +20,8 @@ import {
   getPageLastmod,
   getProjectsLastmod,
   getResourcesLastmod,
-  getNsfwPostSlugs,
   getUnlistedPostSlugs,
+  getTagLastmods,
   getEmptyRepostSlugs,
 } from './src/lib/contentFiles.mjs';
 
@@ -29,7 +29,8 @@ import {
 const blogLastmods = getBlogPostLastmods();
 const newestPostDate = [...blogLastmods.values()].sort((a, b) => b - a)[0] ?? new Date();
 const homeLastmod = new Date(Math.max(getPageLastmod('home').getTime(), newestPostDate.getTime()));
-const hiddenFromSitemap = new Set([...getNsfwPostSlugs(), ...getUnlistedPostSlugs(), ...getEmptyRepostSlugs()]);
+const hiddenFromSitemap = new Set([...getUnlistedPostSlugs(), ...getEmptyRepostSlugs()]);
+const tagLastmods = getTagLastmods();
 
 // custom domain 301s from the github.io url once set up in repo settings, so only one url needs to be canonical
 // https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
@@ -96,6 +97,9 @@ export default defineConfig({
           item.lastmod = getResourcesLastmod('main').toISOString();
         } else if (/^\/resources\/[^/]+\/$/.test(pathname)) {
           item.lastmod = getResourcesLastmod(pathname.split('/')[2]).toISOString();
+        } else if (pathname.startsWith('/blog/tag/')) {
+          const lastmod = tagLastmods.get(decodeURIComponent(pathname.split('/')[3]));
+          if (lastmod) item.lastmod = lastmod.toISOString();
         } else if (pathname === '/blog/' || /^\/blog\/\d+\/$/.test(pathname)) {
           item.lastmod = newestPostDate.toISOString();
         } else if (pathname.startsWith('/blog/')) {

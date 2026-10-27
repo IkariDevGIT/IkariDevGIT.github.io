@@ -2,6 +2,8 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { renderOgImage, type OgImageOptions } from '../../../lib/ogImage';
 import { resourceListUrl } from '../../../lib/resourcesText';
+import { withLegacyTag } from '../../../lib/posts';
+import { tagInfo, tagUrl } from '../../../lib/tags.mjs';
 import { SITE_TITLE } from '../../../consts';
 
 type Props = Omit<OgImageOptions, 'url'> & { pathname: string; url?: string };
@@ -9,6 +11,7 @@ type Props = Omit<OgImageOptions, 'url'> & { pathname: string; url?: string };
 export const getStaticPaths = (async () => {
   const resourceLists = await getCollection('resources');
   const posts = await getCollection('blog');
+  const tags = [...new Set(posts.filter((entry) => !entry.data.unlisted).flatMap(withLegacyTag))];
 
   const page = async (id: string, label: string, pathname: string, title?: string): Promise<{ path: string; props: Props }> => {
     const entry = await getEntry('pages', id);
@@ -28,6 +31,10 @@ export const getStaticPaths = (async () => {
     )),
     await page('blog', 'Blog', '/blog/'),
     { ...(await page('404', '404', '/404')), path: '404' },
+    ...tags.map((tag) => ({
+      path: `blog/tag/${tag}`,
+      props: { label: 'Blog', ...tagInfo(tag), pathname: tagUrl(tag) },
+    })),
     ...posts.map((entry) => {
       const isRepost = entry.id.startsWith('repost/');
       const isLegacy = entry.id.startsWith('legacy/');

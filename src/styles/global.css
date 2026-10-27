@@ -788,6 +788,17 @@ hr {
   border-color: var(--color-accent);
 }
 
+.tag a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.tag:has(a:hover, a:focus-visible) {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
 .btn {
   font-family: var(--font-display);
   font-size: 0.9rem;
@@ -856,6 +867,10 @@ hr {
 
 .kaomoji {
   font-family: var(--font-kaomoji);
+}
+
+.kaomoji-big {
+  font-size: 1.5rem;
 }
 
 .spoiler {
