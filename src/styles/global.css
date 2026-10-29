@@ -356,9 +356,9 @@ hr {
 }
 
 .badge-list img {
-  width: 140px;
   height: auto;
   margin-bottom: 5px;
+  image-rendering: pixelated;
 }
 
 .pronouns {
@@ -450,8 +450,8 @@ hr {
 }
 
 .sidebar-gif-row img {
-  width: 140px;
   height: auto;
+  image-rendering: pixelated;
 }
 
 /* old web panels, ported from .cat / .blogbox */
