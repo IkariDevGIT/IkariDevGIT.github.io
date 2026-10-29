@@ -1,5 +1,8 @@
 ---
 // goatcounter's counter image ignores the style query param, so this fetches the raw count as json instead
+const buttonGif = new URL('/images/ikaridev-88x31.gif', Astro.site).toString();
+const buttonWebp = new URL('/images/ikaridev-88x31.webp', Astro.site).toString();
+const buttonHtml = `<a href="${new URL('/', Astro.site)}"><picture><source srcset="${buttonWebp}" type="image/webp"><img src="${buttonGif}" alt="IkariDev" width="88" height="31"></picture></a>`;
 ---
 
 <aside class="sidebar">
@@ -90,6 +93,17 @@
     </div>
   </div>
   <script is:inline src="/scripts/visitor-count.js"></script>
+
+  <div class="box2">
+    <div class="box stat-box link-me">
+      <p class="meta-line">Link to me</p>
+      <picture>
+        <source srcset="/images/ikaridev-88x31.webp" type="image/webp" />
+        <img src="/images/ikaridev-88x31.gif" alt="IkariDev" width="88" height="31" loading="lazy" />
+      </picture>
+      <textarea readonly rows="6" aria-label="HTML for my button">{buttonHtml}</textarea>
+    </div>
+  </div>
 
   <nav class="hotline-webring" aria-label="Hotline Webring">
     <a class="webring-arrow" rel="nofollow" href="https://hotlinewebring.club/ikari/previous" aria-label="Previous site">

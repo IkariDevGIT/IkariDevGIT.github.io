@@ -1038,7 +1038,8 @@ picture + .follow-blog {
   color: var(--color-text-faint);
 }
 
-.post-search input {
+.post-search input,
+.link-me textarea {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   appearance: none;
@@ -1057,10 +1058,28 @@ picture + .follow-blog {
   color: var(--color-text-faint);
 }
 
-.post-search input:focus-visible {
+.post-search input:focus-visible,
+.link-me textarea:focus-visible {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 6px var(--color-accent-glow);
+}
+
+.link-me img,
+.link-me textarea {
+  display: block;
+  margin: 0.5rem auto;
+}
+
+.link-me img {
+  width: 176px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.link-me textarea {
+  resize: none;
+  scrollbar-color: var(--color-accent) var(--color-bg);
 }
 
 .post-search input:disabled {
