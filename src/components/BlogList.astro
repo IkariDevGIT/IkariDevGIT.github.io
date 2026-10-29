@@ -3,6 +3,7 @@ import type { Page } from 'astro';
 import PostCard from './PostCard.astro';
 import BlogSortLinks from './BlogSortLinks.astro';
 import Pagination from './Pagination.astro';
+import FollowBlog from './FollowBlog.astro';
 import type { PostMeta, SortMode } from '../lib/posts';
 
 interface Props {
@@ -19,6 +20,8 @@ const { page, sort } = Astro.props;
   <source srcset="/images/badges/typos.webp" type="image/webp" />
   <img src="/images/badges/typos.gif" alt="Typos... who needs backspase!" width="150" height="20" loading="lazy" />
 </picture>
+
+<FollowBlog />
 
 <div class="blog-controls">
   <div class="post-search">

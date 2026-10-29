@@ -7,6 +7,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Comments from '../../components/Comments.astro';
 import PostHistory from '../../components/PostHistory.astro';
 import RecommendedPost from '../../components/RecommendedPost.astro';
+import FollowBlog from '../../components/FollowBlog.astro';
 import PostAuthors from '../../components/PostAuthors.astro';
 import { resolvePostDates } from '../../lib/postDates';
 import { isRepostPost, withLegacyTag, commentsDisabled, postAuthors, COMMENTS_DISABLED_NOTICE } from '../../lib/posts';
@@ -155,6 +156,7 @@ const blogPostingJsonLd = {
       <PostHistory slug={entry.id} isLegacy={isLegacy} />
     </div>
   </article>
+  <FollowBlog />
   <RecommendedPost currentSlug={entry.id} />
   {!isEmptyRepost && (noComments ? <p class="notice panel comments-disabled">{COMMENTS_DISABLED_NOTICE}</p> : <Comments />)}
   {isNsfw && <script is:inline type="module" src="/scripts/nsfw-gate.js"></script>}

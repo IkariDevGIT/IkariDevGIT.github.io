@@ -56,7 +56,7 @@ description: "Hey, i am IkariDev. A developer from germany doing machine learnin
 - [Civitai](https://civitai.com/user/ikaridev)
 - [Twitter](https://x.com/IkariDev_tw) ~ art stuff
 
-Nothing much to say about me, but if you really want to know more about me you can check out my [blog](/blog/).
+Nothing much to say about me, but if you really want to know more about me you can check out my [blog](/blog/). Wanna keep up with it? Add one of my [RSS feeds](/rss/) to your reader!
 
 <picture>
   <source srcset="/images/badges/iknowyouare.webp" type="image/webp" />

@@ -35,4 +35,4 @@ Also draw sometimes now, you can check that out on [twitter](https://x.com/Ikari
 
 <br><br>
 
-If you want to know what i am currently up to you can check out my [blog](/blog/).
+If you want to know what i am currently up to you can check out my [blog](/blog/). Wanna keep up with it? Add one of my [RSS feeds](/rss/) to your reader!

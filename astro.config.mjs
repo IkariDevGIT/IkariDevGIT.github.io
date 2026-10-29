@@ -91,6 +91,8 @@ export default defineConfig({
           item.lastmod = homeLastmod.toISOString();
         } else if (pathname === '/about/') {
           item.lastmod = getPageLastmod('about').toISOString();
+        } else if (pathname === '/rss/') {
+          item.lastmod = getPageLastmod('rss').toISOString();
         } else if (pathname === '/projects/') {
           item.lastmod = getProjectsLastmod().toISOString();
         } else if (pathname === '/resources/') {

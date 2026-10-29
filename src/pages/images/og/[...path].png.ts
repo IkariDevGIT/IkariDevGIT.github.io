@@ -30,6 +30,7 @@ export const getStaticPaths = (async () => {
       })),
     )),
     await page('blog', 'Blog', '/blog/'),
+    await page('rss', 'RSS', '/rss/'),
     { ...(await page('404', '404', '/404')), path: '404' },
     ...tags.map((tag) => ({
       path: `blog/tag/${tag}`,

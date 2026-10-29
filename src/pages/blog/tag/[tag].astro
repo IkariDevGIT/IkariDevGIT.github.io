@@ -4,6 +4,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PostCard from '../../../components/PostCard.astro';
 import { getAllPostMeta, sortByNewest, NSFW_TAG } from '../../../lib/posts';
 import { tagInfo, tagUrl } from '../../../lib/tags.mjs';
+import FollowBlog from '../../../components/FollowBlog.astro';
 
 export const getStaticPaths = (async () => {
   const posts = sortByNewest(await getAllPostMeta());
@@ -50,6 +51,7 @@ const collectionJsonLd = {
   </Fragment>
   <h1>{title}</h1>
   <p>{description}</p>
+  <FollowBlog />
   <p class="meta-line">
     {posts.length} {posts.length === 1 ? 'post' : 'posts'} ~ <a href={`/blog/?tag=${encodeURIComponent(tag)}`}>combine with other tags on the blog</a>
   </p>

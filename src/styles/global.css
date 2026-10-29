@@ -577,6 +577,14 @@ hr {
   margin-bottom: 0;
 }
 
+.follow-blog + .recommended {
+  margin-top: 5rem;
+}
+
+.post-panel + .follow-blog {
+  text-align: center;
+}
+
 .legacy-projects {
   position: relative;
   margin-top: 1.5rem;
