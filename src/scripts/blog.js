@@ -62,8 +62,9 @@ function fallBackToStatic() {
 
 async function main() {
   const searchInput = document.getElementById('post-search-input');
-  const sortButtons = document.querySelectorAll('#sort-buttons button');
+  const sortButtons = document.querySelectorAll('#sort-buttons button[data-sort]');
   const sortButtonGroup = document.getElementById('sort-buttons');
+  const randomButton = document.getElementById('random-post');
   const tagFilter = document.getElementById('tag-filter');
   const tagFilterChips = document.getElementById('tag-filter-chips');
   const authorFilter = document.getElementById('author-filter');
@@ -78,6 +79,7 @@ async function main() {
   if (
     !searchInput ||
     !sortButtonGroup ||
+    !randomButton ||
     !tagFilter ||
     !tagFilterChips ||
     !authorFilter ||
@@ -194,6 +196,7 @@ async function main() {
     pageIndicator.textContent = `Page ${state.page} of ${lastPage}`;
     prevButton.disabled = state.page <= 1;
     nextButton.disabled = state.page >= lastPage;
+    randomButton.disabled = list.length === 0;
 
     for (const button of sortButtons) {
       button.setAttribute('aria-current', button.dataset.sort === state.sort ? 'page' : 'false');
@@ -256,6 +259,13 @@ async function main() {
       render();
     });
   }
+
+  randomButton.addEventListener('click', () => {
+    const list = currentList();
+    if (list.length === 0) return;
+    const post = list[Math.floor(Math.random() * list.length)];
+    location.href = `/blog/${post.slug}/`;
+  });
 
   prevButton.addEventListener('click', () => {
     state.page = Math.max(1, state.page - 1);
