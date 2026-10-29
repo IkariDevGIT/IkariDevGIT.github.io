@@ -585,6 +585,10 @@ hr {
   text-align: center;
 }
 
+picture + .follow-blog {
+  margin-top: 1rem;
+}
+
 .legacy-projects {
   position: relative;
   margin-top: 1.5rem;

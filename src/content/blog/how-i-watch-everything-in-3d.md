@@ -2,6 +2,7 @@
 title: How i watch everything in 3d
 description: How i watch anime, movies and series these days, and the setup behind it.
 tags: [ai, vr]
+toc: true
 ---
 
 <kao>( ˶ˆ ᗜ ˆ˶ )</kao>

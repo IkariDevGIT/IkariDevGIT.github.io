@@ -64,9 +64,6 @@ sections:
               - label: SillyTavern
                 href: https://discord.gg/sillytavern
                 note: SillyTavern server.
-              - label: TheBlock
-                href: https://discord.gg/theblokeai
-                note: TheBloke server.
               - label: KoboldAI
                 href: https://discord.gg/X3WmRM9Npn
                 note: KoboldAI server.

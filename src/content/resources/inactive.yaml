@@ -47,6 +47,12 @@ sections:
                   models. It is based on this Paper (https://arxiv.org/abs/2304.03442)
                   (Video: https://www.youtube.com/watch?v=nKCJ3BMUy1s).
                 status: Not sure what happened to it.
+          - id: discords-lm
+            title: Various discords
+            links:
+              - label: TheBloke
+                href: https://discord.gg/theblokeai
+                note: TheBloke server.
           - id: learn-lm
             title: Learn
             links:

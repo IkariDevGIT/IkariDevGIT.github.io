@@ -9,6 +9,7 @@ import PostHistory from '../../components/PostHistory.astro';
 import RecommendedPost from '../../components/RecommendedPost.astro';
 import FollowBlog from '../../components/FollowBlog.astro';
 import PostAuthors from '../../components/PostAuthors.astro';
+import PostToc from '../../components/PostToc.astro';
 import { resolvePostDates } from '../../lib/postDates';
 import { isRepostPost, withLegacyTag, commentsDisabled, postAuthors, COMMENTS_DISABLED_NOTICE } from '../../lib/posts';
 import { DEFAULT_AUTHOR_ID } from '../../lib/authors.mjs';
@@ -24,7 +25,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(entry);
+const { Content, remarkPluginFrontmatter, headings } = await render(entry);
 
 const { pubDate, updatedDate } = resolvePostDates(entry.data, remarkPluginFrontmatter);
 const wordCount = remarkPluginFrontmatter.wordCount ?? 0;
@@ -141,6 +142,13 @@ const blogPostingJsonLd = {
       </div>
     )}
     <div class="post-content" id="post-content" hidden={isNsfw}>
+      {entry.data.toc && headings.length > 0 && (
+        <>
+          <h2>Contents</h2>
+          <PostToc headings={headings} />
+          <hr />
+        </>
+      )}
       <Content />
       {isRepost && repostTarget && (
         <a class="repost-source" href={repostTarget} target="_blank" rel="noopener">

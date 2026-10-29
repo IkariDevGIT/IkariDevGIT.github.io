@@ -1,0 +1,27 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const topDepth = headings[0]?.depth;
+
+const sections = headings.reduce<{ heading: MarkdownHeading; children: MarkdownHeading[] }[]>((list, heading) => {
+  if (heading.depth <= topDepth) list.push({ heading, children: [] });
+  else list.at(-1)?.children.push(heading);
+  return list;
+}, []);
+---
+
+<ul>
+  {
+    sections.map(({ heading, children }) => (
+      <li>
+        <a href={`#${heading.slug}`}>{heading.text}</a>
+        {children.length > 0 && <Astro.self headings={children} />}
+      </li>
+    ))
+  }
+</ul>
