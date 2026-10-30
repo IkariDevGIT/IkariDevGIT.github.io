@@ -12,15 +12,17 @@ description: "My personal site: machine learning, anime, and software, plus the 
 
 Moin, i am Ikari.
 
-I am a AI/ML enthusiast from germany (she/her, he/him also works), in my blog, i talk about all kinds of things, here some examples:
+I am an ML enthusiast from germany (she/her, he/him also works), in my blog, i talk about all kinds of things, here some examples:
 
-- AI/ML
+- ML
 - Drawing
 - Technology
 - Archiving
 - Anime
 - Games [SFW and NSFW]
 - And lots more!
+
+<p class="meta-line">Even though i am into ML, i am generally against AI in creative spaces. Art, music and writing should come from actual people, and i hate seeing slop everywhere now. Thats also why i stopped messing with Stable Diffusion, i'd rather draw stuff myself.</p>
 
 I love all kinds of anime, from shitty isekai to romance and stuff like Clevatess.
 
