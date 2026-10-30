@@ -4,6 +4,7 @@ import PostCard from './PostCard.astro';
 import BlogSortLinks from './BlogSortLinks.astro';
 import Pagination from './Pagination.astro';
 import FollowBlog from './FollowBlog.astro';
+import { REPO_URL } from '../lib/buildInfo.mjs';
 import type { PostMeta, SortMode } from '../lib/posts';
 
 interface Props {
@@ -21,7 +22,11 @@ const { page, sort } = Astro.props;
   <img src="/images/badges/typos.gif" alt="Typos... who needs backspase!" width="150" height="20" loading="lazy" />
 </picture>
 
-<FollowBlog />
+<FollowBlog>
+  <br />
+  Wanna write a post for my blog?{' '}
+  <a href={`${REPO_URL}/blob/main/README.md#posting-on-my-blog`} target="_blank" rel="noopener">Here is how you can do that</a>.
+</FollowBlog>
 
 <div class="blog-controls">
   <div class="post-search">

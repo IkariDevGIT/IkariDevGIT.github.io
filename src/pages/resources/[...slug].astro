@@ -6,6 +6,7 @@ import ResourceSection from '../../components/ResourceSection.astro';
 import ResourceToc from '../../components/ResourceToc.astro';
 import { resourceListUrl } from '../../lib/resourcesText';
 import { resolveResourceList } from '../../lib/resources';
+import { REPO_URL } from '../../lib/buildInfo.mjs';
 
 export const getStaticPaths = (async () => {
   const lists = await getCollection('resources');
@@ -32,6 +33,14 @@ if (list.id !== 'main') breadcrumbs.push({ name: page.data.title, url: resourceL
 <BaseLayout title={page.data.title} description={page.data.description} breadcrumbs={breadcrumbs} hideSidebar>
   <h1>{page.data.title}</h1>
   <p>{page.data.description}</p>
+  {
+    list.id === 'main' && (
+      <p>
+        Want something added? Hit me up through my <a href="/about/#contact">contact stuff</a> or{' '}
+        <a href={`${REPO_URL}/issues/new?template=add-resource.yml`} target="_blank" rel="noopener">open an issue</a>.
+      </p>
+    )
+  }
 
   <h2>Overview</h2>
   <ResourceToc groups={sections} />

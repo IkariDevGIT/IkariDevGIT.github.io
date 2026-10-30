@@ -1,0 +1,18 @@
+name: Inactive resource
+description: Something on my resources page went down or got abandoned.
+title: 'Inactive: '
+body:
+  - type: input
+    id: resource
+    attributes:
+      label: Resource
+      description: The name or link, as it shows on the page.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Is it down, abandoned, or replaced by something else? Links help.
+    validations:
+      required: true
