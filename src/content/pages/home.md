@@ -22,7 +22,7 @@ I am an ML enthusiast from germany (she/her, he/him also works), in my blog, i t
 - Games [SFW and NSFW]
 - And lots more!
 
-<p class="meta-line">Even though i am into ML, i am generally against AI in creative spaces. Art, music and writing should come from actual people, and i hate seeing slop everywhere now. Thats also why i stopped messing with Stable Diffusion, i'd rather draw stuff myself.</p>
+<p class="meta-line">Even though i am into ML, i am generally against AI in creative spaces. Art, music and writing (except one on one roleplay with an LLM, i think that is fine) should come from actual people, and i hate seeing slop everywhere now. Thats also why i stopped messing with Stable Diffusion, i'd rather draw stuff myself.</p>
 
 I love all kinds of anime, from shitty isekai to romance and stuff like Clevatess.
 
